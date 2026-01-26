@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class StageManager : MonoBehaviour
 {
@@ -35,6 +37,13 @@ public class StageManager : MonoBehaviour
     [SerializeField] private float capsuleSizePx = 116f;
     [SerializeField] private float allowedOverlapPx = 10f;
 
+    [Header("HUD References")]
+    [SerializeField] private Image stageCountImage;     // Hud/StageCount の Image
+    [SerializeField] private Sprite stageCount1of2;     // 1/2 のSprite
+    [SerializeField] private Sprite stageCount2of2;     // 2/2 のSprite
+    [SerializeField] private TMP_Text atariCounterText; // AtariCounterText を入れる
+
+
     // 3枚目の「順位表」を埋め順（0〜17のslot index）
     // row-major（上段0..5 / 中段6..11 / 下段12..17）
     private static readonly int[] PlacementOrder18 =
@@ -57,9 +66,13 @@ public class StageManager : MonoBehaviour
         StartStage();
     }
 
+
     private void StartStage()
     {
+        ApplyStageCountHUD(); // ← まず表示を更新
+
         foundHit = 0;
+        ApplyAtariCounterHUD(); // ★ここで 0/6 にする
 
         missCount = Mathf.FloorToInt(hitCount * 0.6f); // floor(hit*0.6)
         totalCount = hitCount + missCount;
@@ -89,6 +102,38 @@ public class StageManager : MonoBehaviour
         ClearSpawned();
         SpawnCapsules(totalCount, hitCount);
     }
+
+    private void ApplyStageCountHUD()
+    {
+        if (stageCountImage == null) return;
+        if (GameSession.I == null) return;
+
+
+
+        // 今は2ステージ固定の想定
+        if (GameSession.I.CurrentStage == 1)
+        {
+            if (stageCount1of2 != null) stageCountImage.sprite = stageCount1of2;
+        }
+        else
+        {
+            if (stageCount2of2 != null) stageCountImage.sprite = stageCount2of2;
+        }
+
+        // Imageの表示更新（念のため）
+        //stageCountImage.SetNativeSize(); // サイズをスプライトに合わせたい場合
+        // ↑ サイズ固定なら、この行は消してOK
+    }
+
+    private void ApplyAtariCounterHUD()
+    {
+        if (atariCounterText == null) return;
+
+        // foundHit は「見つけた当たり数」
+        // hitCount は「総当たり数（例:6）」
+        atariCounterText.text = $"{foundHit}/{hitCount}";
+    }
+
 
     private void SpawnCapsules(int total, int hit)
     {
@@ -257,17 +302,42 @@ public class StageManager : MonoBehaviour
     public void OnHitFound()
     {
         foundHit++;
-        // TODO: HUD更新（foundHit / hitCount）
-
+        ApplyAtariCounterHUD(); // ★ここで更新
         if (foundHit >= hitCount)
         {
-            GoNextScene();
+            HandleStageClear();
         }
     }
 
-    public void GoNextScene()
+
+    private void HandleStageClear()
     {
-        if (!string.IsNullOrEmpty(nextSceneName))
-            SceneManager.LoadScene(nextSceneName);
+        Debug.Log("[StageManager] Stage Clear!");
+
+        // GameSession が居ないなら、2ステージ判定ができないので安全にインセンティブへ
+        if (GameSession.I == null)
+        {
+            Debug.LogError("[StageManager] GameSession が見つかりません。最初のシーンに GameSession を置いてください。");
+            SceneManager.LoadScene("PV04_Incentive");
+            return;
+        }
+
+        // 次ステージがあるなら同じゲームシーンをリロード
+        if (GameSession.I.TryAdvanceStage())
+        {
+            Debug.Log($"[StageManager] Next Stage: {GameSession.I.CurrentStage}/{GameSession.I.TotalStages}");
+            SceneManager.LoadScene("PV03_Virusweets_Game");
+        }
+        else
+        {
+            // 最終ステージクリア
+            Debug.Log("[StageManager] All Stages Cleared. Go Incentive.");
+            GameSession.I.ResetStages();
+            SceneManager.LoadScene("PV04_Incentive");
+        }
     }
+
+
+
+
 }
