@@ -22,6 +22,24 @@ public class PopupManager : MonoBehaviour
 
     Coroutine routine;
 
+    private bool isShowing;
+    public bool IsShowing => isShowing;
+
+    /*public bool IsShowing
+    {
+        get
+        {
+            // ルーチンが回ってる＝表示中
+            if (routine != null) return true;
+
+            // 念のため：alphaやenabledでも判定（保険）
+            if (canvasGroup != null && canvasGroup.alpha > 0.01f) return true;
+            if (popupImage != null && popupImage.enabled) return true;
+
+            return false;
+        }
+    }*/
+
     private void Reset()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -36,6 +54,8 @@ public class PopupManager : MonoBehaviour
             canvasGroup.interactable = false;
         }
         if(popupImage != null) popupImage.enabled = false;
+        //isShowing = false;
+
     }
 
     public void ShowStage(int stageIndex)
@@ -63,6 +83,9 @@ public class PopupManager : MonoBehaviour
 
     IEnumerator ShowRoutine(Sprite sprite)
     {
+        //isShowing = true;
+
+
         popupImage.sprite = sprite;
         popupImage.SetNativeSize();
         popupImage.enabled = true;
@@ -84,6 +107,9 @@ public class PopupManager : MonoBehaviour
         canvasGroup.alpha = 0f;
         popupImage.enabled = false;
         routine = null;
+
+        //isShowing = false;
+
 
     }
 

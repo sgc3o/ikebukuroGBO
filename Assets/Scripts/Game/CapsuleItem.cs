@@ -44,6 +44,8 @@ public class CapsuleItem : MonoBehaviour
 
     private void OnClickCapsule()
     {
+        if (manager != null && manager.IsInputBlocked) return; // ★追加：ポップアップ中は無視
+
         if (opened) return;
         opened = true;
 

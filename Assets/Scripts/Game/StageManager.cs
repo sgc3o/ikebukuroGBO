@@ -436,6 +436,12 @@ public class StageManager : MonoBehaviour
             SceneManager.LoadScene("PV04_Incentive");
         }
     }
+    public bool IsInputBlocked
+    {
+        get { return popup != null && popup.IsShowing; }
+    }
+
+
 
 
 
