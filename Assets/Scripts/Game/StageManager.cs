@@ -44,10 +44,13 @@ public class StageManager : MonoBehaviour
     [SerializeField] private TMP_Text atariCounterText; // AtariCounterText を入れる
 
     [Header("Timer")]
+    [SerializeField] private GameObject timerGroup; // Hud/TimerGroup
     [SerializeField] private TMP_Text timerText;     // Hud/TimerText を入れる
     [SerializeField] private float stage1LimitSec = 30f;
     [SerializeField] private float stage2LimitSec = 30f;
 
+    [Header("Popup")]
+    [SerializeField] private PopupManager popup;
 
     // 3枚目の「順位表」を埋め順（0〜17のslot index）
     // row-major（上段0..5 / 中段6..11 / 下段12..17）
@@ -80,43 +83,27 @@ public class StageManager : MonoBehaviour
 
     private void StartStage()
     {
+
+        if (timerGroup != null) timerGroup.SetActive(false);
+
+        stageEnding = false;
         ApplyStageCountHUD(); // ← まず表示を更新
-
-        stageEndedByTimer = false;
-        StartTimer();
-        UpdateTimerText();
-
 
         foundHit = 0;
         ApplyAtariCounterHUD(); // ★ここで 0/6 にする
 
+        stageEndedByTimer = false;
+
         missCount = Mathf.FloorToInt(hitCount * 0.6f); // floor(hit*0.6)
         totalCount = hitCount + missCount;
 
-        if (totalCount > 18)
-        {
-            Debug.LogError($"[StageManager] totalCount={totalCount} は上限18を超えています。画像数を減らしてください。 (hit={hitCount}, miss={missCount})");
-            return;
-        }
-
-        if (capsulePrefab == null || capsuleRoot == null || spawnArea == null)
-        {
-            Debug.LogError("[StageManager] Inspector参照が未設定です。capsulePrefab / capsuleRoot / spawnArea を確認してください。");
-            return;
-        }
-
-        if (hitCount > 0 && (hitSprites == null || hitSprites.Count == 0))
-        {
-            Debug.LogWarning("[StageManager] hitSprites が空です。当たり画像が差し替えできません。Inspectorで入れてください。");
-        }
-
-        if (hitSprites != null && hitSprites.Count < hitCount)
-        {
-            Debug.LogWarning($"[StageManager] hitSprites の数({hitSprites.Count})が hitCount({hitCount})より少ないです。足りない分は先頭から使い回します。");
-        }
-
         ClearSpawned();
         SpawnCapsules(totalCount, hitCount);
+        StartCoroutine(StageIntroSequence());
+
+
+
+
     }
 
     private void ApplyStageCountHUD()
@@ -188,6 +175,34 @@ public class StageManager : MonoBehaviour
     {
         Debug.Log("[StageManager] Time Up!");
         HandleStageEnd(); // ← これだけ
+    }
+
+    private System.Collections.IEnumerator StageIntroSequence()
+    {
+        // ① STAGE 表示
+        if (popup != null && GameSession.I != null)
+        {
+            popup.ShowStage(GameSession.I.CurrentStage);
+        }
+        yield return new WaitForSeconds(2.4f);
+
+        // ② カプセルIN（仮）
+        yield return new WaitForSeconds(1.0f);
+
+        // ③ GameStart
+        if (popup != null)
+        {
+            popup.ShowGameStart();
+        }
+        yield return new WaitForSeconds(2.4f);
+
+        // ④ ここからゲーム開始（タイマー表示→開始）
+        if (timerGroup != null) timerGroup.SetActive(true);
+
+        StartTimer();
+        UpdateTimerText();
+
+        // 入力ブロックしたいなら、ここで解除する（後で）
     }
 
 
@@ -370,19 +385,15 @@ public class StageManager : MonoBehaviour
 
     private void HandleStageEnd()
     {
-        if (stageEnding) return;     // ★多重防止
+        if (stageEnding) return;
         stageEnding = true;
 
-        // タイマー止める
         if (timerCo != null)
         {
             StopCoroutine(timerCo);
             timerCo = null;
         }
 
-        Debug.Log("[StageManager] Stage End -> Next");
-
-        // GameSessionが無いなら安全にインセンティブへ
         if (GameSession.I == null)
         {
             Debug.LogError("[StageManager] GameSession が見つかりません。");
@@ -390,8 +401,32 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        // 次ステージある？
-        if (GameSession.I.TryAdvanceStage())
+        // 次ステージがある？
+        bool hasNext = GameSession.I.TryAdvanceStage();
+
+        // まずFinishを出す（ステージ1でも2でも）
+        if (popup != null)
+        {
+            popup.ShowFinish();
+            StartCoroutine(LoadAfterFinish(hasNext));
+            return;
+        }
+
+        // popupが無い場合のフォールバック
+        if (hasNext)
+            SceneManager.LoadScene("PV03_Virusweets_Game");
+        else
+        {
+            GameSession.I.ResetStages();
+            SceneManager.LoadScene("PV04_Incentive");
+        }
+    }
+
+    private System.Collections.IEnumerator LoadAfterFinish(bool hasNext)
+    {
+        yield return new WaitForSeconds(2.4f);
+
+        if (hasNext)
         {
             SceneManager.LoadScene("PV03_Virusweets_Game");
         }
@@ -401,6 +436,9 @@ public class StageManager : MonoBehaviour
             SceneManager.LoadScene("PV04_Incentive");
         }
     }
+
+
+
 
 
 
