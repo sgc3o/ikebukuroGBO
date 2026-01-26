@@ -4,146 +4,208 @@ using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
-    // =========================================================
-    // Inspectorで設定する項目
-    // =========================================================
-
     [Header("Stage Rule")]
-    [SerializeField] private int hitCount = 6;          // 当たり数
-    [SerializeField] private float hitRate = 0.55f;     // 今回は未使用でもOK（残しておく）
+    [SerializeField] private int hitCount = 6;
 
     [Header("Spawn References")]
-    [SerializeField] private CapsuleItem capsulePrefab; // CapsuleItemが付いたPrefab
-    [SerializeField] private RectTransform capsuleRoot; // 生成先（CapsuleRoot）
-    [SerializeField] private RectTransform spawnArea;   // 配置エリア（CapsuleArea）
+    [SerializeField] private CapsuleItem capsulePrefab;
+    [SerializeField] private RectTransform capsuleRoot;   // CapsuleRoot（GridLayoutGroupはOFF推奨）
+    [SerializeField] private RectTransform spawnArea;     // CapsuleArea（いまは使ってないけど参照チェック用）
+
+    [Header("Hit Sprites (Inspectorで差し替え)")]
+    [SerializeField] private List<Sprite> hitSprites = new(); // PV03_Common_Atari01〜などを入れる
 
     [Header("Flow")]
     [SerializeField] private string nextSceneName = "PV04_Incentive";
 
     [Header("Placement (18 slots fixed = 6x3)")]
-    [SerializeField] private int columns = 6;           // 固定: 6
-    [SerializeField] private int rows = 3;              // 固定: 3
+    [SerializeField] private int columns = 6;
+    [SerializeField] private int rows = 3;
 
     [Header("Cluster (compressed grid area)")]
-    [SerializeField] private float clusterWidth = 420f;  // ★中心寄せの幅
-    [SerializeField] private float clusterHeight = 240f; // ★中心寄せの高さ
-    [SerializeField] private Vector2 clusterOffset = Vector2.zero; // ★中心からの微調整（必要なら）
+    [SerializeField] private float clusterWidth = 420f;
+    [SerializeField] private float clusterHeight = 240f;
+    [SerializeField] private Vector2 clusterOffset = Vector2.zero;
 
-    [Header("Jitter (random offset)")]
-    [SerializeField] private float jitterX = 18f;
-    [SerializeField] private float jitterY = 10f;
-    [SerializeField] private int jitterTriesPerCapsule = 10;
+    [Header("Offset (ばらつき演出)")]
+    [SerializeField] private float offsetX = 18f;
+    [SerializeField] private float offsetY = 10f;
 
     [Header("Overlap Rule (approx)")]
     [SerializeField] private float capsuleSizePx = 116f;
     [SerializeField] private float allowedOverlapPx = 10f;
 
-    // =========================================================
-    // 実行時に使う内部データ
-    // =========================================================
+    // 3枚目の「順位表」を埋め順（0〜17のslot index）
+    // row-major（上段0..5 / 中段6..11 / 下段12..17）
+    private static readonly int[] PlacementOrder18 =
+   {
+    8,  9,  2,  3, 14, 15,
+    7, 10,  1,  4, 13, 16,
+    6, 11,  0,  5, 12, 17
+};
+
     private readonly List<CapsuleItem> spawned = new();
     private readonly List<Vector2> placedPositions = new();
 
-    private int totalCount;   // hit + miss
-    private int missCount;    // floor(hit * 0.6)
+    private int totalCount;
+    private int missCount;
 
-    // =========================================================
-    // Unity lifecycle
-    // =========================================================
+    private int foundHit = 0;
+
     private void Start()
     {
         StartStage();
     }
 
-    // =========================================================
-    // Stage start
-    // =========================================================
     private void StartStage()
     {
-        // missCount = floor(hit * 0.6) で確定
-        missCount = Mathf.FloorToInt(hitCount * 0.6f);
+        foundHit = 0;
+
+        missCount = Mathf.FloorToInt(hitCount * 0.6f); // floor(hit*0.6)
         totalCount = hitCount + missCount;
 
-        // total > 18 のときはエラー吐いて停止
         if (totalCount > 18)
         {
             Debug.LogError($"[StageManager] totalCount={totalCount} は上限18を超えています。画像数を減らしてください。 (hit={hitCount}, miss={missCount})");
             return;
         }
 
-        // 参照チェック
         if (capsulePrefab == null || capsuleRoot == null || spawnArea == null)
         {
-            Debug.LogError("[StageManager] Inspectorの参照が未設定です。capsulePrefab / capsuleRoot / spawnArea を確認してください。");
+            Debug.LogError("[StageManager] Inspector参照が未設定です。capsulePrefab / capsuleRoot / spawnArea を確認してください。");
             return;
+        }
+
+        if (hitCount > 0 && (hitSprites == null || hitSprites.Count == 0))
+        {
+            Debug.LogWarning("[StageManager] hitSprites が空です。当たり画像が差し替えできません。Inspectorで入れてください。");
+        }
+
+        if (hitSprites != null && hitSprites.Count < hitCount)
+        {
+            Debug.LogWarning($"[StageManager] hitSprites の数({hitSprites.Count})が hitCount({hitCount})より少ないです。足りない分は先頭から使い回します。");
         }
 
         ClearSpawned();
         SpawnCapsules(totalCount, hitCount);
     }
 
-    // =========================================================
-    // カプセル生成と配置
-    // =========================================================
     private void SpawnCapsules(int total, int hit)
     {
-        // A) 当たり/はずれフラグを作る → シャッフル
-        List<bool> flags = new List<bool>(total);
-        for (int i = 0; i < total; i++)
+        // 1) 18枠の中心座標（row-majorで18個）
+        List<Vector2> slotsRowMajor = BuildSlots18_RowMajor();
+
+        // 2) 中心からの順で total 個だけ使う（配置自体は固定）
+        List<Vector2> chosen = new List<Vector2>(total);
+        for (int k = 0; k < total; k++)
         {
-            flags.Add(i < hit);
+            int slotIndex = PlacementOrder18[k];
+            chosen.Add(slotsRowMajor[slotIndex]);
         }
-        Shuffle(flags);
 
-        // B) 候補枠18（6x3）を「中心クラスタ(420x240)」で作る → シャッフル
-        List<Vector2> slots = BuildSlots18_ClusterCentered();
-        Shuffle(slots);
+        // 3) chosen の中で「当たり位置」だけランダム抽選（重複なし）
+        HashSet<int> hitIndices = PickUniqueIndices(total, hit);
 
-        // totalが18未満なら「一部だけ使う」（先頭から total 個）
+        // 4) 当たり画像（重複なし）を作る：hitCount枚ぶん
+        List<Sprite> hitSpriteList = BuildHitSpriteList(hit);
+
+        // 5) 生成・配置
         float minDist = capsuleSizePx - allowedOverlapPx; // 116-10=106
+        int hitSpriteCursor = 0;
 
         for (int i = 0; i < total; i++)
         {
-            Vector2 center = slots[i];
+            bool isHit = hitIndices.Contains(i);
+            Sprite spriteForThis = null;
 
-            // C) オフセットのみで乱雑感（回転・スケールなし）
-            Vector2 decidedPos = DecidePositionWithJitter(center, minDist);
+            if (isHit)
+            {
+                spriteForThis = hitSpriteList[hitSpriteCursor];
+                hitSpriteCursor++;
+            }
 
-            // D) 生成してSetupして配置
+            Vector2 basePos = chosen[i];
+            Vector2 pos = ApplyDeterministicOffset(basePos, i);
+
+            // 近すぎ救済：オフセット無しに戻す（中心骨格寄り）
+            if (!IsFarEnough(pos, minDist))
+            {
+                pos = basePos;
+            }
+
             CapsuleItem item = Instantiate(capsulePrefab, capsuleRoot);
-            item.Setup(this, flags[i]);
+            item.Setup(this, isHit, spriteForThis);
 
             RectTransform rt = item.GetComponent<RectTransform>();
-            rt.anchoredPosition = decidedPos;
+            rt.anchoredPosition = pos;
 
             spawned.Add(item);
-            placedPositions.Add(decidedPos);
+            placedPositions.Add(pos);
         }
 
-        Debug.Log($"[StageManager] Spawn done. hit={hitCount}, miss={missCount}, total={totalCount}, cluster={clusterWidth}x{clusterHeight}");
+        Debug.Log($"[StageManager] Spawn done. hit={hitCount}, miss={missCount}, total={totalCount}");
     }
 
-    // =========================================================
-    // ★中心寄せクラスタで 18枠（6x3）の中心座標を作る
-    // - spawnAreaの中心(0,0)を基準に clusterWidth/Height の箱を作り
-    // - その箱の中に 6x3 の中心点を均等配置
-    // =========================================================
-    private List<Vector2> BuildSlots18_ClusterCentered()
+    // 当たり画像を hit 枚ぶん作る（基本：重複なし、足りなければ使い回し）
+    private List<Sprite> BuildHitSpriteList(int hit)
+    {
+        var result = new List<Sprite>(hit);
+
+        if (hitSprites == null || hitSprites.Count == 0)
+        {
+            // 空でも落ちないように
+            for (int i = 0; i < hit; i++) result.Add(null);
+            return result;
+        }
+
+        // hitSprites をシャッフルして先頭から使う
+        var pool = new List<Sprite>(hitSprites);
+        Shuffle(pool);
+
+        for (int i = 0; i < hit; i++)
+        {
+            // 足りない分は先頭から使い回し
+            result.Add(pool[i % pool.Count]);
+        }
+
+        return result;
+    }
+
+    // total個のうち count個のインデックスを重複なしで選ぶ
+    private HashSet<int> PickUniqueIndices(int total, int count)
+    {
+        var list = new List<int>(total);
+        for (int i = 0; i < total; i++) list.Add(i);
+
+        Shuffle(list);
+
+        var set = new HashSet<int>();
+        for (int i = 0; i < count; i++) set.Add(list[i]);
+        return set;
+    }
+
+    // リストをシャッフル（UnityEngine.Random 使用）
+    private void Shuffle<T>(List<T> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int r = Random.Range(0, i + 1);
+            (list[i], list[r]) = (list[r], list[i]);
+        }
+    }
+
+    // 18枠を row-major（上段→中段→下段、左→右）で作る
+    private List<Vector2> BuildSlots18_RowMajor()
     {
         var slots = new List<Vector2>(columns * rows);
 
-        // spawnArea内での「クラスタ中心」
-        Vector2 clusterCenter = clusterOffset; // (0,0)ならspawnArea中央。必要なら微調整可
+        Vector2 center = clusterOffset;
+        float left = center.x - clusterWidth * 0.5f;
+        float bottom = center.y - clusterHeight * 0.5f;
 
-        // クラスタの左下（中心から半分引く）
-        float left = clusterCenter.x - clusterWidth * 0.5f;
-        float bottom = clusterCenter.y - clusterHeight * 0.5f;
-
-        // ピッチ（中心間隔）
         float pitchX = clusterWidth / columns;
         float pitchY = clusterHeight / rows;
 
-        // 各セルの中心を追加
         for (int r = 0; r < rows; r++)
         {
             for (int c = 0; c < columns; c++)
@@ -153,63 +215,23 @@ public class StageManager : MonoBehaviour
                 slots.Add(new Vector2(x, y));
             }
         }
-
-        // 念のため：クラスタがspawnAreaを超えてないか軽く警告（止めはしない）
-        if (spawnArea != null)
-        {
-            float areaW = spawnArea.rect.width;
-            float areaH = spawnArea.rect.height;
-
-            if (clusterWidth > areaW || clusterHeight > areaH)
-            {
-                Debug.LogWarning($"[StageManager] cluster({clusterWidth}x{clusterHeight}) が spawnArea({areaW}x{areaH}) より大きい可能性があります。");
-            }
-        }
-
         return slots;
     }
 
-    // =========================================================
-    // 中心からオフセットして置く。近すぎたら救済（グリッド寄りに戻す）
-    // =========================================================
-    private Vector2 DecidePositionWithJitter(Vector2 center, float minDist)
+    // 決定論オフセット（毎回同じばらつき）
+    private Vector2 ApplyDeterministicOffset(Vector2 basePos, int i)
     {
-        // 1) 通常オフセットで試す
-        for (int t = 0; t < jitterTriesPerCapsule; t++)
-        {
-            Vector2 candidate = center + new Vector2(
-                Random.Range(-jitterX, jitterX),
-                Random.Range(-jitterY, jitterY)
-            );
-
-            if (IsFarEnough(candidate, minDist))
-                return candidate;
-        }
-
-        // 2) オフセットを弱めて試す（救済1）
-        float weakX = Mathf.Min(8f, jitterX);
-        float weakY = Mathf.Min(6f, jitterY);
-        for (int t = 0; t < jitterTriesPerCapsule; t++)
-        {
-            Vector2 candidate = center + new Vector2(
-                Random.Range(-weakX, weakX),
-                Random.Range(-weakY, weakY)
-            );
-
-            if (IsFarEnough(candidate, minDist))
-                return candidate;
-        }
-
-        // 3) 最後は中心に戻す（救済2）
-        if (!IsFarEnough(center, minDist))
-            Debug.LogWarning("[StageManager] 近接制限を満たせないため、中心配置で確定しました（密度が高い可能性）");
-
-        return center;
+        float nx = Hash01(i * 17 + 3) * 2f - 1f;  // -1..1
+        float ny = Hash01(i * 29 + 7) * 2f - 1f;
+        return basePos + new Vector2(nx * offsetX, ny * offsetY);
     }
 
-    // =========================================================
-    // 既に置いた点から十分離れているか
-    // =========================================================
+    private float Hash01(int n)
+    {
+        float s = Mathf.Sin(n * 12.9898f) * 43758.5453f;
+        return s - Mathf.Floor(s);
+    }
+
     private bool IsFarEnough(Vector2 candidate, float minDist)
     {
         float minDistSqr = minDist * minDist;
@@ -221,21 +243,6 @@ public class StageManager : MonoBehaviour
         return true;
     }
 
-    // =========================================================
-    // リストシャッフル
-    // =========================================================
-    private void Shuffle<T>(List<T> list)
-    {
-        for (int i = 0; i < list.Count; i++)
-        {
-            int r = Random.Range(i, list.Count);
-            (list[i], list[r]) = (list[r], list[i]);
-        }
-    }
-
-    // =========================================================
-    // 既存生成物の掃除
-    // =========================================================
     private void ClearSpawned()
     {
         for (int i = 0; i < spawned.Count; i++)
@@ -247,18 +254,20 @@ public class StageManager : MonoBehaviour
         placedPositions.Clear();
     }
 
-    // =========================================================
-    // 次シーンへ（必要なら）
-    // =========================================================
+    public void OnHitFound()
+    {
+        foundHit++;
+        // TODO: HUD更新（foundHit / hitCount）
+
+        if (foundHit >= hitCount)
+        {
+            GoNextScene();
+        }
+    }
+
     public void GoNextScene()
     {
         if (!string.IsNullOrEmpty(nextSceneName))
             SceneManager.LoadScene(nextSceneName);
-    }
-
-    // CapsuleItemから呼ぶ想定（必要なら）
-    public void OnHitFound()
-    {
-        // TODO: ヒット数UI更新など
     }
 }

@@ -1,80 +1,75 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 // カプセル1個の挙動
-// ボタンを押されたら1回だけ開く
-// 当たり / はずれの見た目切替
-// 当たりなら StageManager に通知 
-
-
 public class CapsuleItem : MonoBehaviour
 {
     [Header("Input")]
     [SerializeField] private Button button;
 
-    [Header("Visuals")]
+    [Header("Visuals (GameObject参照)")]
     [SerializeField] private GameObject closedVisual;
     [SerializeField] private GameObject hitVisual;
     [SerializeField] private GameObject missVisual;
 
     // --- 状態 ---
-    private bool isHit;              // このカプセルは当たり？
-    private bool opened;             // もう開いた？
-    private StageManager manager;    // 通知先
+    private bool isHit;
+    private bool opened;
+    private StageManager manager;
 
-    public void Setup(StageManager managerRef, bool hitFlag) //Setup = このオブジェクトがちゃんと動くように、外部情報を注入する準備処理
+    // 当たり画像（Hitのときだけ使う）
+    private Sprite hitSprite;
+
+    /// <summary>
+    /// 外から「このカプセルは当たりか？」と「当たり画像」を注入して初期化
+    /// </summary>
+    public void Setup(StageManager managerRef, bool hitFlag, Sprite hitSpriteIfAny)
     {
-        this.manager = managerRef;
+        manager = managerRef;
         isHit = hitFlag;
+        hitSprite = hitSpriteIfAny;
         opened = false;
 
-        // 初期表示：閉じた状態だけON
-        if(closedVisual != null) closedVisual.SetActive(true);
-        if(hitVisual!= null) hitVisual.SetActive(false);
-        if(missVisual!= null) missVisual.SetActive(false);
+        // 初期表示：閉じだけON
+        if (closedVisual != null) closedVisual.SetActive(true);
+        if (hitVisual != null) hitVisual.SetActive(false);
+        if (missVisual != null) missVisual.SetActive(false);
 
-        //クリック登録
+        // クリック登録
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(OnClickCapsule);
 
-        //ボタン有効化
         button.interactable = true;
     }
 
     private void OnClickCapsule()
     {
-        // TODO: すでに開いてたら何もしない（opened判定）
         if (opened) return;
         opened = true;
 
-        //ボタン無効化（連打防止）
         button.interactable = false;
 
-        // 見た目切り替え：閉じた表示OFF
         if (closedVisual != null) closedVisual.SetActive(false);
 
         if (isHit)
         {
-            //当たり表示ON
-            if(hitVisual != null)hitVisual.SetActive(true);
+            // HitVisual の Image の sprite を差し替え
+            if (hitVisual != null)
+            {
+                var img = hitVisual.GetComponent<Image>();
+                if (img != null && hitSprite != null)
+                {
+                    img.sprite = hitSprite;
+                    img.SetNativeSize(); // 必要ならON（サイズ揃えたいなら消してOK）
+                }
+                hitVisual.SetActive(true);
+            }
 
-            // TODO: StageManager に「当たり見つけた」を通知
             manager.OnHitFound();
-        }else
+        }
+        else
         {
-
-            //はずれ表示
-            if (missVisual != null)missVisual.SetActive(true);
+            if (missVisual != null) missVisual.SetActive(true);
         }
     }
-
-
-
-
-
-
-
-
-
 }
