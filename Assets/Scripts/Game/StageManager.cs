@@ -70,6 +70,8 @@ public class StageManager : MonoBehaviour
     private Coroutine timerCo;
     private bool stageEndedByTimer = false;
 
+    private bool stageEnding = false; // クリア/タイムアップの多重防止
+
     private void Start()
     {
         StartStage();
@@ -184,16 +186,8 @@ public class StageManager : MonoBehaviour
 
     private void OnTimeUp()
     {
-        if (stageEndedByTimer) return;
-        stageEndedByTimer = true;
-
         Debug.Log("[StageManager] Time Up!");
-
-        // 連打で2回呼ばれないように入力止める（spawned があるなら）
-        // spawned の型が List<CapsuleItem> なら↓が効く
-        // foreach (var c in spawned) c.SetInteractable(false);
-
-        HandleStageClearOrTimeout();
+        HandleStageEnd(); // ← これだけ
     }
 
 
@@ -364,44 +358,21 @@ public class StageManager : MonoBehaviour
     public void OnHitFound()
     {
         foundHit++;
-        ApplyAtariCounterHUD(); // ★ここで更新
+        ApplyAtariCounterHUD();
+
         if (foundHit >= hitCount)
         {
-            HandleStageClear();
-            HandleStageClearOrTimeout();
+            HandleStageEnd(); // ← これだけ呼ぶ
         }
     }
 
 
-    private void HandleStageClear()
+
+    private void HandleStageEnd()
     {
-        Debug.Log("[StageManager] Stage Clear!");
+        if (stageEnding) return;     // ★多重防止
+        stageEnding = true;
 
-        // GameSession が居ないなら、2ステージ判定ができないので安全にインセンティブへ
-        if (GameSession.I == null)
-        {
-            Debug.LogError("[StageManager] GameSession が見つかりません。最初のシーンに GameSession を置いてください。");
-            SceneManager.LoadScene("PV04_Incentive");
-            return;
-        }
-
-        // 次ステージがあるなら同じゲームシーンをリロード
-        if (GameSession.I.TryAdvanceStage())
-        {
-            Debug.Log($"[StageManager] Next Stage: {GameSession.I.CurrentStage}/{GameSession.I.TotalStages}");
-            SceneManager.LoadScene("PV03_Virusweets_Game");
-        }
-        else
-        {
-            // 最終ステージクリア
-            Debug.Log("[StageManager] All Stages Cleared. Go Incentive.");
-            GameSession.I.ResetStages();
-            SceneManager.LoadScene("PV04_Incentive");
-        }
-    }
-
-    private void HandleStageClearOrTimeout()
-    {
         // タイマー止める
         if (timerCo != null)
         {
@@ -411,19 +382,26 @@ public class StageManager : MonoBehaviour
 
         Debug.Log("[StageManager] Stage End -> Next");
 
-        // 次ステージある？
-        if (GameSession.I != null && GameSession.I.TryAdvanceStage())
+        // GameSessionが無いなら安全にインセンティブへ
+        if (GameSession.I == null)
         {
-            // 同じゲームシーンをリロードして2ステージ目へ
+            Debug.LogError("[StageManager] GameSession が見つかりません。");
+            SceneManager.LoadScene("PV04_Incentive");
+            return;
+        }
+
+        // 次ステージある？
+        if (GameSession.I.TryAdvanceStage())
+        {
             SceneManager.LoadScene("PV03_Virusweets_Game");
         }
         else
         {
-            // 最終ステージならインセンティブ
-            if (GameSession.I != null) GameSession.I.ResetStages();
+            GameSession.I.ResetStages();
             SceneManager.LoadScene("PV04_Incentive");
         }
     }
+
 
 
 }
