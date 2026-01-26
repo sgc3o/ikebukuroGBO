@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Repository\\ikebukuroGBO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|c:\\repository\\ikebukurogbo\\assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|C:\\Repository\\ikebukuroGBO\\assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|C:\\Repository\\ikebukuroGBO\\assets\\scripts\\flow\\gamesession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\flow\\gamesession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|C:\\Repository\\ikebukuroGBO\\assets\\scripts\\flow\\pv02commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|C:\\Repository\\ikebukuroGBO\\assets\\scripts\\game\\capsuleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\capsuleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|C:\\Repository\\ikebukuroGBO\\assets\\scripts\\flow\\gamesession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\flow\\gamesession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +30,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "PV02CommonController.cs",
               "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\PV02CommonController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\PV02CommonController.cs",
@@ -42,7 +42,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "CapsuleItem.cs",
               "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\CapsuleItem.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\CapsuleItem.cs",
@@ -54,15 +54,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "GameSession.cs",
               "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\GameSession.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\GameSession.cs",
               "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\GameSession.cs",
               "RelativeToolTip": "Assets\\Scripts\\Flow\\GameSession.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAzwDIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-26T02:31:33.395Z"
+              "WhenOpened": "2026-01-26T02:31:33.395Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -72,7 +73,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\StageManager.cs",
               "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Game\\StageManager.cs",
-              "ViewState": "AgIAAC0BAAAAAAAAAAA6wFcBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHgBAAAAAAAAAAAowKkBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-16T03:13:37.389Z",
               "EditorCaption": ""

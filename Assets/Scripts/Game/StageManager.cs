@@ -43,6 +43,11 @@ public class StageManager : MonoBehaviour
     [SerializeField] private Sprite stageCount2of2;     // 2/2 のSprite
     [SerializeField] private TMP_Text atariCounterText; // AtariCounterText を入れる
 
+    [Header("Timer")]
+    [SerializeField] private TMP_Text timerText;     // Hud/TimerText を入れる
+    [SerializeField] private float stage1LimitSec = 30f;
+    [SerializeField] private float stage2LimitSec = 30f;
+
 
     // 3枚目の「順位表」を埋め順（0〜17のslot index）
     // row-major（上段0..5 / 中段6..11 / 下段12..17）
@@ -61,6 +66,10 @@ public class StageManager : MonoBehaviour
 
     private int foundHit = 0;
 
+    private float timeLeft;
+    private Coroutine timerCo;
+    private bool stageEndedByTimer = false;
+
     private void Start()
     {
         StartStage();
@@ -70,6 +79,11 @@ public class StageManager : MonoBehaviour
     private void StartStage()
     {
         ApplyStageCountHUD(); // ← まず表示を更新
+
+        stageEndedByTimer = false;
+        StartTimer();
+        UpdateTimerText();
+
 
         foundHit = 0;
         ApplyAtariCounterHUD(); // ★ここで 0/6 にする
@@ -132,6 +146,54 @@ public class StageManager : MonoBehaviour
         // foundHit は「見つけた当たり数」
         // hitCount は「総当たり数（例:6）」
         atariCounterText.text = $"{foundHit}/{hitCount}";
+    }
+
+    private void StartTimer()
+    {
+        if (timerCo != null) StopCoroutine(timerCo);
+
+        int stage = (GameSession.I != null) ? GameSession.I.CurrentStage : 1;
+        timeLeft = (stage >= 2) ? stage2LimitSec : stage1LimitSec;
+
+        timerCo = StartCoroutine(TimerRoutine());
+    }
+
+    private System.Collections.IEnumerator TimerRoutine()
+    {
+        while (timeLeft > 0f)
+        {
+            timeLeft -= Time.deltaTime;
+            if (timeLeft < 0f) timeLeft = 0f;
+
+            UpdateTimerText();
+            yield return null;
+        }
+
+        // 時間切れ
+        OnTimeUp();
+    }
+
+    private void UpdateTimerText()
+    {
+        if (timerText == null) return;
+
+        // 表示は整数が見やすい
+        int sec = Mathf.CeilToInt(timeLeft);
+        timerText.text = sec.ToString();
+    }
+
+    private void OnTimeUp()
+    {
+        if (stageEndedByTimer) return;
+        stageEndedByTimer = true;
+
+        Debug.Log("[StageManager] Time Up!");
+
+        // 連打で2回呼ばれないように入力止める（spawned があるなら）
+        // spawned の型が List<CapsuleItem> なら↓が効く
+        // foreach (var c in spawned) c.SetInteractable(false);
+
+        HandleStageClearOrTimeout();
     }
 
 
@@ -306,6 +368,7 @@ public class StageManager : MonoBehaviour
         if (foundHit >= hitCount)
         {
             HandleStageClear();
+            HandleStageClearOrTimeout();
         }
     }
 
@@ -337,7 +400,30 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    private void HandleStageClearOrTimeout()
+    {
+        // タイマー止める
+        if (timerCo != null)
+        {
+            StopCoroutine(timerCo);
+            timerCo = null;
+        }
 
+        Debug.Log("[StageManager] Stage End -> Next");
+
+        // 次ステージある？
+        if (GameSession.I != null && GameSession.I.TryAdvanceStage())
+        {
+            // 同じゲームシーンをリロードして2ステージ目へ
+            SceneManager.LoadScene("PV03_Virusweets_Game");
+        }
+        else
+        {
+            // 最終ステージならインセンティブ
+            if (GameSession.I != null) GameSession.I.ResetStages();
+            SceneManager.LoadScene("PV04_Incentive");
+        }
+    }
 
 
 }

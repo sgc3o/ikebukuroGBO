@@ -22,7 +22,7 @@ public class GameSession : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // ゲーム選択時に呼ぶ（PV02側など）
+    // ゲーム選択時に呼ぶ想定
     public void SelectGame(string gameKey, string openingScene, string gameScene, int totalStages = 2)
     {
         SelectedGameKey = gameKey;
@@ -30,21 +30,19 @@ public class GameSession : MonoBehaviour
         NextGameScene = gameScene;
 
         TotalStages = Mathf.Max(1, totalStages);
-        CurrentStage = 1; // 選び直したらステージは1に戻す
+        CurrentStage = 1;
     }
 
-    // 進められたら true（= 次ステージへ）
     public bool TryAdvanceStage()
     {
         if (CurrentStage < TotalStages)
         {
             CurrentStage++;
-            return true;
+            return true; // 続行
         }
-        return false;
+        return false; // 最終ステージ
     }
 
-    // 最終クリア後など、必要なら明示リセット
     public void ResetStages()
     {
         CurrentStage = 1;

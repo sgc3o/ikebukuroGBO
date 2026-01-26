@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Repository\\ikebukuroGBO\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|c:\\repository\\ikebukurogbo\\assets\\scripts\\game\\stagetimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\stagetimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|c:\\repository\\ikebukurogbo\\assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -26,11 +30,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "StageTimer.cs",
+              "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageTimer.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\StageTimer.cs",
+              "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageTimer.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Game\\StageTimer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-26T06:47:57.16Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "PV02CommonController.cs",
               "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\PV02CommonController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\PV02CommonController.cs",
@@ -42,7 +59,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "CapsuleItem.cs",
               "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\CapsuleItem.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\CapsuleItem.cs",
@@ -54,7 +71,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "GameSession.cs",
               "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\GameSession.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\GameSession.cs",
@@ -66,13 +83,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "StageManager.cs",
               "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\StageManager.cs",
               "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Game\\StageManager.cs",
-              "ViewState": "AgIAABMBAAAAAAAAAADwvzABAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAC4BAAAAAAAAAAAmwFcBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-16T03:13:37.389Z",
               "EditorCaption": ""
