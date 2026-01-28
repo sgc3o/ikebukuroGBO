@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PV03_Stage02_GameStart_Popup_0: -4243270320410973297
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

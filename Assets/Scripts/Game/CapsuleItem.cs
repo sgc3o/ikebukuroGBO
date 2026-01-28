@@ -8,6 +8,7 @@ public class CapsuleItem : MonoBehaviour
     [SerializeField] private Button button;
 
     [Header("Visuals (GameObject参照)")]
+    [SerializeField] private RectTransform rotator; // Button/Rotator を入れる
     [SerializeField] private GameObject closedVisual;
     [SerializeField] private GameObject hitVisual;
     [SerializeField] private GameObject missVisual;
@@ -16,6 +17,7 @@ public class CapsuleItem : MonoBehaviour
     private bool isHit;
     private bool opened;
     private StageManager manager;
+    public RectTransform Rotator => rotator;
 
     // 当たり画像（Hitのときだけ使う）
     private Sprite hitSprite;
@@ -76,4 +78,13 @@ public class CapsuleItem : MonoBehaviour
         Debug.Log($"[CapsuleItem] Clicked. isHit={isHit}, manager={(manager ? manager.name : "NULL")}");
 
     }
+
+    public void SetInteractable(bool value)
+    {
+        if (button == null) return;
+
+        // すでに開いてるカプセルは再度押せないままにする
+        button.interactable = value && !opened;
+    }
+
 }

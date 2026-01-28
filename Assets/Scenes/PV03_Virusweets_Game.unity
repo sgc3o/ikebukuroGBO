@@ -670,6 +670,64 @@ MonoBehaviour:
   stage1LimitSec: 30
   stage2LimitSec: 30
   popup: {fileID: 1989464983}
+  spawnAnimDuration: 1
+  spawnEase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.49057007
+      inSlope: 0.50942993
+      outSlope: 0.50942993
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.50942993
+      outSlope: 0.50942993
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  rotatorPivot: {x: 0.85, y: 0.2}
+  spawnDuration: 1
+  spawnOffscreenPadding: 5
+  moveEase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.00000029113662
+      outSlope: -0.00000029113662
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.49444446
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.023554433
+      outSlope: 0.023554433
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 1
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  startAngleRight: 180
+  startAngleOther: -180
+  offscreenPadding: 10
+  centerBandRatio: 0.2
+  edgeJitterX: 80
+  edgeJitterY: 80
 --- !u!1 &1281607259
 GameObject:
   m_ObjectHideFlags: 0
