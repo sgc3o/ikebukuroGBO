@@ -22,23 +22,17 @@ public class PopupManager : MonoBehaviour
 
     Coroutine routine;
 
-    private bool isShowing;
-    public bool IsShowing => isShowing;
-
-    /*public bool IsShowing
+    public bool IsShowing
     {
         get
         {
-            // ルーチンが回ってる＝表示中
             if (routine != null) return true;
-
-            // 念のため：alphaやenabledでも判定（保険）
             if (canvasGroup != null && canvasGroup.alpha > 0.01f) return true;
             if (popupImage != null && popupImage.enabled) return true;
-
             return false;
         }
-    }*/
+    }
+
 
     private void Reset()
     {
@@ -47,13 +41,13 @@ public class PopupManager : MonoBehaviour
 
     private void Awake()
     {
-        if(canvasGroup != null)
+        if (canvasGroup != null)
         {
             canvasGroup.alpha = 0f;
             canvasGroup.blocksRaycasts = false;
             canvasGroup.interactable = false;
         }
-        if(popupImage != null) popupImage.enabled = false;
+        if (popupImage != null) popupImage.enabled = false;
         //isShowing = false;
 
     }
@@ -76,7 +70,7 @@ public class PopupManager : MonoBehaviour
             return;
         }
 
-        if(routine != null)StopCoroutine(routine);
+        if (routine != null) StopCoroutine(routine);
         routine = StartCoroutine(ShowRoutine(sprite));
 
     }
@@ -90,18 +84,18 @@ public class PopupManager : MonoBehaviour
         popupImage.SetNativeSize();
         popupImage.enabled = true;
 
-        canvasGroup.alpha= 1f;
-        canvasGroup.blocksRaycasts= true;
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = false;
 
         yield return new WaitForSeconds(showSec);
 
         float t = 0f;
         float startA = canvasGroup.alpha;
-        while(t < fadeOutSec)
+        while (t < fadeOutSec)
         {
             t += Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(startA,0f, t / fadeOutSec);
+            canvasGroup.alpha = Mathf.Lerp(startA, 0f, t / fadeOutSec);
             yield return null;
         }
         canvasGroup.alpha = 0f;
@@ -113,8 +107,14 @@ public class PopupManager : MonoBehaviour
 
     }
 
+    public Coroutine ShowAndWait(Sprite sprite, MonoBehaviour owner)
+    {
+        if (routine != null) owner.StopCoroutine(routine);
+        routine = owner.StartCoroutine(ShowRoutine(sprite));
+        return routine;
+    }
 
 
-
-
+    
 }
+

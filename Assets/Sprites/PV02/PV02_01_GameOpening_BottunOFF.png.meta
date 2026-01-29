@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PV02_01_GameOpening_BottunOFF_0: -192479072875790964
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

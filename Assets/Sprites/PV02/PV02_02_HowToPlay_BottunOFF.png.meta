@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PV02_02_HowToPlay_BottunOFF_0: 8750090793655393528
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

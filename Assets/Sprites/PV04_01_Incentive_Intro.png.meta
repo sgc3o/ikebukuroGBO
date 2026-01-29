@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PV04_01_Incentive_Intro_0: -69396749049264854
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

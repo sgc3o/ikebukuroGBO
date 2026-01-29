@@ -133,8 +133,8 @@ public class StageManager : MonoBehaviour
         totalCount = hitCount + missCount;
 
         ClearSpawned();
-        SpawnCapsules(totalCount, hitCount);
-        StartCoroutine(StageIntroSequence());
+        StartCoroutine(StartStageFlow());
+
 
 
 
@@ -218,6 +218,8 @@ public class StageManager : MonoBehaviour
         if (popup != null && GameSession.I != null)
         {
             popup.ShowStage(GameSession.I.CurrentStage);
+            yield return new WaitWhile(() => popup.IsShowing);
+
         }
         yield return new WaitForSeconds(2.4f);
 
@@ -302,6 +304,10 @@ public class StageManager : MonoBehaviour
 
             // 演出が終わったら押せるようにする（簡易版）
             StartCoroutine(EnableAfter(item, spawnDuration));
+
+            spawned.Add(item);
+            placedPositions.Add(pos);
+
         }
 
         Debug.Log($"[StageManager] Spawn done. hit={hitCount}, miss={missCount}, total={totalCount}");
@@ -714,5 +720,53 @@ private void ClearSpawned()
         if (item != null) item.SetInteractable(true);
     }
 
+    private IEnumerator StartStageFlow()
+    {
+        // 念のため最初は入力OFF
+        EnableCapsuleInput(false);
+
+        // ① ステージポップアップ
+        if (popup != null && GameSession.I != null)
+            popup.ShowStage(GameSession.I.CurrentStage);
+
+        // ② フェードアウト完了まで待つ
+        if (popup != null)
+            yield return new WaitUntil(() => !popup.IsShowing);
+
+        // ③ カプセルIN（この時点で初めて生成）
+        SpawnCapsulesWithAnimation();
+
+        // ★カプセルINが終わるまで待つ（spawnDuration を使う）
+        yield return new WaitForSeconds(spawnDuration);
+
+        // ④ GameStart ポップアップ
+        if (popup != null)
+            popup.ShowGameStart();
+
+        if (popup != null)
+            yield return new WaitUntil(() => !popup.IsShowing);
+
+        // ⑤ ここで初めてゲーム操作可能
+        EnableCapsuleInput(true);
+
+        if (timerGroup != null) timerGroup.SetActive(true);
+        StartTimer();
+    }
+
+    // SpawnCapsules を「演出込みで呼ぶ」ためのラッパー
+    private void SpawnCapsulesWithAnimation()
+    {
+        SpawnCapsules(totalCount, hitCount);
+    }
+
+    // まとめて入力ON/OFF（popup中に押せない、などに使う）
+    private void EnableCapsuleInput(bool enable)
+    {
+        for (int i = 0; i < spawned.Count; i++)
+        {
+            if (spawned[i] != null)
+                spawned[i].SetInteractable(enable);
+        }
+    }
 
 }

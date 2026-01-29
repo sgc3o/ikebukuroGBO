@@ -722,8 +722,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  startAngleRight: 180
-  startAngleOther: -180
+  startAngleRight: 360
+  startAngleOther: -360
   offscreenPadding: 10
   centerBandRatio: 0.2
   edgeJitterX: 80
