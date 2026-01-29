@@ -46,6 +46,10 @@ public class CapsuleItem : MonoBehaviour
 
     private void OnClickCapsule()
     {
+
+        // 押されたカプセルを最前面へ（UIの重なり順を上げる）
+        transform.SetAsLastSibling();
+
         if (manager != null && manager.IsInputBlocked) return; // ★追加：ポップアップ中は無視
 
         if (opened) return;
