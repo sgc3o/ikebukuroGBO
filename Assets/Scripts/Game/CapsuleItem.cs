@@ -12,6 +12,12 @@ public class CapsuleItem : MonoBehaviour
     [SerializeField] private GameObject closedVisual;
     [SerializeField] private GameObject hitVisual;
     [SerializeField] private GameObject missVisual;
+    [SerializeField] private GameObject hitEffect;
+    [SerializeField] private Animator hitEffectAnimator; // HitEffect に付いてる Animator
+    [SerializeField] private string hitEffectStateName = "HitEffect"; // Animator内のState名
+
+
+
 
     // --- 状態 ---
     private bool isHit;
@@ -27,6 +33,7 @@ public class CapsuleItem : MonoBehaviour
     /// </summary>
     public void Setup(StageManager managerRef, bool hitFlag, Sprite hitSpriteIfAny)
     {
+
         manager = managerRef;
         isHit = hitFlag;
         hitSprite = hitSpriteIfAny;
@@ -40,6 +47,10 @@ public class CapsuleItem : MonoBehaviour
         // クリック登録
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(OnClickCapsule);
+
+        //ヒットエフェクトを最初は消す
+        if (hitEffect != null) hitEffect.SetActive(false);
+
 
         button.interactable = true;
     }
@@ -70,6 +81,7 @@ public class CapsuleItem : MonoBehaviour
                     img.sprite = hitSprite;
                     img.SetNativeSize(); // 必要ならON（サイズ揃えたいなら消してOK）
                 }
+                PlayHitEffect();
                 hitVisual.SetActive(true);
             }
 
@@ -90,5 +102,32 @@ public class CapsuleItem : MonoBehaviour
         // すでに開いてるカプセルは再度押せないままにする
         button.interactable = value && !opened;
     }
+    private void PlayHitEffect()
+    {
+        if (hitEffect == null) return;
+
+        hitEffect.SetActive(true);
+
+        if (hitEffectAnimator != null)
+        {
+            // 毎回先頭から再生
+            hitEffectAnimator.Play(hitEffectStateName, 0, 0f);
+
+            // クリップ長で消す（Animatorから取得）
+            var clips = hitEffectAnimator.runtimeAnimatorController.animationClips;
+            float len = 0.3f;
+            if (clips != null && clips.Length > 0) len = clips[0].length;
+
+            StartCoroutine(HideHitEffectAfter(len));
+        }
+    }
+
+
+    private System.Collections.IEnumerator HideHitEffectAfter(float t)
+    {
+        yield return new WaitForSeconds(t);
+        if (hitEffect != null) hitEffect.SetActive(false);
+    }
+
 
 }
