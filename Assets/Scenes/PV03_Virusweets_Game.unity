@@ -657,8 +657,8 @@ MonoBehaviour:
   clusterWidth: 460
   clusterHeight: 240
   clusterOffset: {x: 0, y: 0}
-  offsetX: 10
-  offsetY: 10
+  offsetX: 25
+  offsetY: 25
   capsuleSizePx: 100
   allowedOverlapPx: 5
   stageCountImage: {fileID: 1788606376}
