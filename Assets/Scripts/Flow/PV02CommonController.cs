@@ -42,7 +42,8 @@ public class PV02CommonController : MonoBehaviour
     public void OnOkPressed()
     {
         if (transitioning) return;
-        StartCoroutine(FadeOutAndLoad(howToPlayPanel, nextGameSceneName));
+        SceneTransition.Go(nextGameSceneName);
+
     }
 
     // HowToPlay → Opening に戻すボタンがある場合
@@ -117,7 +118,7 @@ public class PV02CommonController : MonoBehaviour
         from.alpha = 0f;
         from.gameObject.SetActive(false);
 
-        SceneManager.LoadScene(sceneName);
+        SceneTransition.Go(sceneName);
     }
 
     // --------------------

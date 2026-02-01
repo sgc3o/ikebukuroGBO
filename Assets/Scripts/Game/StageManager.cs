@@ -531,7 +531,7 @@ private void ClearSpawned()
         if (GameSession.I == null)
         {
             Debug.LogError("[StageManager] GameSession が見つかりません。");
-            SceneManager.LoadScene("PV04_Incentive");
+            SceneTransition.Go("PV04_Incentive");
             return;
         }
 
@@ -548,11 +548,11 @@ private void ClearSpawned()
 
         // popupが無い場合のフォールバック
         if (hasNext)
-            SceneManager.LoadScene("PV03_Virusweets_Game");
+            SceneTransition.Go("PV03_Virusweets_Game");
         else
         {
             GameSession.I.ResetStages();
-            SceneManager.LoadScene("PV04_Incentive");
+            SceneTransition.Go("PV04_Incentive");
         }
     }
 
