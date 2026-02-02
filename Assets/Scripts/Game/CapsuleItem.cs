@@ -91,7 +91,6 @@ public class CapsuleItem : MonoBehaviour
         {
             if (missVisual != null) missVisual.SetActive(true);
         }
-        Debug.Log($"[CapsuleItem] Clicked. isHit={isHit}, manager={(manager ? manager.name : "NULL")}");
 
     }
 

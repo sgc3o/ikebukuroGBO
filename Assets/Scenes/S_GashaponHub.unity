@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 339379622}
   - component: {fileID: 339379625}
   m_Layer: 5
-  m_Name: BTN_Scene_PV02
+  m_Name: BTN_Scene_Puzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16dc6328eced19c4ead7fe14ac02a51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: PV02_Common
+  sceneName: S_PuzzleGameRoot
 --- !u!1 &450449940
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 687922197}
   - component: {fileID: 687922200}
   m_Layer: 5
-  m_Name: BTN_Scene_M02
+  m_Name: BTN_Scene_Memory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -600,7 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16dc6328eced19c4ead7fe14ac02a51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: M02_Common
+  sceneName: S_MemoryGameRoot
 --- !u!1 &864504776
 GameObject:
   m_ObjectHideFlags: 0

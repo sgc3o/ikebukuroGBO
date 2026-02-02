@@ -9,19 +9,19 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/C01_Title.unity
+    path: Assets/Scenes/S_GashaponHub.unity
     guid: c9c815d33198838429bf30740ceeaa5c
   - enabled: 1
-    path: Assets/Scenes/PV02_Common.unity
+    path: Assets/Scenes/_bk/PV02_Common.unity
     guid: 85cb3b9627c30cd4a8330d4225e053c3
   - enabled: 1
-    path: Assets/Scenes/PV03_Virusweets_Game.unity
+    path: Assets/Scenes/S_PuzzleGameRoot.unity
     guid: 8e212a24aee94e14f8293a1d9751fa9a
   - enabled: 1
-    path: Assets/Scenes/PV04_Incentive.unity
+    path: Assets/Scenes/S_PuzzleIncentive.unity
     guid: d26ef361d18935441a40756826e471f8
   - enabled: 1
-    path: Assets/Scenes/M02_Common.unity
+    path: Assets/Scenes/S_MemoryGameRoot.unity
     guid: 4270013c451aa5c46b713f348efbe6eb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
