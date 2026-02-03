@@ -3,52 +3,8 @@
   "WorkspaceRootPath": "D:\\Repository\\ikebukuroGBO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|d:\\repository\\ikebukurogbo\\assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|d:\\repository\\ikebukurogbo\\assets\\scripts\\ui\\circularcountdownui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\circularcountdownui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\ui\\idlerecoverypopupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\idlerecoverypopupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\flow\\gamesession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\flow\\gamesession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\ui\\idlerecoverymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\idlerecoverymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\ui\\popupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\popupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\flow\\pv02commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\flow\\pv02commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\game\\capsuleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\capsuleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\game\\screenflowcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\screenflowcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\flow\\scenetransition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\flow\\scenetransition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\flow\\scenebuttonloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\flow\\scenebuttonloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\C01Controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Flow\\C01Controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,106 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SceneTransition.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\SceneTransition.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\SceneTransition.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\SceneTransition.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Flow\\SceneTransition.cs",
-              "ViewState": "AgIAAHMAAAAAAAAAAAAgwK0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T09:43:51.136Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IdleRecoveryManager.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAjwEQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T10:55:08.395Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IdleRecoveryPopupController.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T10:54:46.287Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CircularCountdownUI.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\CircularCountdownUI.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\CircularCountdownUI.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\CircularCountdownUI.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\CircularCountdownUI.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAgwD4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T10:54:09.238Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PopupManager.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\PopupManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\PopupManager.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\PopupManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\PopupManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T10:54:02.644Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GameSession.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\GameSession.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\GameSession.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\GameSession.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Flow\\GameSession.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T04:30:53.904Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CapsuleItem.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\CapsuleItem.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\CapsuleItem.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\CapsuleItem.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Game\\CapsuleItem.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAMwF0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T04:05:06.151Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ScreenFlowController.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\ScreenFlowController.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Game\\ScreenFlowController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T04:01:33.858Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -166,45 +24,10 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\StageManager.cs",
               "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Game\\StageManager.cs",
-              "ViewState": "AgIAAAgBAAAAAAAAAAAAAAcBAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAK0BAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-30T17:54:59.409Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PV02CommonController.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\PV02CommonController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\PV02CommonController.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\PV02CommonController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Flow\\PV02CommonController.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAuwCEAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T04:53:42.915Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "SceneButtonLoader.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\SceneButtonLoader.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\SceneButtonLoader.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\SceneButtonLoader.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Flow\\SceneButtonLoader.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T13:02:02.413Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "C01Controller.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\C01Controller.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\C01Controller.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\C01Controller.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Flow\\C01Controller.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T12:48:22.021Z"
             }
           ]
         }
