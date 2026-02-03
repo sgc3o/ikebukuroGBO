@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Repository\\ikebukuroGBO\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|d:\\repository\\ikebukurogbo\\assets\\scripts\\ui\\idlerecoverymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\idlerecoverymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|d:\\repository\\ikebukurogbo\\assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -19,12 +23,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "IdleRecoveryManager.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAUwJIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-03T07:57:04.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "StageManager.cs",
               "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\StageManager.cs",
               "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Game\\StageManager.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAK0BAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBGwK0BAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-30T17:54:59.409Z",
               "EditorCaption": ""
