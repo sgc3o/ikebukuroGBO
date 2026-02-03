@@ -56,4 +56,7 @@ public class CircularCountdownUI : MonoBehaviour
         if (radialImage == null) return;
         radialImage.fillAmount = Mathf.Clamp01(v);
     }
+
+ 
+
 }

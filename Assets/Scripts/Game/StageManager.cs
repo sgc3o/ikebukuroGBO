@@ -32,6 +32,20 @@ public class StageManager : MonoBehaviour
     [Header("Offset (ばらつき演出)")]
     [SerializeField] private float offsetX = 18f;
     [SerializeField] private float offsetY = 10f;
+    [SerializeField, Range(0f, 1f)] private float offsetMinRatio = 0.25f; // 0付近でも最低これだけズラす
+    [SerializeField, Range(0.1f, 2f)] private float offsetPower = 0.6f;   // 0.6くらいで「均等に散る」寄り
+
+
+    [Header("Offset Tuning (Global)")]
+    [SerializeField, Range(0.2f, 2f)] private float offsetBias = 0.7f;    // <1で大きめが出やすい
+
+    [Header("Offset Tuning (Falloff + Clamp)")]
+    [SerializeField, Range(0f, 0.49f)] private float minJitter01 = 0.25f; // 0.25=常に最大の25%はズレる(=約6px)
+    [SerializeField, Range(0f, 1f)] private float edgeMinFactor = 0.35f;  // 端でもこれ以上は効く
+    [SerializeField] private float edgeFalloffX = 60f; // 端からこの距離以内だとXオフセットが弱まる
+    [SerializeField] private float edgeFalloffY = 60f; // 端からこの距離以内だとYオフセットが弱まる
+    [SerializeField] private float clampPadding = 0f;   // 枠内に余白を取りたい場合（0でOK）
+
 
     [Header("Overlap Rule (approx)")]
     [SerializeField] private float capsuleSizePx = 116f;
@@ -101,8 +115,15 @@ public class StageManager : MonoBehaviour
         foundHit = 0;
         ApplyAtariCounterHUD();
 
+        int maxSlots = columns * rows; // 6x3想定なら18
+
         missCount = Mathf.FloorToInt(hitCount * 0.6f);
+
+        // 18を超えないように上限カット（hit=12なら missは6までに制限される）
+        missCount = Mathf.Clamp(missCount, 0, Mathf.Max(0, maxSlots - hitCount));
+
         totalCount = hitCount + missCount;
+
 
         ClearSpawned();
 
@@ -284,9 +305,8 @@ public class StageManager : MonoBehaviour
 
             Vector2 basePos = chosen[i];
             Vector2 pos = ApplyDeterministicOffset(basePos, i);
+            pos = ResolveOverlapByShrinking(basePos, pos, minDist);
 
-            if (!IsFarEnough(pos, minDist))
-                pos = basePos;
 
             CapsuleItem item = Instantiate(capsulePrefab, capsuleRoot);
             item.Setup(this, isHit, spriteForThis);
@@ -306,6 +326,93 @@ public class StageManager : MonoBehaviour
             placedPositions.Add(pos);
         }
     }
+
+    [Header("Offset Overlap Fix (Shrink)")]
+    [SerializeField, Range(0.1f, 0.95f)] private float overlapShrink = 0.7f;
+    [SerializeField, Range(1, 20)] private int overlapShrinkIters = 8;
+
+    private Vector2 ResolveOverlapByShrinking(Vector2 basePos, Vector2 candidate, float minDist)
+    {
+        Vector2 offset = candidate - basePos;
+        Vector2 cur = candidate;
+
+        for (int t = 0; t < overlapShrinkIters; t++)
+        {
+            if (IsFarEnough(cur, minDist)) return cur;
+
+            offset *= overlapShrink;          // 減衰
+            cur = basePos + offset;
+        }
+
+        // どうしてもダメなら最後の保険
+        return basePos;
+    }
+
+    private Vector2 ApplyOffsetFalloffAndClamp(Vector2 basePos, int i, RectTransform root)
+    {
+        // ラフなカプセル半径（RectTransformサイズを取るより安定するので既存の capsuleSizePx を使う）
+        float half = capsuleSizePx * 0.5f;
+
+        Rect rect = root.rect;
+
+        // 安全に収める領域（カプセル半径ぶん内側）
+        float minX = rect.xMin + half + clampPadding;
+        float maxX = rect.xMax - half - clampPadding;
+        float minY = rect.yMin + half + clampPadding;
+        float maxY = rect.yMax - half - clampPadding;
+
+        // まずベース位置自体が安全域に入ってる前提にする（ここで軽く補正）
+        float bx = Mathf.Clamp(basePos.x, minX, maxX);
+        float by = Mathf.Clamp(basePos.y, minY, maxY);
+        Vector2 safeBase = new Vector2(bx, by);
+
+        float nx = Hash01(i * 17 + 3) * 2f - 1f;
+        float ny = Hash01(i * 29 + 7) * 2f - 1f;
+
+        // 0付近を避けて「必ずちょいズレ」を作る（最大値は変えない）
+        nx = WithMinAbs(nx, minJitter01);
+        ny = WithMinAbs(ny, minJitter01);
+
+        Vector2 rawOffset = new Vector2(nx * offsetX, ny * offsetY);
+
+
+        // 端に近いほど弱める（減衰）
+        float distLeft = safeBase.x - minX;
+        float distRight = maxX - safeBase.x;
+        float distBottom = safeBase.y - minY;
+        float distTop = maxY - safeBase.y;
+
+        float fxRaw = Mathf.Clamp01(Mathf.Min(distLeft, distRight) / Mathf.Max(1f, edgeFalloffX));
+        float fyRaw = Mathf.Clamp01(Mathf.Min(distBottom, distTop) / Mathf.Max(1f, edgeFalloffY));
+
+        // 端でも edgeMinFactor は残す
+        float fx = Mathf.Lerp(edgeMinFactor, 1f, fxRaw);
+        float fy = Mathf.Lerp(edgeMinFactor, 1f, fyRaw);
+
+        Vector2 dampedOffset = new Vector2(rawOffset.x * fx, rawOffset.y * fy);
+
+
+        // 最終位置（まだ出そうならクランプ）
+        Vector2 candidate = safeBase + dampedOffset;
+        candidate.x = Mathf.Clamp(candidate.x, minX, maxX);
+        candidate.y = Mathf.Clamp(candidate.y, minY, maxY);
+
+        return candidate;
+    }
+
+    private float WithMinAbs(float v, float min01)
+    {
+        float s = Mathf.Sign(v);
+        float a = Mathf.Abs(v);              // 0..1
+
+        // ★ここでバイアス：0付近を避けたいなら offsetBias < 1 が効く
+        a = Mathf.Pow(a, Mathf.Max(0.001f, offsetBias));
+
+        a = Mathf.Lerp(min01, 1f, a);        // min01..1 （底上げ）
+        return s * a;
+    }
+
+
 
     private List<Sprite> BuildHitSpriteList(int hit)
     {
@@ -374,8 +481,23 @@ public class StageManager : MonoBehaviour
     {
         float nx = Hash01(i * 17 + 3) * 2f - 1f;
         float ny = Hash01(i * 29 + 7) * 2f - 1f;
+
+        // ここが「変換を挟む」ポイント
+        nx = BiasAwayFromZero(nx, offsetMinRatio, offsetPower);
+        ny = BiasAwayFromZero(ny, offsetMinRatio, offsetPower);
+
         return basePos + new Vector2(nx * offsetX, ny * offsetY);
     }
+
+    private float BiasAwayFromZero(float v, float minRatio, float power)
+    {
+        float sign = Mathf.Sign(v);
+        float a = Mathf.Abs(v);                    // 0..1
+        a = Mathf.Pow(a, power);                   // 0付近を持ち上げやすくする
+        a = Mathf.Lerp(minRatio, 1f, a);           // 最低ズレ量を保証（0に近くても minRatio）
+        return sign * a;                           // -1..1 に戻す
+    }
+
 
     private float Hash01(int n)
     {
