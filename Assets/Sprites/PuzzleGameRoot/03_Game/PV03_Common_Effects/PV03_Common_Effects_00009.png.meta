@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: a6df8764e25323d4ca40e10b362bb677
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7135937625212935577
+    second: PV03_Common_Effects_00009_0
+  - first:
+      213: 4686610361402459858
+    second: PV03_Common_Effects_00009_1
+  - first:
+      213: -818656718187251621
+    second: PV03_Common_Effects_00009_2
+  - first:
+      213: -3118154025415541529
+    second: PV03_Common_Effects_00009_3
+  - first:
+      213: -7890994576136111699
+    second: PV03_Common_Effects_00009_4
+  - first:
+      213: -4237991983653161876
+    second: PV03_Common_Effects_00009_5
+  - first:
+      213: -293346112249333880
+    second: PV03_Common_Effects_00009_6
+  - first:
+      213: -882445446845352110
+    second: PV03_Common_Effects_00009_7
+  - first:
+      213: 2837315251502088686
+    second: PV03_Common_Effects_00009_8
+  - first:
+      213: 6367220634492183810
+    second: PV03_Common_Effects_00009_9
+  - first:
+      213: -8715098610038508213
+    second: PV03_Common_Effects_00009_10
+  - first:
+      213: 4630529526239281106
+    second: PV03_Common_Effects_00009_11
+  - first:
+      213: -2360022314667987520
+    second: PV03_Common_Effects_00009_12
+  - first:
+      213: -5283179330484378104
+    second: PV03_Common_Effects_00009_13
+  - first:
+      213: 6934725533975508301
+    second: PV03_Common_Effects_00009_14
+  - first:
+      213: 7759596108250363921
+    second: PV03_Common_Effects_00009_15
+  - first:
+      213: 1245355235991516601
+    second: PV03_Common_Effects_00009_16
+  - first:
+      213: 8502741614130124952
+    second: PV03_Common_Effects_00009_17
+  - first:
+      213: 1673236125341054199
+    second: PV03_Common_Effects_00009_18
+  - first:
+      213: -3606567525846921368
+    second: PV03_Common_Effects_00009_19
+  - first:
+      213: -1113264322924714193
+    second: PV03_Common_Effects_00009_20
+  - first:
+      213: -5923982020408496719
+    second: PV03_Common_Effects_00009_21
+  - first:
+      213: 3521768746095873810
+    second: PV03_Common_Effects_00009_22
+  - first:
+      213: 7639510791695219615
+    second: PV03_Common_Effects_00009_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 63
+        width: 8
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 762a6d5a98e08fc90800000000000000
+      internalID: -7135937625212935577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 81
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d60f000b4f2a0140800000000000000
+      internalID: 4686610361402459858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_2
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 77
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b58367f5d0c83a4f0800000000000000
+      internalID: -818656718187251621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_3
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 69
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ecf6204f671ab4d0800000000000000
+      internalID: -3118154025415541529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 63
+        width: 13
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da97fd4cd3e8d7290800000000000000
+      internalID: -7890994576136111699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_5
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 64
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c647665aeb0af25c0800000000000000
+      internalID: -4237991983653161876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 65
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 887f22fd343ddebf0800000000000000
+      internalID: -293346112249333880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_7
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 70
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2573f1f9a8ce0c3f0800000000000000
+      internalID: -882445446845352110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_8
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 66
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee18491403b206720800000000000000
+      internalID: 2837315251502088686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_9
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 59
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 205a17d9e69ec5850800000000000000
+      internalID: 6367220634492183810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_10
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 46
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b45772e1dffbd0780800000000000000
+      internalID: -8715098610038508213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_11
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 44
+        width: 23
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2df337d0212f24040800000000000000
+      internalID: 4630529526239281106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_12
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 52
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cd283075348f3fd0800000000000000
+      internalID: -2360022314667987520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_13
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 55
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 806eac1f3606ea6b0800000000000000
+      internalID: -5283179330484378104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_14
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 47
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d45f073a1281d3060800000000000000
+      internalID: 6934725533975508301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_15
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 34
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11834c06c8f9fab60800000000000000
+      internalID: 7759596108250363921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_16
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 27
+        width: 26
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b5727c2df3684110800000000000000
+      internalID: 1245355235991516601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_17
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 28
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8985827d27ecff570800000000000000
+      internalID: 8502741614130124952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_18
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 11
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f4fd4c0467883710800000000000000
+      internalID: 1673236125341054199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_19
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 9
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86f4f6391f5e2fdc0800000000000000
+      internalID: -3606567525846921368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_20
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 20
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f27e4f22ff3ec80f0800000000000000
+      internalID: -1113264322924714193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_21
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 10
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bd20c13db9c9cda0800000000000000
+      internalID: -5923982020408496719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_22
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 7
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21f0e14f306dfd030800000000000000
+      internalID: 3521768746095873810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PV03_Common_Effects_00009_23
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 6
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9bb1c4d69ef40a60800000000000000
+      internalID: 7639510791695219615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PV03_Common_Effects_00009_0: -7135937625212935577
+      PV03_Common_Effects_00009_1: 4686610361402459858
+      PV03_Common_Effects_00009_10: -8715098610038508213
+      PV03_Common_Effects_00009_11: 4630529526239281106
+      PV03_Common_Effects_00009_12: -2360022314667987520
+      PV03_Common_Effects_00009_13: -5283179330484378104
+      PV03_Common_Effects_00009_14: 6934725533975508301
+      PV03_Common_Effects_00009_15: 7759596108250363921
+      PV03_Common_Effects_00009_16: 1245355235991516601
+      PV03_Common_Effects_00009_17: 8502741614130124952
+      PV03_Common_Effects_00009_18: 1673236125341054199
+      PV03_Common_Effects_00009_19: -3606567525846921368
+      PV03_Common_Effects_00009_2: -818656718187251621
+      PV03_Common_Effects_00009_20: -1113264322924714193
+      PV03_Common_Effects_00009_21: -5923982020408496719
+      PV03_Common_Effects_00009_22: 3521768746095873810
+      PV03_Common_Effects_00009_23: 7639510791695219615
+      PV03_Common_Effects_00009_3: -3118154025415541529
+      PV03_Common_Effects_00009_4: -7890994576136111699
+      PV03_Common_Effects_00009_5: -4237991983653161876
+      PV03_Common_Effects_00009_6: -293346112249333880
+      PV03_Common_Effects_00009_7: -882445446845352110
+      PV03_Common_Effects_00009_8: 2837315251502088686
+      PV03_Common_Effects_00009_9: 6367220634492183810
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

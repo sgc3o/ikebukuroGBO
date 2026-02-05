@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f153c2e82145a4488aa995d5e699c05, type: 3}
+  m_Name: IpPack_03
+  m_EditorClassIdentifier: 
+  characterSprites:
+  - {fileID: 21300000, guid: 52bbcae8abb8b3b479fa016f0bc29040, type: 3}
+  - {fileID: 21300000, guid: fa2b4eee134c863418aebc18c830506e, type: 3}
+  - {fileID: 21300000, guid: 460bb03d832b5c84a8fc9e129b58a6a2, type: 3}
+  - {fileID: 21300000, guid: 3d92196aaf8adb5469d5982c8ce972ba, type: 3}
+  - {fileID: 21300000, guid: 5c23f2b7c0bdd124c9b38ff6102def3f, type: 3}
+  - {fileID: 21300000, guid: b1cfc5474bc7c3e4bbe51f0e6866ae2b, type: 3}
