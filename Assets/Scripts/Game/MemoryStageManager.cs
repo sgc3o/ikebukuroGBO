@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq; // 追加（名前検索に便利）
+using System.Linq;
 
 
 public class MemoryStageManager : MonoBehaviour
@@ -60,9 +60,22 @@ public class MemoryStageManager : MonoBehaviour
     [SerializeField] private PopupManager popupManager; // 既存
     [SerializeField] private Image stageBadgeImage;     // 1/2 等（差し替えたいなら）
 
+    [Header("HUD Images")]
+    [SerializeField] private Image howToImage;
+    [SerializeField] private Sprite howToMemorizeSprite; // M03_02_Memorize_Howto
+    [SerializeField] private Sprite howToPlaySprite;     // M03_03_Play_Howto
+
+    [SerializeField] private Image hudStageBadgeImage;   // HUD側のステージ数（StageBadgeImageをコピペしたやつ）
+    [SerializeField] private GameObject circleTimerRoot; // HUD/CircleTimer を丸ごと
+    [SerializeField] private Image hudTargetCharaImage; // HUDのターゲット表示Image（作ったやつ）
+    private Sprite currentTargetSprite;                 // 今ステージのターゲットを保持
+
     [Header("HUD Timer (Circle)")]
     [SerializeField] private Image radialTimerFill; // FillAmount使う想定（CircularCountdownUIでもOK）
     [SerializeField] private bool timerClockwise = true; // 見た目合わせ用
+    [SerializeField] private CanvasGroup circleTimerCanvasGroup; // HUD/CircleTimer に付けたCanvasGroup
+    [SerializeField] private float countdownToTimerFadeSec = 0.25f; // 0→タイマーのクロスフェード秒
+
 
     [Header("Board")]
     [SerializeField] private GridLayoutGroup grid;
@@ -128,6 +141,7 @@ public class MemoryStageManager : MonoBehaviour
             targetCharaImage.sprite = (cfg.ipPack != null) ? cfg.ipPack.TargetSprite : null;
             targetCharaImage.enabled = (targetCharaImage.sprite != null);
         }
+        currentTargetSprite = (cfg != null && cfg.ipPack != null) ? cfg.ipPack.TargetSprite : null;
 
         // MissionIntro 入る直前
         missionCountdownUI.gameObject.SetActive(true);
@@ -136,25 +150,32 @@ public class MemoryStageManager : MonoBehaviour
         // --- Mission Intro ---
         state = State.MissionIntro;
 
-        // ★追加：ミッション提示UI（背景・ステージバッジ・ターゲット画像）をセット
+        //ミッション提示UI（背景・ステージバッジ・ターゲット画像）をセット
         SetupMissionIntro(cfg, currentStageIndex);
 
-        // 既存：カウントダウン（5→0） + 0後にfadeToNextSec待つ想定
+        //カウントダウン（5→0） + 0後にfadeToNextSec待つ想定
         yield return missionCountdownUI.Play(cfg.missionCountdownSec);
 
-        // MissionIntro -> Memorize を「パネル同士のクロスフェード」で
+        //ミッション側カウント表示を消してから遷移
+        if (missionCountdownUI != null)
+            yield return missionCountdownUI.FadeOut(0f);
 
+        // MissionIntro -> Memorize を「パネル同士のクロスフェード」で
         float fadeSec = useCrossFadeOverride ? crossFadeSecOverride : cfg.fadeToNextSec;
         yield return CrossFadePanels(missionIntroPanel, memorizePanel, fadeSec);
 
+        //Memorizeでは盤面(HUD+Grid)も表示する（重ね表示）
+        SetActiveSafe(gamePlayPanel, true);
+        SetActiveSafe(hudPanel, true);
 
-        //yield return CrossFadePanels(missionIntroPanel, memorizePanel, cfg.fadeToNextSec);
-
-        // HideMissionIntro は不要（fromPanelをSetActive(false)するので）
-        // HideMissionIntro();
+        // Memorizeカウントも表示
+        if (memorizeCountdownUI != null) memorizeCountdownUI.ShowImmediate();
 
         // --- Memorize ---
         state = State.Memorize;
+        SetHudModeMemorize();
+        memorizeCountdownUI.ShowImmediate();
+        memorizeCountdownUI.ShowNumber(cfg.memorizeCountdownSec); // 最初から5を表示
         yield return RunMemorizeSequence(cfg);
 
         // --- GameStart Popup ---
@@ -168,6 +189,7 @@ public class MemoryStageManager : MonoBehaviour
 
         // --- Playing ---
         state = State.Playing;
+        SetHudModePlay();
         SetAllInteractable(true);
         yield return RunPlayingSequence(cfg);
 
@@ -199,50 +221,58 @@ public class MemoryStageManager : MonoBehaviour
         BeginStage(next);
     }
 
-    private IEnumerator RunCountdown(CountdownUI ui, int seconds, float fadeToNextSec)
+    private IEnumerator RunCountdown(CountdownUI ui, int seconds)
     {
         if (ui == null) yield break;
 
-        for (int s = seconds; s >= 0; s--)
-        {
-            ui.ShowNumber(s);
-            yield return new WaitForSeconds(1f);
-        }
+        // 先に表示＆最初の数字を出す（白対策にもなる）
+        ui.ShowImmediate();
+        ui.ShowNumber(seconds);
 
-        // 0を見せた後のクロスフェード
-        yield return ui.FadeOut(fadeToNextSec);
+        // CountdownUI.Play() は「0で holdLastNumberSec だけ待つ」仕様
+        yield return ui.Play(seconds);
+
+        // ★ここでは消さない（0を残すのが目的）
     }
+
 
     private IEnumerator RunMemorizeSequence(StageConfig cfg)
     {
-        // ①カプセルひっこめ動画（0.5秒想定）
-        //    今回は「全カプセルを一斉に“開ける”」がイメージに近いので、
-        //    表示だけ先に作っておいて、動画部分は時間待ちで吸収してる。
-        //    もし「盤面全体の動画」をUIで流すなら、ここにその再生コルーチンを挿す。
+        // Memorize中は触れない
+        SetAllInteractable(false);
 
+        // retract待ち（今の速度感を維持）
         yield return new WaitForSeconds(cfg.retractSec);
 
-        // ②画像スケールアップ表示（全員Reveal）
+        // ★全員同時にReveal
+        var reveal = new List<Coroutine>(items.Count);
         foreach (var it in items)
         {
-            // ここでは“正解/不正解問わず”配置を見せる（全部見せ運用）
-            yield return it.PlayRetractAndReveal();
+            if (it == null) continue;
+            reveal.Add(StartCoroutine(it.PlayRetractAndReveal()));
         }
+        foreach (var c in reveal) yield return c;
 
-        // ③ここからカウントダウン開始（画像は表示されたまま）
-        yield return RunCountdown(memorizeCountdownUI, cfg.memorizeCountdownSec, 0f);
+        // ★カウント（CountdownUI側が 0 を短く見せる仕様）
+        if (memorizeCountdownUI != null)
+            yield return memorizeCountdownUI.Play(cfg.memorizeCountdownSec);
+        else
+            yield return new WaitForSeconds(cfg.memorizeCountdownSec);
 
-        // ④ 0表示済み（RunCountdownの最後が0を1秒見せてるのでOK）
-
-        // ⑤カプセル閉じる用の動画
+        // ★全員同時にClose
+        var close = new List<Coroutine>(items.Count);
         foreach (var it in items)
         {
-            yield return it.PlayClose();
+            if (it == null) continue;
+            close.Add(StartCoroutine(it.PlayClose()));
         }
+        foreach (var c in close) yield return c;
+        yield return CrossFadeCountdownToCircleTimer(0.25f);
 
-        // カウントUIを次のために戻す（必要なら）
-        if (memorizeCountdownUI != null) yield return memorizeCountdownUI.FadeOut(cfg.fadeToNextSec);
+
+        // 次は GameStartPopup → Playing なので、ここではまだ操作不可のままでOK
     }
+
 
     private IEnumerator RunPlayingSequence(StageConfig cfg)
     {
@@ -387,46 +417,46 @@ public class MemoryStageManager : MonoBehaviour
     }
 
     // ===============================
-// Mission Intro 表示セットアップ
-// ===============================
-private void SetupMissionIntro(StageConfig cfg, int stageIndex)
-{
-    // パネル表示
-    if (missionIntroPanel != null)
-        missionIntroPanel.SetActive(true);
-
-    // ステージバッジ（1 / 2 / 3）
-    if (stageBadgeImage != null &&
-        stageBadgeSprites != null &&
-        stageIndex >= 0 &&
-        stageIndex < stageBadgeSprites.Length &&
-        stageBadgeSprites[stageIndex] != null)
+    // Mission Intro 表示セットアップ
+    // ===============================
+    private void SetupMissionIntro(StageConfig cfg, int stageIndex)
     {
-        stageBadgeImage.sprite = stageBadgeSprites[stageIndex];
-        stageBadgeImage.enabled = true;
+        // パネル表示
+        if (missionIntroPanel != null)
+            missionIntroPanel.SetActive(true);
+
+        // ステージバッジ（1 / 2 / 3）
+        if (stageBadgeImage != null &&
+            stageBadgeSprites != null &&
+            stageIndex >= 0 &&
+            stageIndex < stageBadgeSprites.Length &&
+            stageBadgeSprites[stageIndex] != null)
+        {
+            stageBadgeImage.sprite = stageBadgeSprites[stageIndex];
+            stageBadgeImage.enabled = true;
+        }
+        else if (stageBadgeImage != null)
+        {
+            stageBadgeImage.enabled = false;
+        }
+
+        // ターゲットキャラ（IPの index0 = TARGET）
+        Sprite target = null;
+        if (cfg.ipPack != null)
+            target = cfg.ipPack.TargetSprite;
+
+        if (targetCharaImage != null)
+        {
+            targetCharaImage.sprite = target;
+            targetCharaImage.enabled = (target != null);
+        }
     }
-    else if (stageBadgeImage != null)
+
+    private void HideMissionIntro()
     {
-        stageBadgeImage.enabled = false;
+        if (missionIntroPanel != null)
+            missionIntroPanel.SetActive(false);
     }
-
-    // ターゲットキャラ（IPの index0 = TARGET）
-    Sprite target = null;
-    if (cfg.ipPack != null)
-        target = cfg.ipPack.TargetSprite;
-
-    if (targetCharaImage != null)
-    {
-        targetCharaImage.sprite = target;
-        targetCharaImage.enabled = (target != null);
-    }
-}
-
-private void HideMissionIntro()
-{
-    if (missionIntroPanel != null)
-        missionIntroPanel.SetActive(false);
-}
 
 
     private List<SlotData> BuildSlotData(int totalSlots, int correctCount, MemoryIpPack pack)
@@ -683,5 +713,89 @@ private void HideMissionIntro()
         }
     }
 
+    private void SetHudModeMemorize()
+    {
+        if (howToImage != null && howToMemorizeSprite != null)
+            howToImage.sprite = howToMemorizeSprite;
+
+        if (hudStageBadgeImage != null && stageBadgeSprites != null &&
+            currentStageIndex >= 0 && currentStageIndex < stageBadgeSprites.Length)
+        {
+            hudStageBadgeImage.sprite = stageBadgeSprites[currentStageIndex];
+            hudStageBadgeImage.enabled = (hudStageBadgeImage.sprite != null);
+        }
+
+        if (memorizeCountdownUI != null) memorizeCountdownUI.gameObject.SetActive(true);
+        if (circleTimerRoot != null) circleTimerRoot.SetActive(false);
+        if (hudTargetCharaImage != null)
+            hudTargetCharaImage.enabled = false;
+
+    }
+
+    private void SetHudModePlay()
+    {
+        if (howToImage != null && howToPlaySprite != null)
+            howToImage.sprite = howToPlaySprite;
+
+        if (hudStageBadgeImage != null && stageBadgeSprites != null &&
+            currentStageIndex >= 0 && currentStageIndex < stageBadgeSprites.Length)
+        {
+            hudStageBadgeImage.sprite = stageBadgeSprites[currentStageIndex];
+            hudStageBadgeImage.enabled = (hudStageBadgeImage.sprite != null);
+        }
+      
+        if (memorizeCountdownUI != null) memorizeCountdownUI.gameObject.SetActive(false);
+        if (circleTimerRoot != null) circleTimerRoot.SetActive(true);
+
+        // ★Play中：HowToの上にターゲット表示
+        if (hudTargetCharaImage != null)
+        {
+            hudTargetCharaImage.sprite = currentTargetSprite;
+            hudTargetCharaImage.enabled = (currentTargetSprite != null);
+
+            // 確実に前面へ（HowToより上にしたいなら有効）
+            if (currentTargetSprite != null)
+                hudTargetCharaImage.transform.SetAsLastSibling();
+        }
+
+
+    }
+
+    private IEnumerator CrossFadeCountdownToCircleTimer(float sec)
+    {
+        if (memorizeCountdownUI == null) yield break;
+        if (circleTimerCanvasGroup == null) yield break;
+
+        // CircleTimer表示準備
+        circleTimerCanvasGroup.gameObject.SetActive(true);
+        circleTimerCanvasGroup.alpha = 0f;
+
+        var from = memorizeCountdownUI.CG;
+        var to = circleTimerCanvasGroup;
+
+        if (sec <= 0f)
+        {
+            from.alpha = 0f;
+            memorizeCountdownUI.gameObject.SetActive(false);
+            to.alpha = 1f;
+            yield break;
+        }
+
+        float t = 0f;
+        while (t < sec)
+        {
+            t += Time.deltaTime;
+            float k = Mathf.Clamp01(t / sec);
+
+            from.alpha = 1f - k;
+            to.alpha = k;
+
+            yield return null;
+        }
+
+        from.alpha = 0f;
+        memorizeCountdownUI.gameObject.SetActive(false);
+        to.alpha = 1f;
+    }
 
 }

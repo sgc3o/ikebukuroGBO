@@ -26,7 +26,10 @@ public class CountdownUI : MonoBehaviour
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
+
+        if (numberImage != null) numberImage.enabled = false; // ★追加：白出し防止
     }
+
 
     public void HideImmediate()
     {
@@ -85,6 +88,8 @@ public class CountdownUI : MonoBehaviour
         if (!gameObject.activeSelf) gameObject.SetActive(true);
         if (canvasGroup != null && canvasGroup.alpha <= 0f) canvasGroup.alpha = 1f;
     }
+
+    public CanvasGroup CG => canvasGroup;
 
     // フェードアウト（必要なければ duration=0 で即消す運用もOK）
     public IEnumerator FadeOut(float duration)
