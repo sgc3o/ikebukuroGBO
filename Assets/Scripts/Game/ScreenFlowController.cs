@@ -16,7 +16,6 @@ public class ScreenFlowController : MonoBehaviour
         if (I != null && I != this) { Destroy(gameObject); return; }
         I = this;
 
-        // ★ここが重要：Startより前に状態を確定させる
         ApplyStartState();
     }
 

@@ -1,26 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Repository\\ikebukuroGBO\\",
+  "WorkspaceRootPath": "C:\\Repository\\ikebukuroGBO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|d:\\repository\\ikebukurogbo\\assets\\scripts\\game\\memorystagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\memorystagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\MemoryStageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\ui\\popupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\popupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\CountdownUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\CountdownUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\stagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\ScreenFlowController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\game\\spritesequenceplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\spritesequenceplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|D:\\Repository\\ikebukuroGBO\\assets\\scripts\\game\\memoryippack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F4F5647-4DD3-C9D6-155A-ACDD49DAF20C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\memoryippack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryIpPack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\MemoryIpPack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,64 +29,57 @@
           "SelectedChildIndex": 4,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PopupManager.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\PopupManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\PopupManager.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\PopupManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\PopupManager.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAswEQAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T11:24:03.771Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SpriteSequencePlayer.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\SpriteSequencePlayer.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\SpriteSequencePlayer.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\SpriteSequencePlayer.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Game\\SpriteSequencePlayer.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAqwDoAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "CountdownUI.cs",
+              "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\CountdownUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\CountdownUI.cs",
+              "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\CountdownUI.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UI\\CountdownUI.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAABQPT4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T11:11:21.024Z"
+              "WhenOpened": "2026-02-05T07:40:08.211Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "StageManager.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\StageManager.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Game\\StageManager.cs",
-              "ViewState": "AgIAAHoBAAAAAAAAAAAQwEoBAABIAAAAAAAAAA==",
+              "Title": "ScreenFlowController.cs",
+              "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\ScreenFlowController.cs",
+              "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Game\\ScreenFlowController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T11:03:29.227Z"
+              "WhenOpened": "2026-02-05T06:12:10.686Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "MemoryIpPack.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryIpPack.cs",
+              "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryIpPack.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\MemoryIpPack.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryIpPack.cs",
+              "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryIpPack.cs",
               "RelativeToolTip": "Assets\\Scripts\\Game\\MemoryIpPack.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T07:03:43.865Z"
+              "WhenOpened": "2026-02-05T05:13:34.79Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MemoryStageManager.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
+              "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
+              "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAswF0AAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAMwJIAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T01:56:14.266Z",
+              "WhenOpened": "2026-02-05T05:03:43.263Z",
               "EditorCaption": ""
             }
           ]
