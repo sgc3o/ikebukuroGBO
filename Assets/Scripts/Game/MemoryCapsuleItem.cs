@@ -14,10 +14,6 @@ public class MemoryCapsuleItem : MonoBehaviour
     [SerializeField] private bool hideRevealedAtCloseStart = true; // Close開始でキャラを消す
     [SerializeField] private float closeHideScaleSec = 0.15f;       // 縮小で消す時間（0なら即）
 
-    [Header("Animation (Optional)")]
-    [SerializeField] private string retractTrigger = "Retract";
-    [SerializeField] private string closeTrigger = "Close";
-
     [Header("Timing")]
     [SerializeField] private float retractSec = 0.5f; // ひっこめ動画の長さ
     [SerializeField] private float closeSec = 0.5f;   // 閉じる動画の長さ
@@ -36,6 +32,9 @@ public class MemoryCapsuleItem : MonoBehaviour
 
     public void Setup(Sprite hiddenSprite, Sprite revealedSprite, bool correct, Action<MemoryCapsuleItem> onClickCb)
     {
+        //Debug.Log($"CLICK: {name}");
+
+
         isCorrect = correct;
         isOpened = false;
         onClick = onClickCb;
@@ -160,4 +159,48 @@ public class MemoryCapsuleItem : MonoBehaviour
         }
         rt.localScale = Vector3.one;
     }
+
+    public IEnumerator ForceRevealFade(float sec)
+    {
+        // すでに開いてたら何もしない（押せてない＝未オープンだけ見せたい）
+        if (isOpened) yield break;
+
+        isOpened = true; // 以後クリックさせないため（StageManager側でもinteractableは切るけど保険）
+
+        // キャラを見せる
+        if (revealedImage != null) revealedImage.enabled = true;
+        if (revealRect != null) revealRect.localScale = Vector3.one;
+
+        // CanvasGroupでフェード（無ければ付ける）
+        var cg = revealedImage != null ? revealedImage.GetComponent<CanvasGroup>() : null;
+        if (cg == null && revealedImage != null) cg = revealedImage.gameObject.AddComponent<CanvasGroup>();
+
+        if (cg == null) yield break;
+
+        cg.alpha = 0f;
+
+        if (sec <= 0f)
+        {
+            cg.alpha = 1f;
+            yield break;
+        }
+
+        float t = 0f;
+        while (t < sec)
+        {
+            t += Time.deltaTime;
+            cg.alpha = Mathf.Clamp01(t / sec);
+            yield return null;
+        }
+
+        cg.alpha = 1f;
+    }
+
+    public void SetRevealedVisible(bool visible)
+    {
+        if (revealedImage != null) revealedImage.enabled = visible;
+    }
+
+
+
 }

@@ -146,6 +146,11 @@ public class MemoryStageManager : MonoBehaviour
 
         // 盤面生成
         BuildBoard(cfg);
+        // ★ 追加：このステージで「あと何体 正解が残ってるか」
+        remainingCorrect = Mathf.Max(1, cfg.correctCount);
+        // 任意：デバッグ（あとで消してOK）
+        Debug.Log($"[MemoryStageManager] BeginStage idx={currentStageIndex} correctCount={cfg.correctCount} remainingCorrect={remainingCorrect}");
+
 
         // --- MissionIntro 表示準備 ---
         ShowOnly(missionIntroPanel);
@@ -294,34 +299,51 @@ public class MemoryStageManager : MonoBehaviour
         // 次は GameStartPopup → Playing なので、ここではまだ操作不可のままでOK
     }
 
-
     private IEnumerator RunPlayingSequence(StageConfig cfg)
     {
-        remainingCorrect = cfg.correctCount;
-        playRemainSec = cfg.playTimeLimitSec;
-        stageEnding = false;
+        // Playing中は基本押せる
+        SetAllInteractable(true);
 
-        // タイマー開始
-        while (!stageEnding)
+        // 残り時間
+        float remain = cfg.playTimeLimitSec;
+        playRemainSec = remain;
+
+        // 円タイマー初期化（見た目だけ）
+        if (radialTimerFill != null)
+            radialTimerFill.fillAmount = 1f;
+
+        // ループ：時間が残っていて、かつ正解が残っている間だけ回す
+        while (remain > 0f && remainingCorrect > 0 && !stageEnding)
         {
-            playRemainSec -= Time.deltaTime;
-            UpdateRadialTimer(playRemainSec, cfg.playTimeLimitSec);
+            remain -= Time.deltaTime;
+            playRemainSec = remain;
 
-            // 終了条件
-            if (remainingCorrect <= 0)
+            if (radialTimerFill != null)
             {
-                stageEnding = true;
-                break;
-            }
-            if (playRemainSec <= 0f)
-            {
-                stageEnding = true;
-                break;
+                float t = (cfg.playTimeLimitSec <= 0f) ? 0f : Mathf.Clamp01(remain / cfg.playTimeLimitSec);
+                radialTimerFill.fillAmount = t;
             }
 
             yield return null;
         }
+
+        // ここから「終了処理」(※ループ外！！)
+        bool success = (remainingCorrect <= 0);
+
+        // 失敗なら未開封の正解を見せる（任意）
+        if (!success)
+        {
+            // ここで操作不能にして演出に集中
+            SetAllInteractable(false);
+
+            // 0.25秒でフェードイン表示（あなたの要望②）
+            yield return RevealUnopenedCorrects(0.25f);
+        }
+
+        // Playing終了時点ではもう押させない（次のポップアップや遷移があるため）
+        SetAllInteractable(false);
     }
+
 
     private void OnCapsuleClicked(MemoryCapsuleItem item)
     {
@@ -344,14 +366,24 @@ public class MemoryStageManager : MonoBehaviour
         if (item.IsCorrect)
         {
             remainingCorrect--;
+            Debug.Log($"[MemoryStageManager] Correct! remainingCorrect={remainingCorrect}");
+
             PlaySE(correctSE);
 
-            // ★当たり演出：押した位置に出す
+            // 正解演出中だけカード側の表示を隠す（枠の背面透け対策）
+            item.SetRevealedVisible(false);
+
             yield return PlayCorrectEffectAtItem(item);
+
+            // 演出後に戻したいなら true
+            item.SetRevealedVisible(true);
         }
+
         else
         {
             // ★不正解でも閉じない（固定表示）
+            Debug.Log("[MemoryStageManager] Miss");
+
             PlaySE(wrongSE);
             // ここで閉じる処理はしない
         }
@@ -365,6 +397,8 @@ public class MemoryStageManager : MonoBehaviour
 
         // 入力再開
         SetAllInteractable(true);
+
+
     }
 
     private IEnumerator PlayCorrectEffectAtItem(MemoryCapsuleItem item)
@@ -543,6 +577,8 @@ public class MemoryStageManager : MonoBehaviour
     {
         for (int i = 0; i < items.Count; i++)
             if (items[i] != null) items[i].SetInteractable(value);
+        Debug.Log($"[MemoryStageManager] SetAllInteractable({value}) items={items?.Count}");
+
     }
 
     private IEnumerator WaitPopupDone()
@@ -817,6 +853,30 @@ public class MemoryStageManager : MonoBehaviour
         from.alpha = 0f;
         memorizeCountdownUI.gameObject.SetActive(false);
         to.alpha = 1f;
+    }
+
+    private IEnumerator RevealUnopenedCorrects(float fadeSec)
+    {
+        // 失敗時は入力は止める
+        SetAllInteractable(false);
+
+        var coroutines = new List<Coroutine>();
+
+        foreach (var it in items)
+        {
+            if (it == null) continue;
+
+            // 「押せてない正解」だけ
+            if (it.IsCorrect && !it.IsOpened)
+                coroutines.Add(StartCoroutine(it.ForceRevealFade(fadeSec)));
+        }
+
+        foreach (var c in coroutines) yield return c;
+    }
+
+    public void SetRevealedVisible(bool visible)
+    {
+        if (targetCharaImage != null) targetCharaImage.enabled = visible;
     }
 
 }
