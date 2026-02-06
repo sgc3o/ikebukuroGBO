@@ -356,50 +356,45 @@ public class MemoryStageManager : MonoBehaviour
 
     private IEnumerator HandleClick(MemoryCapsuleItem item)
     {
-        // 連打ガード：一旦全部OFF
         SetAllInteractable(false);
 
-        // ひっこめ→表示（ここはそのまま）
-        yield return item.PlayRetractAndReveal();
-
-        // 判定
         if (item.IsCorrect)
         {
+            // ここはあなたの基準変数に合わせて
             remainingCorrect--;
             Debug.Log($"[MemoryStageManager] Correct! remainingCorrect={remainingCorrect}");
-
             PlaySE(correctSE);
 
-            // 正解演出中だけカード側の表示を隠す（枠の背面透け対策）
-            item.SetRevealedVisible(false);
+            // ① CloseSeqだけ再生（この間はキャラ出さない）
+            yield return item.PlayCloseOnlyThenDisappear();
 
-            yield return PlayCorrectEffectAtItem(item);
+            // ② Close終了と同時にキャラ画像ON（出しっぱなし）
+            item.ShowRevealedFinal();
 
-            // 演出後に戻したいなら true
-            item.SetRevealedVisible(true);
+            // ③ 同フレームでCorrectEffect開始（見た目は同時）
+            var fx = StartCoroutine(PlayCorrectEffectAtItem(item));
+            yield return fx;
         }
-
         else
         {
-            // ★不正解でも閉じない（固定表示）
             Debug.Log("[MemoryStageManager] Miss");
-
             PlaySE(wrongSE);
-            // ここで閉じる処理はしない
+
+            // 不正解は「ひっこめ→表示」してから閉じる（今の仕様に合わせる）
+            yield return item.PlayRetractAndReveal();
+            yield return item.PlayClose();
         }
 
-        // 終了判定
         if (remainingCorrect <= 0 || playRemainSec <= 0f)
         {
             stageEnding = true;
             yield break;
         }
 
-        // 入力再開
         SetAllInteractable(true);
-
-
     }
+
+
 
     private IEnumerator PlayCorrectEffectAtItem(MemoryCapsuleItem item)
     {
