@@ -9,9 +9,12 @@ public class MemoryCapsuleItem : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private Image capsuleImage;     // 閉じてる見た目（赤カプセル）
     [SerializeField] private Image revealedImage;    // キャラ表示用（普段OFFでもOK）
+    [SerializeField] private SpriteSequencePlayer openSeq;
+    [SerializeField] private SpriteSequencePlayer closeSeq;
+    [SerializeField] private bool hideRevealedAtCloseStart = true; // Close開始でキャラを消す
+    [SerializeField] private float closeHideScaleSec = 0.15f;       // 縮小で消す時間（0なら即）
 
     [Header("Animation (Optional)")]
-    [SerializeField] private Animator animator;      // なくても動く
     [SerializeField] private string retractTrigger = "Retract";
     [SerializeField] private string closeTrigger = "Close";
 
@@ -52,6 +55,10 @@ public class MemoryCapsuleItem : MonoBehaviour
             button.onClick.AddListener(() => onClick?.Invoke(this));
             button.interactable = true;
         }
+
+        if (openSeq != null) openSeq.gameObject.SetActive(false);
+        if (closeSeq != null) closeSeq.gameObject.SetActive(false);
+
     }
 
     public void SetInteractable(bool value)
@@ -61,36 +68,77 @@ public class MemoryCapsuleItem : MonoBehaviour
 
     public IEnumerator PlayRetractAndReveal()
     {
+        // Open再生するなら Closeは消す（白板防止）
+        if (closeSeq != null) closeSeq.gameObject.SetActive(false);
+
         if (isOpened) yield break;
         isOpened = true;
 
-        // ひっこめ動画
-        if (animator != null && !string.IsNullOrEmpty(retractTrigger))
-            animator.SetTrigger(retractTrigger);
-
-        yield return new WaitForSeconds(retractSec);
+        // ★開く連番があるならそれを再生
+        if (openSeq != null)
+            yield return openSeq.PlayOnceAndWait();
+        else
+            yield return new WaitForSeconds(retractSec);
 
         // キャラ表示（スケール0→1）
         if (revealedImage != null) revealedImage.enabled = true;
-
         if (revealRect != null)
             yield return ScaleIn(revealRect, scaleInSec, scaleCurve);
     }
 
+
     public IEnumerator PlayClose()
     {
-        // 閉じる動画（必要なら）
-        if (animator != null && !string.IsNullOrEmpty(closeTrigger))
-            animator.SetTrigger(closeTrigger);
+        // Close再生するなら Openは消す（白板防止）
+        if (openSeq != null) openSeq.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(closeSec);
+        // Close開始でキャラを隠す（重なり対策）
+        if (hideRevealedAtCloseStart)
+        {
+            if (closeHideScaleSec > 0f && revealRect != null)
+                yield return ScaleOut(revealRect, closeHideScaleSec);
 
-        // キャラ非表示
-        if (revealedImage != null) revealedImage.enabled = false;
-        if (revealRect != null) revealRect.localScale = Vector3.zero;
+            if (revealedImage != null) revealedImage.enabled = false;
+            if (revealRect != null) revealRect.localScale = Vector3.zero;
+        }
+
+        // ★閉じる連番があるならそれを再生
+        if (closeSeq != null)
+            yield return closeSeq.PlayOnceAndWait();
+        else
+            yield return new WaitForSeconds(closeSec);
+
+        // hideRevealedAtCloseStart=false の場合はここで消す
+        if (!hideRevealedAtCloseStart)
+        {
+            if (revealedImage != null) revealedImage.enabled = false;
+            if (revealRect != null) revealRect.localScale = Vector3.zero;
+        }
 
         isOpened = false;
     }
+
+    private IEnumerator ScaleOut(RectTransform rt, float sec)
+    {
+        if (rt == null) yield break;
+        if (sec <= 0f)
+        {
+            rt.localScale = Vector3.zero;
+            yield break;
+        }
+
+        float t = 0f;
+        Vector3 start = rt.localScale;
+        while (t < sec)
+        {
+            t += Time.deltaTime;
+            float n = Mathf.Clamp01(t / sec);
+            rt.localScale = Vector3.Lerp(start, Vector3.zero, n);
+            yield return null;
+        }
+        rt.localScale = Vector3.zero;
+    }
+
 
     private IEnumerator ScaleIn(RectTransform rt, float sec, AnimationCurve curve)
     {

@@ -57,7 +57,7 @@ public class MemoryStageManager : MonoBehaviour
     [Header("UI Refs")]
     [SerializeField] private CountdownUI missionCountdownUI;
     [SerializeField] private CountdownUI memorizeCountdownUI;
-    [SerializeField] private PopupManager popupManager; // 既存
+    [SerializeField] private MemoryPopupManager popupManager; // 既存
     [SerializeField] private Image stageBadgeImage;     // 1/2 等（差し替えたいなら）
 
     [Header("HUD Images")]
@@ -111,16 +111,31 @@ public class MemoryStageManager : MonoBehaviour
 
     public void BeginStage(int stageIndex)
     {
-        if (stages == null || stages.Length == 0)
+        StopAllCoroutines();
+
+        // ★追加：フェード途中で止まっても復帰させる
+        if (panelsCanvasGroup != null)
         {
-            Debug.LogError("[MemoryStageManager] stages is empty");
-            return;
+            panelsCanvasGroup.alpha = 1f;
+            panelsCanvasGroup.gameObject.SetActive(true);
         }
 
-        currentStageIndex = Mathf.Clamp(stageIndex, 0, stages.Length - 1);
-        StopAllCoroutines();
+        //（あれば）各パネル側も念のため復帰
+        ForceCanvasGroupAlpha(missionIntroPanel, 1f);
+        ForceCanvasGroupAlpha(memorizePanel, 1f);
+        ForceCanvasGroupAlpha(gamePlayPanel, 1f);
+
+        currentStageIndex = stageIndex;
         StartCoroutine(RunStageFlow());
     }
+
+    private void ForceCanvasGroupAlpha(GameObject go, float a)
+    {
+        if (go == null) return;
+        var cg = go.GetComponent<CanvasGroup>();
+        if (cg != null) cg.alpha = a;
+    }
+
 
     private IEnumerator RunStageFlow()
     {
@@ -160,6 +175,11 @@ public class MemoryStageManager : MonoBehaviour
         if (missionCountdownUI != null)
             yield return missionCountdownUI.FadeOut(0f);
 
+        // 直前ステージの途中値が残らないように、常に満タンへ
+        if (radialTimerFill != null) radialTimerFill.fillAmount = 1f;
+        yield return CrossFadeCountdownToCircleTimer(countdownToTimerFadeSec);
+
+
         // MissionIntro -> Memorize を「パネル同士のクロスフェード」で
         float fadeSec = useCrossFadeOverride ? crossFadeSecOverride : cfg.fadeToNextSec;
         yield return CrossFadePanels(missionIntroPanel, memorizePanel, fadeSec);
@@ -186,6 +206,8 @@ public class MemoryStageManager : MonoBehaviour
 
         // ここは「プレイ画面アイドル」なのでHUDタイマー停止（=開始しない）
         yield return WaitPopupDone();
+
+        yield return CrossFadeCountdownToCircleTimer(countdownToTimerFadeSec);
 
         // --- Playing ---
         state = State.Playing;
@@ -266,10 +288,9 @@ public class MemoryStageManager : MonoBehaviour
             if (it == null) continue;
             close.Add(StartCoroutine(it.PlayClose()));
         }
+
         foreach (var c in close) yield return c;
-        yield return CrossFadeCountdownToCircleTimer(0.25f);
-
-
+        // ★ここではまだ円時計を出さない（GameStartポップアップ後に出す）
         // 次は GameStartPopup → Playing なので、ここではまだ操作不可のままでOK
     }
 
