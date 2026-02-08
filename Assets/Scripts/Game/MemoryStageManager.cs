@@ -356,43 +356,49 @@ public class MemoryStageManager : MonoBehaviour
 
     private IEnumerator HandleClick(MemoryCapsuleItem item)
     {
+        // 連打ガード：一旦全部OFF
         SetAllInteractable(false);
+
+        // まず開く→キャラ表示（ここは両方共通）
+        yield return item.PlayRetractAndReveal();
 
         if (item.IsCorrect)
         {
-            // ここはあなたの基準変数に合わせて
+            // 正解
             remainingCorrect--;
-            Debug.Log($"[MemoryStageManager] Correct! remainingCorrect={remainingCorrect}");
             PlaySE(correctSE);
 
-            // ① CloseSeqだけ再生（この間はキャラ出さない）
-            yield return item.PlayCloseOnlyThenDisappear();
+            // ✅ 正解はCloseしない
+            // ✅ キャラ画像は既に出てるので、そのタイミングでエフェクト開始
+            // （視覚的に “タッチ→Open→キャラ＋エフェクト” になる）
+            yield return PlayCorrectEffectAtItem(item);
 
-            // ② Close終了と同時にキャラ画像ON（出しっぱなし）
-            item.ShowRevealedFinal();
-
-            // ③ 同フレームでCorrectEffect開始（見た目は同時）
-            var fx = StartCoroutine(PlayCorrectEffectAtItem(item));
-            yield return fx;
+            if (remainingCorrect <= 0)
+            {
+                stageEnding = true;
+                yield break;
+            }
         }
         else
         {
-            Debug.Log("[MemoryStageManager] Miss");
+            // 不正解
             PlaySE(wrongSE);
 
-            // 不正解は「ひっこめ→表示」してから閉じる（今の仕様に合わせる）
-            yield return item.PlayRetractAndReveal();
-            yield return item.PlayClose();
+            // ✅ 不正解もCloseしない（キャラ出しっぱなし）
+            // ここで item.PlayClose(); を呼ばない
         }
 
-        if (remainingCorrect <= 0 || playRemainSec <= 0f)
+        // 終了判定（タイムアップなど）
+        if (playRemainSec <= 0f)
         {
             stageEnding = true;
             yield break;
         }
 
+        // 入力再開
         SetAllInteractable(true);
     }
+
 
 
 
@@ -852,22 +858,22 @@ public class MemoryStageManager : MonoBehaviour
 
     private IEnumerator RevealUnopenedCorrects(float fadeSec)
     {
-        // 失敗時は入力は止める
         SetAllInteractable(false);
-
-        var coroutines = new List<Coroutine>();
 
         foreach (var it in items)
         {
             if (it == null) continue;
 
-            // 「押せてない正解」だけ
             if (it.IsCorrect && !it.IsOpened)
-                coroutines.Add(StartCoroutine(it.ForceRevealFade(fadeSec)));
+            {
+                // ✅ 正解画像だけを表示（カプセル見た目は消す）＋フェード
+                yield return it.ForceShowCorrectOnlyFade(fadeSec);
+            }
         }
-
-        foreach (var c in coroutines) yield return c;
     }
+
+
+
 
     public void SetRevealedVisible(bool visible)
     {

@@ -73,7 +73,10 @@ public class MemoryCapsuleItem : MonoBehaviour
         if (isOpened) yield break;
         isOpened = true;
 
-        // ★開く連番があるならそれを再生
+        //開く瞬間から「閉じ画像」を消す（被り防止）
+        if (capsuleImage != null) capsuleImage.enabled = false;
+
+        //開く連番があるならそれを再生
         if (openSeq != null)
             yield return openSeq.PlayOnceAndWait();
         else
@@ -289,6 +292,52 @@ public class MemoryCapsuleItem : MonoBehaviour
         if (revealRect != null) revealRect.localScale = Vector3.one;
     }
 
+    // 失敗時など「未タッチ正解」を見せる専用
+    public void ForceShowCorrectOnlyImmediate()
+    {
+        // 1) カプセル見た目は全部消す（閉じ画像/連番）
+        if (capsuleImage != null) capsuleImage.enabled = false;
+
+        if (openSeq != null) openSeq.gameObject.SetActive(false);
+        if (closeSeq != null) closeSeq.gameObject.SetActive(false);
+
+        // 2) キャラ画像だけ出す
+        if (revealedImage != null) revealedImage.enabled = true;
+        if (revealRect != null) revealRect.localScale = Vector3.one;
+
+        // 3) クリック無効（結果演出中の誤操作防止）
+        if (button != null) button.interactable = false;
+    }
+
+    // フェード付きで出したい場合（CanvasGroupがrevealed側に無ければ後述）
+    public IEnumerator ForceShowCorrectOnlyFade(float sec)
+    {
+        ForceShowCorrectOnlyImmediate();
+
+        // revealedImage or revealRect に CanvasGroup が付いてる前提（無ければ付ける/別案）
+        CanvasGroup cg = null;
+        if (revealedImage != null) cg = revealedImage.GetComponent<CanvasGroup>();
+        if (cg == null && revealRect != null) cg = revealRect.GetComponent<CanvasGroup>();
+
+        if (cg == null)
+        {
+            // CanvasGroupが無いならフェード無しで終了（壊さないため）
+            yield break;
+        }
+
+        cg.alpha = 0f;
+        cg.blocksRaycasts = false;
+        cg.interactable = false;
+
+        float t = 0f;
+        while (t < sec)
+        {
+            t += Time.deltaTime;
+            cg.alpha = Mathf.Clamp01(t / sec);
+            yield return null;
+        }
+        cg.alpha = 1f;
+    }
 
 
 }
