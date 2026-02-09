@@ -1323,7 +1323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pv04SceneName: S_PuzzleIncentive
-  hitCount: 6
+  hitCount: 8
   capsulePrefab: {fileID: 7115440766924270674, guid: 4e83b90be3c84f84f9008138d68578d8, type: 3}
   capsuleRoot: {fileID: 1281607260}
   hitSprites:
@@ -1332,6 +1332,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1eb62120d0b80904f91a7a053dcf6ddb, type: 3}
   - {fileID: 21300000, guid: 1611688b200a61f42aa010791527a697, type: 3}
   - {fileID: 21300000, guid: 979840ecf35a94d42a6c9845e3e941b5, type: 3}
+  - {fileID: 21300000, guid: f24456464e6621447af61dea09bac8fe, type: 3}
+  - {fileID: 21300000, guid: f24456464e6621447af61dea09bac8fe, type: 3}
   - {fileID: 21300000, guid: f24456464e6621447af61dea09bac8fe, type: 3}
   columns: 6
   rows: 3
