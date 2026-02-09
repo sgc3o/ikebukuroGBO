@@ -43,6 +43,9 @@ public class MemoryStageManager : MonoBehaviour
     [Header("Stages")]
     [SerializeField] private StageConfig[] stages; // 3ステージ想定（増やしてもOK）
 
+    [Header("Scene Transition")]
+    [SerializeField] private string incentiveSceneName = "S_MemoryIncentive";
+
     [Header("Panels Root")]
     [SerializeField] private CanvasGroup panelsCanvasGroup; // PanelsにCanvasGroup付けてここへ
     [SerializeField] private GameObject missionIntroPanel;
@@ -241,7 +244,7 @@ public class MemoryStageManager : MonoBehaviour
         {
             state = State.Done;
             // TODO: Incentiveへ SceneTransition.Go("S_MemoryIncentive") 等
-            Debug.Log("[MemoryStageManager] All stages done. Go Incentive.");
+            SceneTransition.Go(incentiveSceneName);
             return;
         }
 

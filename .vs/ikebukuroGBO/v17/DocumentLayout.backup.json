@@ -1,26 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Repository\\ikebukuroGBO\\",
+  "WorkspaceRootPath": "D:\\Repository\\ikebukuroGBO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryCapsuleItem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\MemoryCapsuleItem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IncentiveReturnConfirmPopupController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Incentive\\IncentiveReturnConfirmPopupController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\GameSelectSetter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Incentive\\GameSelectSetter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IncentiveSceneController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Incentive\\IncentiveSceneController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IncentiveConfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Incentive\\IncentiveConfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IReturnConfirmOwner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Incentive\\IReturnConfirmOwner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\MemoryStageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\RaycastProbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\RaycastProbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\MemoryPopupManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\MemoryPopupManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\ScreenFlowController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,72 +42,89 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RaycastProbe.cs",
-              "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\RaycastProbe.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\RaycastProbe.cs",
-              "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\RaycastProbe.cs",
-              "RelativeToolTip": "Assets\\Scripts\\RaycastProbe.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAFAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "GameSelectSetter.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\GameSelectSetter.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Incentive\\GameSelectSetter.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\GameSelectSetter.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Incentive\\GameSelectSetter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-06T08:57:47.992Z",
+              "WhenOpened": "2026-02-08T19:21:00.766Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "MemoryPopupManager.cs",
-              "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\MemoryPopupManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\MemoryPopupManager.cs",
-              "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\MemoryPopupManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\MemoryPopupManager.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAIwFoAAAAeAAAAAAAAAA==",
+              "Title": "IncentiveConfig.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IncentiveConfig.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Incentive\\IncentiveConfig.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IncentiveConfig.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Incentive\\IncentiveConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-06T05:24:21.695Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MemoryCapsuleItem.cs",
-              "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryCapsuleItem.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\MemoryCapsuleItem.cs",
-              "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryCapsuleItem.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Game\\MemoryCapsuleItem.cs",
-              "ViewState": "AgIAAK0AAAAAAAAAAAAUwOgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-06T01:28:33.165Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-08T19:00:21.239Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ScreenFlowController.cs",
-              "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\ScreenFlowController.cs",
-              "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Game\\ScreenFlowController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Title": "IReturnConfirmOwner.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IReturnConfirmOwner.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Incentive\\IReturnConfirmOwner.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IReturnConfirmOwner.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Incentive\\IReturnConfirmOwner.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T06:12:10.686Z",
+              "WhenOpened": "2026-02-08T18:59:35.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IncentiveReturnConfirmPopupController.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IncentiveReturnConfirmPopupController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Incentive\\IncentiveReturnConfirmPopupController.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IncentiveReturnConfirmPopupController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Incentive\\IncentiveReturnConfirmPopupController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAowD0AAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-08T18:58:52.124Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MemoryStageManager.cs",
-              "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "ViewState": "AgIAALoAAAAAAAAAAAAIwNYAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "IdleRecoveryPopupController.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T05:03:43.263Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-08T18:50:29.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IncentiveSceneController.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IncentiveSceneController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Incentive\\IncentiveSceneController.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\IncentiveSceneController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Incentive\\IncentiveSceneController.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAkwJcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-08T18:43:24.81Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MemoryStageManager.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\MemoryStageManager.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Game\\MemoryStageManager.cs",
+              "ViewState": "AgIAANYAAAAAAAAAAAAiwPcAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T05:03:43.263Z"
             }
           ]
         }

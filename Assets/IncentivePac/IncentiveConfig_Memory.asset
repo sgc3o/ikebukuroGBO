@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce8fcd40d22f041ba5ad2e7c0c002d, type: 3}
+  m_Name: IncentiveConfig_Memory
+  m_EditorClassIdentifier: 
+  gameKey: Memory
+  introBgClip: {fileID: 32900000, guid: 17f1500b639807247a8983e2a75fe7e7, type: 3}
+  qrSprite: {fileID: 21300000, guid: df91896ae21842b4fb7c62d81636f08e, type: 3}
+  timeoutSeconds: 120
+  returnSceneName: S_GashaponHub
