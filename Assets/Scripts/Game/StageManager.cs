@@ -254,7 +254,7 @@ ClearSpawned();
         else
         {
             GameSession.I.ResetStages();
-            SceneManager.LoadScene(pv04SceneName); // ★最後だけScene移動
+            SceneTransition.Go(pv04SceneName); // ★ここにする
         }
     }
 
@@ -270,7 +270,7 @@ ClearSpawned();
         else
         {
             GameSession.I.ResetStages();
-            SceneManager.LoadScene(pv04SceneName); // ★最後だけScene移動
+            SceneTransition.Go(pv04SceneName); // ★最後だけScene移動
         }
     }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IncentiveConfig_Puzzle
   m_EditorClassIdentifier: 
   gameKey: Puzzle
-  introBgClip: {fileID: 32900000, guid: 17f1500b639807247a8983e2a75fe7e7, type: 3}
-  qrSprite: {fileID: 21300000, guid: df91896ae21842b4fb7c62d81636f08e, type: 3}
+  introBgClip: {fileID: 0}
+  qrSprite: {fileID: 21300000, guid: 397b243bf0a15c6469ca4b61038fbef8, type: 3}
   timeoutSeconds: 120
   returnSceneName: S_GashaponHub
