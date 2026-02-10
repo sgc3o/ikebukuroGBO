@@ -20,6 +20,10 @@ public class StageManager : MonoBehaviour
     [Header("Hit Sprites (Inspectorで差し替え)")]
     [SerializeField] private List<Sprite> hitSprites = new();
 
+    [Header("Fixed Placement (Optional, up to 10)")]
+    [SerializeField] private bool useFixedPositions = false;
+    [SerializeField] private List<RectTransform> fixedPoints = new();
+
     [Header("Placement (18 slots fixed = 6x3)")]
     [SerializeField] private int columns = 6;
     [SerializeField] private int rows = 3;
@@ -58,6 +62,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private TMP_Text atariCounterText;
 
     [Header("Timer")]
+    [SerializeField] private CountdownUI countdownUI;
     [SerializeField] private GameObject timerGroup;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private float stage1LimitSec = 30f;
@@ -78,17 +83,21 @@ public class StageManager : MonoBehaviour
 
     private static readonly int[] PlacementOrder18 =
     {
-        8,  9,  2,  3, 14, 15,
-        7, 10,  1,  4, 13, 16,
-        6, 11,  0,  5, 12, 17
-    };
+    // 1マス内側の「角っぽい」場所から始める（端すぎない）
+    1, 4, 13, 16,
+    2, 3, 14, 15,
+    6, 11, 7, 10,
+    0, 5, 12, 17,
+    8, 9
+};
 
     private readonly List<CapsuleItem> spawned = new();
     private readonly List<Vector2> placedPositions = new();
 
     private int totalCount;
     private int missCount;
-    private int foundHit = 0;
+    // "当たり"概念撤廃後は「開封数」として使う
+    private int openedCount = 0;
 
     private float timeLeft;
     private Coroutine timerCo;
@@ -112,11 +121,12 @@ public class StageManager : MonoBehaviour
 
         ApplyStageCountHUD();
 
-        foundHit = 0;
+        openedCount = 0;
         ApplyAtariCounterHUD();
 
         int maxSlots = columns * rows; // 6x3想定なら18
 
+        // 旧仕様の比率（hitCount * 0.6）を総数の密度調整として流用
         missCount = Mathf.FloorToInt(hitCount * 0.6f);
 
         // 18を超えないように上限カット（hit=12なら missは6までに制限される）
@@ -125,7 +135,12 @@ public class StageManager : MonoBehaviour
         totalCount = hitCount + missCount;
 
 
-        ClearSpawned();
+        
+
+        // Fixed placement: if points are fewer than total, shrink total to fit (no error)
+        if (useFixedPositions && fixedPoints != null && fixedPoints.Count > 0)
+            totalCount = Mathf.Min(totalCount, fixedPoints.Count);
+ClearSpawned();
 
         StartCoroutine(StartStageFlow());
     }
@@ -148,7 +163,9 @@ public class StageManager : MonoBehaviour
     private void ApplyAtariCounterHUD()
     {
         if (atariCounterText == null) return;
-        atariCounterText.text = $"{foundHit}/{hitCount}";
+        // 当たり概念撤廃：開封数 / 総数
+        int denom = Mathf.Max(1, totalCount);
+        atariCounterText.text = $"{openedCount}/{denom}";
     }
 
     private void StartTimer()
@@ -177,10 +194,18 @@ public class StageManager : MonoBehaviour
 
     private void UpdateTimerText()
     {
-        if (timerText == null) return;
         int sec = Mathf.CeilToInt(timeLeft);
-        timerText.text = sec.ToString();
+
+        // 画像カウントダウン
+        if (countdownUI != null)
+            countdownUI.ShowNumber(sec);
+
+        // 旧TMP（残したいなら）
+        if (timerText != null)
+            timerText.text = sec.ToString();
     }
+
+
 
     private void OnTimeUp()
     {
@@ -189,10 +214,11 @@ public class StageManager : MonoBehaviour
 
     public void OnHitFound()
     {
-        foundHit++;
+        openedCount++;
         ApplyAtariCounterHUD();
 
-        if (foundHit >= hitCount)
+        // 当たり概念撤廃：全て開いたらクリア
+        if (openedCount >= totalCount)
             HandleStageEnd();
     }
 
@@ -258,7 +284,8 @@ public class StageManager : MonoBehaviour
         if (popup != null)
             yield return new WaitUntil(() => !popup.IsShowing);
 
-        SpawnCapsules(totalCount, hitCount);
+        // 当たり概念撤廃：全カプセルがキャラ画像になる
+        SpawnCapsules(totalCount);
 
         yield return new WaitForSeconds(spawnDuration);
 
@@ -275,33 +302,43 @@ public class StageManager : MonoBehaviour
         UpdateTimerText();
     }
 
-    private void SpawnCapsules(int total, int hit)
+    private void SpawnCapsules(int total)
     {
-        List<Vector2> slotsRowMajor = BuildSlots18_RowMajor();
+                int actualTotal = total;
 
-        List<Vector2> chosen = new List<Vector2>(total);
-        for (int k = 0; k < total; k++)
+        List<Vector2> chosen;
+
+        if (useFixedPositions && fixedPoints != null && fixedPoints.Count > 0)
         {
-            int slotIndex = PlacementOrder18[k];
-            chosen.Add(slotsRowMajor[slotIndex]);
+            actualTotal = Mathf.Min(total, fixedPoints.Count);
+            chosen = new List<Vector2>(actualTotal);
+            for (int k = 0; k < actualTotal; k++)
+                chosen.Add(ToCapsuleRootAnchoredPosition(fixedPoints[k]));
+        }
+        else
+        {
+            List<Vector2> slotsRowMajor = BuildSlots18_RowMajor();
+
+            chosen = new List<Vector2>(actualTotal);
+            for (int k = 0; k < actualTotal; k++)
+            {
+                int slotIndex = PlacementOrder18[k];
+                chosen.Add(slotsRowMajor[slotIndex]);
+            }
         }
 
-        HashSet<int> hitIndices = PickUniqueIndices(total, hit);
-        List<Sprite> hitSpriteList = BuildHitSpriteList(hit);
+        // 全員キャラ：actualTotal分のスプライトを作る
+        List<Sprite> spriteList = BuildHitSpriteList(actualTotal);
 
         float minDist = capsuleSizePx - allowedOverlapPx;
-        int hitSpriteCursor = 0;
+        int spriteCursor = 0;
 
-        for (int i = 0; i < total; i++)
+        for (int i = 0; i < actualTotal; i++)
         {
-            bool isHit = hitIndices.Contains(i);
-            Sprite spriteForThis = null;
-
-            if (isHit)
-            {
-                spriteForThis = hitSpriteList[hitSpriteCursor];
-                hitSpriteCursor++;
-            }
+            // 当たり概念撤廃：常にHit扱いでキャラ画像を割り当て
+            bool isHit = true;
+            Sprite spriteForThis = spriteList[spriteCursor % spriteList.Count];
+            spriteCursor++;
 
             Vector2 basePos = chosen[i];
             Vector2 pos = ApplyDeterministicOffset(basePos, i);
@@ -475,6 +512,30 @@ public class StageManager : MonoBehaviour
             }
         }
         return slots;
+    }
+
+
+    private Vector2 ToCapsuleRootAnchoredPosition(RectTransform point)
+    {
+        if (point == null || capsuleRoot == null) return Vector2.zero;
+
+        // 同じ座標系（CapsuleRoot直下）ならそのまま使える
+        if (point.transform.parent == capsuleRoot)
+            return point.anchoredPosition;
+
+        // Canvasのモードに応じてカメラを取得（OverlayならnullでOK）
+        Canvas canvas = capsuleRoot.GetComponentInParent<Canvas>();
+        Camera cam = null;
+        if (canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay)
+            cam = canvas.worldCamera;
+
+        Vector2 screen = RectTransformUtility.WorldToScreenPoint(cam, point.position);
+
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(capsuleRoot, screen, cam, out Vector2 local))
+            return local;
+
+        // 予備（ほぼ来ない想定）
+        return (Vector2)capsuleRoot.InverseTransformPoint(point.position);
     }
 
     private Vector2 ApplyDeterministicOffset(Vector2 basePos, int i)

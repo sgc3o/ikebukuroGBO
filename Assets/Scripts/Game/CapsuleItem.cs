@@ -12,6 +12,11 @@ public class CapsuleItem : MonoBehaviour
     [SerializeField] private GameObject closedVisual;
     [SerializeField] private GameObject hitVisual;
     [SerializeField] private GameObject missVisual;
+
+    [Header("Reveal Flow")]
+    [Tooltip("Closed → (OpenVisual for a moment) → HitVisual. If null, missVisual is used as OpenVisual.")]
+    [SerializeField] private GameObject openVisual;
+    [SerializeField, Min(0f)] private float openVisualDuration = 0.5f;
     [SerializeField] private GameObject hitEffect;
     [SerializeField] private Animator hitEffectAnimator; // HitEffect に付いてる Animator
     [SerializeField] private string hitEffectStateName = "HitEffect"; // Animator内のState名
@@ -43,6 +48,7 @@ public class CapsuleItem : MonoBehaviour
         if (closedVisual != null) closedVisual.SetActive(true);
         if (hitVisual != null) hitVisual.SetActive(false);
         if (missVisual != null) missVisual.SetActive(false);
+        if (openVisual != null) openVisual.SetActive(false);
 
         // クリック登録
         button.onClick.RemoveAllListeners();
@@ -70,28 +76,38 @@ public class CapsuleItem : MonoBehaviour
 
         if (closedVisual != null) closedVisual.SetActive(false);
 
-        if (isHit)
+        // Closed → Open(0.5s) → Hit(keep)
+        StartCoroutine(RevealRoutine());
+
+    }
+
+    private System.Collections.IEnumerator RevealRoutine()
+    {
+        // openVisual が未設定なら missVisual を Open 表示として流用（互換）
+        GameObject openObj = (openVisual != null) ? openVisual : missVisual;
+        if (openObj != null) openObj.SetActive(true);
+
+        if (openVisualDuration > 0f)
+            yield return new WaitForSeconds(openVisualDuration);
+
+        if (openObj != null) openObj.SetActive(false);
+
+        // HitVisual の Image の sprite を差し替え（キャラ画像）
+        if (hitVisual != null)
         {
-            // HitVisual の Image の sprite を差し替え
-            if (hitVisual != null)
+            var img = hitVisual.GetComponent<Image>();
+            if (img != null && hitSprite != null)
             {
-                var img = hitVisual.GetComponent<Image>();
-                if (img != null && hitSprite != null)
-                {
-                    img.sprite = hitSprite;
-                    img.SetNativeSize(); // 必要ならON（サイズ揃えたいなら消してOK）
-                }
-                PlayHitEffect();
-                hitVisual.SetActive(true);
+                img.sprite = hitSprite;
+               // img.SetNativeSize(); // 必要ならON（サイズ揃えたいなら消してOK）
             }
 
-            manager.OnHitFound();
-        }
-        else
-        {
-            if (missVisual != null) missVisual.SetActive(true);
+            PlayHitEffect();
+            hitVisual.SetActive(true);
         }
 
+        // 旧API互換：OnHitFound を「開封した」通知として使う
+        if (manager != null) manager.OnHitFound();
     }
 
     public void SetInteractable(bool value)
