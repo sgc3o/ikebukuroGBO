@@ -97,9 +97,9 @@ public class GameStateManager : MonoBehaviour
         return idx switch
         {
             0 => SceneId.S_PuzzleGameRoot,
-            1 => SceneId.S_PuzzleGameRoot,
-            2 => SceneId.S_PuzzleGameRoot,
-            3 => SceneId.S_PuzzleGameRoot,
+            1 => SceneId.S_MemoryGameRoot,
+            2 => SceneId.S_MemoryGameRoot,
+            3 => SceneId.S_MemoryGameRoot,
             _ => SceneId.S_PuzzleGameRoot,
         };
     }

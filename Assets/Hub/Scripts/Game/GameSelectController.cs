@@ -16,6 +16,7 @@ public class GameSelectController : MonoBehaviour, IEndDragHandler
     public int gameCount = 4;
     public float swipeThresholdPx = 80f; // マウスDragの閾値
 
+
     [Header("Confirm Frame")]
     public GameObject[] frames; // size=4（FrameCard0/1/2/3）
     int selectedIndex = -1;
@@ -191,4 +192,5 @@ public class GameSelectController : MonoBehaviour, IEndDragHandler
 
         gsm.GoTransition();
     }
+
 }
