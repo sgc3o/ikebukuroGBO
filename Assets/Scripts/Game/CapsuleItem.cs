@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,34 +12,37 @@ public class CapsuleItem : MonoBehaviour
     [SerializeField] private RectTransform rotator; // Button/Rotator を入れる
     [SerializeField] private GameObject closedVisual;
     [SerializeField] private GameObject hitVisual;
-    [SerializeField] private GameObject missVisual;
+    [SerializeField] private GameObject missVisual; // MissOverlay（はずれ表示）
 
     [Header("Reveal Flow")]
-    [Tooltip("Closed → (OpenVisual for a moment) → HitVisual. If null, missVisual is used as OpenVisual.")]
+    [Tooltip("Closed → OpenVisual(少し) → Hit または Miss")]
     [SerializeField] private GameObject openVisual;
     [SerializeField, Min(0f)] private float openVisualDuration = 0.5f;
+
+    [Header("Miss")]
+    [Tooltip("ON: Miss時にOpenVisualを表示したまま、MissOverlayを重ねる / OFF: Miss時はOpenVisualを消してMissだけ残す")]
+    [SerializeField] private bool keepOpenVisualOnMiss = true;
+
+    [Header("Hit Effect")]
     [SerializeField] private GameObject hitEffect;
     [SerializeField] private Animator hitEffectAnimator; // HitEffect に付いてる Animator
     [SerializeField] private string hitEffectStateName = "HitEffect"; // Animator内のState名
-
-
-
 
     // --- 状態 ---
     private bool isHit;
     private bool opened;
     private StageManager manager;
-    public RectTransform Rotator => rotator;
 
     // 当たり画像（Hitのときだけ使う）
     private Sprite hitSprite;
+
+    public RectTransform Rotator => rotator;
 
     /// <summary>
     /// 外から「このカプセルは当たりか？」と「当たり画像」を注入して初期化
     /// </summary>
     public void Setup(StageManager managerRef, bool hitFlag, Sprite hitSpriteIfAny)
     {
-
         manager = managerRef;
         isHit = hitFlag;
         hitSprite = hitSpriteIfAny;
@@ -46,68 +50,83 @@ public class CapsuleItem : MonoBehaviour
 
         // 初期表示：閉じだけON
         if (closedVisual != null) closedVisual.SetActive(true);
+        if (openVisual != null) openVisual.SetActive(false);
         if (hitVisual != null) hitVisual.SetActive(false);
         if (missVisual != null) missVisual.SetActive(false);
-        if (openVisual != null) openVisual.SetActive(false);
 
-        // クリック登録
-        button.onClick.RemoveAllListeners();
-        button.onClick.AddListener(OnClickCapsule);
-
-        //ヒットエフェクトを最初は消す
+        // ヒットエフェクトを最初は消す
         if (hitEffect != null) hitEffect.SetActive(false);
 
-
-        button.interactable = true;
+        // クリック登録
+        if (button != null)
+        {
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(OnClickCapsule);
+            button.interactable = true;
+        }
     }
 
     private void OnClickCapsule()
     {
-
         // 押されたカプセルを最前面へ（UIの重なり順を上げる）
         transform.SetAsLastSibling();
 
-        if (manager != null && manager.IsInputBlocked) return; // ★追加：ポップアップ中は無視
+        // ★ポップアップ中などは無視（StageManager側に無ければ常にfalse扱い）
+        if (manager != null && manager.IsInputBlocked) return;
 
         if (opened) return;
         opened = true;
 
-        button.interactable = false;
+        if (button != null) button.interactable = false;
 
         if (closedVisual != null) closedVisual.SetActive(false);
 
-        // Closed → Open(0.5s) → Hit(keep)
+        // Closed → Open(0.5s) → Hit or Miss(keep)
         StartCoroutine(RevealRoutine());
-
     }
 
-    private System.Collections.IEnumerator RevealRoutine()
+    private IEnumerator RevealRoutine()
     {
-        // openVisual が未設定なら missVisual を Open 表示として流用（互換）
-        GameObject openObj = (openVisual != null) ? openVisual : missVisual;
-        if (openObj != null) openObj.SetActive(true);
+        // Open表示
+        if (openVisual != null) openVisual.SetActive(true);
 
         if (openVisualDuration > 0f)
             yield return new WaitForSeconds(openVisualDuration);
 
-        if (openObj != null) openObj.SetActive(false);
-
-        // HitVisual の Image の sprite を差し替え（キャラ画像）
-        if (hitVisual != null)
+        if (isHit)
         {
-            var img = hitVisual.GetComponent<Image>();
-            if (img != null && hitSprite != null)
+            // Hit: Openを消してHitへ
+            if (openVisual != null) openVisual.SetActive(false);
+
+            // HitVisual の Image の sprite を差し替え（キャラ画像）
+            if (hitVisual != null)
             {
-                img.sprite = hitSprite;
-               // img.SetNativeSize(); // 必要ならON（サイズ揃えたいなら消してOK）
+                var img = hitVisual.GetComponent<Image>();
+                if (img != null && hitSprite != null)
+                {
+                    img.sprite = hitSprite;
+                    // img.SetNativeSize(); // 必要ならON
+                }
+
+                hitVisual.SetActive(true);
+                PlayHitEffect();
             }
 
-            PlayHitEffect();
-            hitVisual.SetActive(true);
+            // 当たりだけ加算
+            if (manager != null) manager.OnHitFound();
         }
+        else
+        {
+            // Miss: 「閉じない」
+            // Openを維持するならそのまま、消すならOFF
+            if (!keepOpenVisualOnMiss && openVisual != null)
+                openVisual.SetActive(false);
 
-        // 旧API互換：OnHitFound を「開封した」通知として使う
-        if (manager != null) manager.OnHitFound();
+            if (missVisual != null)
+                missVisual.SetActive(true);
+
+            // Missはカウントしない
+        }
     }
 
     public void SetInteractable(bool value)
@@ -117,6 +136,7 @@ public class CapsuleItem : MonoBehaviour
         // すでに開いてるカプセルは再度押せないままにする
         button.interactable = value && !opened;
     }
+
     private void PlayHitEffect()
     {
         if (hitEffect == null) return;
@@ -129,7 +149,10 @@ public class CapsuleItem : MonoBehaviour
             hitEffectAnimator.Play(hitEffectStateName, 0, 0f);
 
             // クリップ長で消す（Animatorから取得）
-            var clips = hitEffectAnimator.runtimeAnimatorController.animationClips;
+            var clips = hitEffectAnimator.runtimeAnimatorController != null
+                ? hitEffectAnimator.runtimeAnimatorController.animationClips
+                : null;
+
             float len = 0.3f;
             if (clips != null && clips.Length > 0) len = clips[0].length;
 
@@ -137,12 +160,9 @@ public class CapsuleItem : MonoBehaviour
         }
     }
 
-
-    private System.Collections.IEnumerator HideHitEffectAfter(float t)
+    private IEnumerator HideHitEffectAfter(float t)
     {
         yield return new WaitForSeconds(t);
         if (hitEffect != null) hitEffect.SetActive(false);
     }
-
-
 }

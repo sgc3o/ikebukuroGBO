@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 50d6ec0fe7bf2504281ce332854f91c0
+guid: a5268cc32ebf3f24f83fb31279a88cca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 759350286569482379
-    second: ch_00005_0
+      213: -3793156634172006933
+    second: hazure_unchi_0
+  - first:
+      213: -1980270845035807181
+    second: hazure_unchi_1
+  - first:
+      213: 6399378114080818858
+    second: hazure_unchi_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ch_00005_0
+      name: hazure_unchi_0
       rect:
         serializedVersion: 2
-        x: 73
-        y: 49
-        width: 354
-        height: 402
+        x: 213
+        y: 567
+        width: 130
+        height: 125
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b88a01bff01c98a00800000000000000
-      internalID: 759350286569482379
+      spriteID: bedd2c263200c5bc0800000000000000
+      internalID: -3793156634172006933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hazure_unchi_1
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 220
+        width: 580
+        height: 510
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33ef39a882aa484e0800000000000000
+      internalID: -1980270845035807181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hazure_unchi_2
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 607
+        width: 211
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa642394d782fc850800000000000000
+      internalID: 6399378114080818858
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ch_00005_0: 759350286569482379
+      hazure_unchi_0: -3793156634172006933
+      hazure_unchi_1: -1980270845035807181
+      hazure_unchi_2: 6399378114080818858
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

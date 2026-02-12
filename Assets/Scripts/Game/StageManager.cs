@@ -11,7 +11,11 @@ public class StageManager : MonoBehaviour
     [SerializeField] private string pv04SceneName = "PV04_Incentive"; // ★PV04のScene名
 
     [Header("Stage Rule")]
-    [SerializeField] private int hitCount = 6;
+    [Tooltip("当たり（キャラ）カプセル数")]
+    [SerializeField, Min(0)] private int hitCount = 6;
+
+    [Tooltip("はずれ（MissOverlay）カプセル数")]
+    [SerializeField, Min(0)] private int missCount = 3;
 
     [Header("Spawn References")]
     [SerializeField] private CapsuleItem capsulePrefab;
@@ -95,9 +99,10 @@ public class StageManager : MonoBehaviour
     private readonly List<Vector2> placedPositions = new();
 
     private int totalCount;
-    private int missCount;
-    // "当たり"概念撤廃後は「開封数」として使う
-    private int openedCount = 0;
+
+    // クリア判定は「当たりを全部出したら」
+    private int hitTargetCount;
+    private int hitFoundCount = 0;
 
     private float timeLeft;
     private Coroutine timerCo;
@@ -121,26 +126,29 @@ public class StageManager : MonoBehaviour
 
         ApplyStageCountHUD();
 
-        openedCount = 0;
-        ApplyAtariCounterHUD();
+        hitFoundCount = 0;
+
+        // 直接指定方式：total = hit + miss
+        totalCount = Mathf.Max(0, hitCount + missCount);
 
         int maxSlots = columns * rows; // 6x3想定なら18
 
-        // 旧仕様の比率（hitCount * 0.6）を総数の密度調整として流用
-        missCount = Mathf.FloorToInt(hitCount * 0.6f);
-
-        // 18を超えないように上限カット（hit=12なら missは6までに制限される）
-        missCount = Mathf.Clamp(missCount, 0, Mathf.Max(0, maxSlots - hitCount));
-
-        totalCount = hitCount + missCount;
-
-
-        
+        // グリッド上限に収める
+        totalCount = Mathf.Min(totalCount, maxSlots);
 
         // Fixed placement: if points are fewer than total, shrink total to fit (no error)
         if (useFixedPositions && fixedPoints != null && fixedPoints.Count > 0)
             totalCount = Mathf.Min(totalCount, fixedPoints.Count);
-ClearSpawned();
+
+        // 実際の当たり数（totalに収まるように調整）
+        hitTargetCount = Mathf.Clamp(hitCount, 0, totalCount);
+
+        ApplyAtariCounterHUD();
+
+
+        
+
+        ClearSpawned();
 
         StartCoroutine(StartStageFlow());
     }
@@ -163,9 +171,8 @@ ClearSpawned();
     private void ApplyAtariCounterHUD()
     {
         if (atariCounterText == null) return;
-        // 当たり概念撤廃：開封数 / 総数
-        int denom = Mathf.Max(1, totalCount);
-        atariCounterText.text = $"{openedCount}/{denom}";
+        int denom = Mathf.Max(1, hitTargetCount);
+        atariCounterText.text = $"{hitFoundCount}/{denom}";
     }
 
     private void StartTimer()
@@ -214,11 +221,11 @@ ClearSpawned();
 
     public void OnHitFound()
     {
-        openedCount++;
+        hitFoundCount++;
         ApplyAtariCounterHUD();
 
-        // 当たり概念撤廃：全て開いたらクリア
-        if (openedCount >= totalCount)
+        // 当たりを全部出したらクリア
+        if (hitFoundCount >= hitTargetCount)
             HandleStageEnd();
     }
 
@@ -284,7 +291,6 @@ ClearSpawned();
         if (popup != null)
             yield return new WaitUntil(() => !popup.IsShowing);
 
-        // 当たり概念撤廃：全カプセルがキャラ画像になる
         SpawnCapsules(totalCount);
 
         yield return new WaitForSeconds(spawnDuration);
@@ -304,7 +310,7 @@ ClearSpawned();
 
     private void SpawnCapsules(int total)
     {
-                int actualTotal = total;
+        int actualTotal = total;
 
         List<Vector2> chosen;
 
@@ -327,18 +333,28 @@ ClearSpawned();
             }
         }
 
-        // 全員キャラ：actualTotal分のスプライトを作る
-        List<Sprite> spriteList = BuildHitSpriteList(actualTotal);
+        // 当たりだけスプライトを作る
+        int actualHit = Mathf.Clamp(hitTargetCount, 0, actualTotal);
+        List<Sprite> spriteList = BuildHitSpriteList(actualHit);
+
+        // 当たり位置をランダムに決める（Fixed/Normal配置どちらでも同じ）
+        HashSet<int> hitIndices = PickUniqueIndices(actualTotal, actualHit);
 
         float minDist = capsuleSizePx - allowedOverlapPx;
         int spriteCursor = 0;
 
         for (int i = 0; i < actualTotal; i++)
         {
-            // 当たり概念撤廃：常にHit扱いでキャラ画像を割り当て
-            bool isHit = true;
-            Sprite spriteForThis = spriteList[spriteCursor % spriteList.Count];
-            spriteCursor++;
+            bool isHit = hitIndices.Contains(i);
+            Sprite spriteForThis = null;
+            if (isHit)
+            {
+                if (spriteList != null && spriteList.Count > 0)
+                {
+                    spriteForThis = spriteList[spriteCursor % spriteList.Count];
+                    spriteCursor++;
+                }
+            }
 
             Vector2 basePos = chosen[i];
             Vector2 pos = ApplyDeterministicOffset(basePos, i);
