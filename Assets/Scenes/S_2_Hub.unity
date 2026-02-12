@@ -382,7 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameSelectController
   gsm: {fileID: 1878279323}
   viewport: {fileID: 551139747}
-  content: {fileID: 0}
+  content: {fileID: 567914127}
   gameCount: 4
   swipeThresholdPx: 80
   frames:
