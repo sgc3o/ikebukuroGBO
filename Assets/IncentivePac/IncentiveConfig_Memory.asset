@@ -16,4 +16,4 @@ MonoBehaviour:
   introBgClip: {fileID: 0}
   qrSprite: {fileID: 21300000, guid: df91896ae21842b4fb7c62d81636f08e, type: 3}
   timeoutSeconds: 120
-  returnSceneName: S_GashaponHub
+  returnSceneName: S_2_Hub

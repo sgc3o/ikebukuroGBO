@@ -47,6 +47,6 @@ MonoBehaviour:
   enabledSystem: 1
   idleToPopupSeconds: 90
   popupToReturnSeconds: 120
-  hubSceneName: S_GashaponHub
+  hubSceneName: S_2_Hub
   useUnscaledTime: 1
   popupPrefab: {fileID: 5141775677277404603, guid: 5498f271f6c5d3048b9ee5d73fc46c91, type: 3}
