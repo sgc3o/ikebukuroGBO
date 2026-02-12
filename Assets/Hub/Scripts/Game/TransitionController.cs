@@ -37,7 +37,7 @@ public class TransitionController : MonoBehaviour
         // ★FadeOverlayは常時Active運用（SetActiveしない）
     }
 
-    void StartFadeThen(System.Action onSwitched)
+    public void StartFadeThen(System.Action onSwitched)
     {
         if (_running) return;
         if (_co != null) StopCoroutine(_co);
