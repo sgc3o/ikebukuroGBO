@@ -902,7 +902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5646032921471841825, guid: 9a50b4e8f4fdf214aa72634e124cf8cb, type: 3}
       propertyPath: idleToPopupSeconds
-      value: 5
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5835321990563510644, guid: 9a50b4e8f4fdf214aa72634e124cf8cb, type: 3}
       propertyPath: m_Name
@@ -910,7 +910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5835321990563510644, guid: 9a50b4e8f4fdf214aa72634e124cf8cb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6764957544079939532, guid: 9a50b4e8f4fdf214aa72634e124cf8cb, type: 3}
       propertyPath: m_LocalPosition.x

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      M04_Incentive_Back_BtnOn_0: 5223652072063122742
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
