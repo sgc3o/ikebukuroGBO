@@ -392,8 +392,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -165.1, y: 65}
-  m_SizeDelta: {x: 140, y: 58}
+  m_AnchoredPosition: {x: -171.29, y: 65}
+  m_SizeDelta: {x: 183.4185, y: 75.9877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &138853289
 CanvasRenderer:
@@ -935,6 +935,7 @@ RectTransform:
   - {fileID: 1563948545}
   - {fileID: 841216964}
   - {fileID: 1044385894}
+  - {fileID: 1967653504}
   - {fileID: 46628147}
   m_Father: {fileID: 82933940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1797,8 +1798,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -165.1, y: 65}
-  m_SizeDelta: {x: 140, y: 58}
+  m_AnchoredPosition: {x: -171.29, y: 65}
+  m_SizeDelta: {x: 183.4185, y: 75.9877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1044385895
 MonoBehaviour:
@@ -2408,10 +2409,7 @@ MonoBehaviour:
   hudStageBadgeImage: {fileID: 418736980}
   circleTimerRoot: {fileID: 0}
   hudTargetCharaImage: {fileID: 1836483140}
-  radialTimerFill: {fileID: 0}
-  timerClockwise: 1
-  circleTimerCanvasGroup: {fileID: 0}
-  countdownToTimerFadeSec: 0.25
+  memorizeTargetCharaImage: {fileID: 1967653505}
   grid: {fileID: 717026649}
   gridRoot: {fileID: 717026648}
   capsulePrefab: {fileID: 4257895128185619437, guid: 6ef2f37f7a4d9ed438ff04f8a9c18c4f, type: 3}
@@ -2665,8 +2663,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 172}
-  m_SizeDelta: {x: 140, y: 58}
+  m_AnchoredPosition: {x: 2.9365, y: 180.22}
+  m_SizeDelta: {x: 167.6088, y: 69.437}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1457689255
 MonoBehaviour:
@@ -3323,6 +3321,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964542005}
+  m_CullTransparentMesh: 1
+--- !u!1 &1967653503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1967653504}
+  - component: {fileID: 1967653506}
+  - component: {fileID: 1967653505}
+  m_Layer: 5
+  m_Name: TargetCharaImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1967653504
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967653503}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 645951293}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -183.6, y: 187.1}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1967653505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967653503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1967653506
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967653503}
   m_CullTransparentMesh: 1
 --- !u!1 &1986831395
 GameObject:

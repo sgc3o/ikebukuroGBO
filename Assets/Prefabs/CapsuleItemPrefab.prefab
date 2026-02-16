@@ -291,6 +291,9 @@ MonoBehaviour:
   revealedImage: {fileID: 5308961235316643636}
   openSeq: {fileID: 6011799970018423101}
   closeSeq: {fileID: 6453041312873460090}
+  enableOpenFlashInGameplay: 1
+  openFlashSprite: {fileID: 21300000, guid: d368532cfa8902c439777d526407bc95, type: 3}
+  openFlashSec: 0.1
   hideRevealedAtCloseStart: 1
   closeHideScaleSec: 0.15
   retractSec: 0.2

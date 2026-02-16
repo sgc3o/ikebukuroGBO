@@ -130,7 +130,7 @@ MonoBehaviour:
   hitVisual: {fileID: 5199783096404611223}
   missVisual: {fileID: 6723139331096880389}
   openVisual: {fileID: 244333471429037907}
-  openVisualDuration: 0.5
+  openVisualDuration: 0.1
   keepOpenVisualOnMiss: 0
   hitEffect: {fileID: 6123236051487104648}
   hitEffectAnimator: {fileID: 4741884822916577923}
