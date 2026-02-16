@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f153c2e82145a4488aa995d5e699c05, type: 3}
   m_Name: IpPack_02
   m_EditorClassIdentifier: 
-  logoSprite: {fileID: 21300000, guid: 43465a1c15394a84f9e5607c884daa55, type: 3}
+  logoSprite: {fileID: 21300000, guid: 75a062079734f724c83ca05e8f8bc655, type: 3}
   characterSprites:
   - {fileID: 21300000, guid: 4a80c5fcc7206814e8c22d94e7d15eca, type: 3}
   - {fileID: 21300000, guid: fc5d81161aaa1e7429b224c1748d49ac, type: 3}
