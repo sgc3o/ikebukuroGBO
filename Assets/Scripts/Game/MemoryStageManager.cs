@@ -552,7 +552,7 @@ public class MemoryStageManager : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
             if (items[i] != null) items[i].SetInteractable(value);
 
-        Debug.Log($"[MemoryStageManager] SetAllInteractable({value}) items={items?.Count}");
+        //Debug.Log($"[MemoryStageManager] SetAllInteractable({value}) items={items?.Count}");
     }
 
     private IEnumerator WaitPopupDone()

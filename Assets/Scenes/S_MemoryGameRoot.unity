@@ -834,7 +834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &557838772
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2003,8 +2003,11 @@ MonoBehaviour:
   popupImage: {fileID: 1964542007}
   gameStartSprite: {fileID: 21300000, guid: 66421806abbb2cf40a4bb152a038df0f, type: 3}
   finishSprite: {fileID: 21300000, guid: 0dfeed229cbe9154a962aae3ac3291d1, type: 3}
-  showSec: 1.5
+  showSec: 1
   fadeOutSec: 0.5
+  tapFadeOutSec: 0.15
+  tapToClose: 1
+  tapIgnoreSec: 0.05
 --- !u!223 &1126862406
 Canvas:
   m_ObjectHideFlags: 0

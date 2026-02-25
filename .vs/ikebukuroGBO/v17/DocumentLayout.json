@@ -3,40 +3,12 @@
   "WorkspaceRootPath": "D:\\Repository\\ikebukuroGBO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\TransitionController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Hub\\Scripts\\Game\\TransitionController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\EntryPoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Hub\\Scripts\\Game\\EntryPoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\HubEntryPoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Hub\\Scripts\\Game\\HubEntryPoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\ReturnToHubButton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Flow\\ReturnToHubButton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\HubBootRouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Flow\\HubBootRouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\UIPulseScale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\UIPulseScale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\UIIdlePulseScale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\UIIdlePulseScale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\MemoryPopupManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\MemoryPopupManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\MemoryStageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryCapsuleItem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\MemoryCapsuleItem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,116 +18,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "MemoryCapsuleItem.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryCapsuleItem.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\MemoryCapsuleItem.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryCapsuleItem.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Game\\MemoryCapsuleItem.cs",
-              "ViewState": "AgIAABoBAAAAAAAAAAAswF4BAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-09T07:57:12.447Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HubEntryPoint.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\HubEntryPoint.cs",
-              "RelativeDocumentMoniker": "Assets\\Hub\\Scripts\\Game\\HubEntryPoint.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\HubEntryPoint.cs",
-              "RelativeToolTip": "Assets\\Hub\\Scripts\\Game\\HubEntryPoint.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T09:36:00.529Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "EntryPoint.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\EntryPoint.cs",
-              "RelativeDocumentMoniker": "Assets\\Hub\\Scripts\\Game\\EntryPoint.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\EntryPoint.cs",
-              "RelativeToolTip": "Assets\\Hub\\Scripts\\Game\\EntryPoint.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T09:35:13.024Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "HubBootRouter.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\HubBootRouter.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\HubBootRouter.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\HubBootRouter.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Flow\\HubBootRouter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T08:47:02.175Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ReturnToHubButton.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\ReturnToHubButton.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\ReturnToHubButton.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\ReturnToHubButton.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Flow\\ReturnToHubButton.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T08:44:40.93Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UIPulseScale.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\UIPulseScale.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\UIPulseScale.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\UIPulseScale.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\UIPulseScale.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAkwAkAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T08:01:58.749Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UIIdlePulseScale.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\UIIdlePulseScale.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\UIIdlePulseScale.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\UIIdlePulseScale.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\UIIdlePulseScale.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T07:57:35.134Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TransitionController.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\TransitionController.cs",
-              "RelativeDocumentMoniker": "Assets\\Hub\\Scripts\\Game\\TransitionController.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\TransitionController.cs",
-              "RelativeToolTip": "Assets\\Hub\\Scripts\\Game\\TransitionController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T04:55:04.811Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "MemoryStageManager.cs",
               "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\MemoryStageManager.cs",
               "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "ViewState": "AgIAAA4DAAAAAAAAAAAswFIDAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoCAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T02:24:53.941Z"
+              "WhenOpened": "2026-02-25T11:52:02.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MemoryPopupManager.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\MemoryPopupManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\MemoryPopupManager.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\MemoryPopupManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UI\\MemoryPopupManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-25T11:37:36.995Z",
+              "EditorCaption": ""
             }
           ]
         }
