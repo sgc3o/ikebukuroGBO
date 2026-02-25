@@ -2056,6 +2056,7 @@ MonoBehaviour:
   titlePanel: {fileID: 1103215412}
   gameSelectPanel: {fileID: 55656830}
   confirmPanel: {fileID: 687430314}
+  gameSelectTargetId: GameSelectPanal
 --- !u!1 &796512205
 GameObject:
   m_ObjectHideFlags: 0
