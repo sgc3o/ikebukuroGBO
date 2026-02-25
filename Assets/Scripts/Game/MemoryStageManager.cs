@@ -362,6 +362,7 @@ public class MemoryStageManager : MonoBehaviour
     private void OnCapsuleClicked(MemoryCapsuleItem item)
     {
         if (state != State.Playing) return;
+        if (stageEnding) return;          // ★ 追加：終了確定後は入力を止める
         if (item == null) return;
         if (item.IsOpened) return;
 
@@ -370,17 +371,22 @@ public class MemoryStageManager : MonoBehaviour
 
     private IEnumerator HandleClick(MemoryCapsuleItem item)
     {
-        SetAllInteractable(false);
+        // ★ 全体を止めない。押した本人だけ止める
+        item.SetInteractable(false);
 
-        // ✅ Play中タップ：Gameplayルート（Flash優先、無ければOpenSeq）
+        // ★ 開く演出は従来通り待つ（ここは個別の処理として必要）
         yield return item.PlayRetractAndReveal();
+
+        if (stageEnding) yield break; // 途中でタイムアップ等が入った場合の保険
 
         if (item.IsCorrect)
         {
             remainingCorrect--;
             PlaySE(correctSE);
 
-            yield return PlayCorrectEffectAtItem(item);
+            // ★ ここが変更点：正解エフェクトを「待たない」で並列再生
+            if (correctEffectPlayer != null)
+                StartCoroutine(PlayCorrectEffectAtItem(item));
 
             if (remainingCorrect <= 0)
             {
@@ -391,16 +397,10 @@ public class MemoryStageManager : MonoBehaviour
         else
         {
             PlaySE(wrongSE);
-            // 不正解もCloseしない（キャラ出しっぱなし）
+            // 不正解は出しっぱなしならこのまま（再タップ不要なので interacable=false のままでOK）
         }
 
-        if (playRemainSec <= 0f)
-        {
-            stageEnding = true;
-            yield break;
-        }
-
-        SetAllInteractable(true);
+        // ★ 他のカプセルは最初から止めてないので、ここでSetAllInteractable(true)とかしない
     }
 
     private IEnumerator PlayCorrectEffectAtItem(MemoryCapsuleItem item)
