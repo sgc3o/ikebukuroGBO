@@ -75,6 +75,10 @@ public class StageManager : MonoBehaviour
     [Header("Popup")]
     [SerializeField] private PopupManager popup;
 
+
+    [Header("Finish Flow")]
+    [Tooltip("Finishポップアップ後、次のステージ表示/遷移まで待つ秒数（テンポ調整用）")]
+    [SerializeField, Min(0f)] private float afterFinishWaitSec = 0.2f;
     [Header("Spawn In Animation")]
     [SerializeField] private float spawnDuration = 1.0f;
     [SerializeField] private AnimationCurve moveEase = AnimationCurve.EaseInOut(0, 0, 1, 1);
@@ -267,8 +271,8 @@ public class StageManager : MonoBehaviour
 
     private IEnumerator AfterFinish(bool hasNext)
     {
-        // 既存と同じ固定秒。Popup側で管理したいなら差し替えOK
-        yield return new WaitForSeconds(2.4f);
+        // Inspectorで調整できる待ち（テンポ調整用）
+        yield return new WaitForSecondsRealtime(afterFinishWaitSec);
 
         if (hasNext)
         {
@@ -280,35 +284,41 @@ public class StageManager : MonoBehaviour
             SceneTransition.Go(pv04SceneName); // ★最後だけScene移動
         }
     }
+private IEnumerator StartStageFlow()
+{
+    EnableCapsuleInput(false);
 
-    private IEnumerator StartStageFlow()
+    if (popup != null && GameSession.I != null)
+        popup.ShowStage(GameSession.I.CurrentStage);
+
+    if (popup != null)
+        yield return new WaitUntil(() => !popup.IsShowing);
+
+    // Spawn演出は走らせたまま、次のポップアップ（GAME START）は即出す
+    // ただし「入力ON/タイマー開始」は Spawn演出が完了してから（従来挙動を維持）
+    float spawnStartUnscaled = Time.unscaledTime;
+    SpawnCapsules(totalCount);
+
+    if (popup != null)
     {
-        EnableCapsuleInput(false);
-
-        if (popup != null && GameSession.I != null)
-            popup.ShowStage(GameSession.I.CurrentStage);
-
-        if (popup != null)
-            yield return new WaitUntil(() => !popup.IsShowing);
-
-        SpawnCapsules(totalCount);
-
-        yield return new WaitForSeconds(spawnDuration);
-
-        if (popup != null)
-            popup.ShowGameStart();
-
-        if (popup != null)
-            yield return new WaitUntil(() => !popup.IsShowing);
-
-        EnableCapsuleInput(true);
-
-        if (timerGroup != null) timerGroup.SetActive(true);
-        StartTimer();
-        UpdateTimerText();
+        popup.ShowGameStart();
+        yield return new WaitUntil(() => !popup.IsShowing);
     }
 
-    private void SpawnCapsules(int total)
+    // ポップアップを即閉じした場合でも、Spawn演出の残り時間は待つ
+    float elapsed = Time.unscaledTime - spawnStartUnscaled;
+    float remaining = spawnDuration - elapsed;
+    if (remaining > 0f)
+        yield return new WaitForSecondsRealtime(remaining);
+
+    EnableCapsuleInput(true);
+
+    if (timerGroup != null) timerGroup.SetActive(true);
+    StartTimer();
+    UpdateTimerText();
+}
+
+private void SpawnCapsules(int total)
     {
         int actualTotal = total;
 

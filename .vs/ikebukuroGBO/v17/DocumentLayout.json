@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\Repository\\ikebukuroGBO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\MemoryPopupManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\MemoryPopupManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\ScreenFlowController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\MemoryStageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Game\\StageManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MemoryStageManager.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Game\\MemoryStageManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoCAAAKAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "ScreenFlowController.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\ScreenFlowController.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Game\\ScreenFlowController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T11:52:02.734Z",
+              "WhenOpened": "2026-02-26T02:55:30.751Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MemoryPopupManager.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\MemoryPopupManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\MemoryPopupManager.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\MemoryPopupManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\MemoryPopupManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "StageManager.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\StageManager.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Game\\StageManager.cs",
+              "ViewState": "AgIAAAYBAAAAAAAAAADwvycBAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T11:37:36.995Z",
+              "WhenOpened": "2026-02-26T02:54:32.903Z",
               "EditorCaption": ""
             }
           ]

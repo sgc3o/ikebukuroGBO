@@ -1740,6 +1740,7 @@ MonoBehaviour:
   stage1LimitSec: 10
   stage2LimitSec: 10
   popup: {fileID: 1989464983}
+  afterFinishWaitSec: 1
   spawnDuration: 1
   moveEase:
     serializedVersion: 2
@@ -3268,6 +3269,9 @@ MonoBehaviour:
   finishSprite: {fileID: 21300000, guid: c240813a9e37edc4f972769fc02d3e3a, type: 3}
   showSec: 2
   fadeOutSec: 0.35
+  tapFadeOutSec: 0.15
+  tapToClose: 1
+  tapIgnoreSec: 0.1
 --- !u!225 &1989464984
 CanvasGroup:
   m_ObjectHideFlags: 0
