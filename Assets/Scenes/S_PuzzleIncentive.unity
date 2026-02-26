@@ -725,6 +725,7 @@ GameObject:
   - component: {fileID: 1145441944}
   - component: {fileID: 1145441946}
   - component: {fileID: 1145441945}
+  - component: {fileID: 1145441947}
   m_Layer: 5
   m_Name: QRImage
   m_TagString: Untagged
@@ -771,7 +772,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 397b243bf0a15c6469ca4b61038fbef8, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -789,6 +790,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145441943}
   m_CullTransparentMesh: 1
+--- !u!114 &1145441947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145441943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23e3d453f56fc1438c3699ef404e9a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 1145441945}
+  resourcesPath: PuzzleIncentive/qr
+  namePrefix: qr_
+  chooseOnEnable: 1
+  persistAcrossSessions: 1
+  prefsKeyPrefix: PUZZLE_QR
 --- !u!1 &1321355340
 GameObject:
   m_ObjectHideFlags: 0

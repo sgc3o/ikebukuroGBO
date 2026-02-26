@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 397b243bf0a15c6469ca4b61038fbef8
+guid: 0efdc0100c9ce0c4890469017c2ad121
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 648877013811397798
-    second: PT04_Incentive_QR_0
+      213: 4614551870032918130
+    second: qr_00025_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PT04_Incentive_QR_0
+      name: qr_00025_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 90
+        width: 91
         height: 91
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a40527c436410900800000000000000
-      internalID: 648877013811397798
+      spriteID: 2763de21a7e2a0040800000000000000
+      internalID: 4614551870032918130
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PT04_Incentive_QR_0: 648877013811397798
+      qr_00025_0: 4614551870032918130
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
