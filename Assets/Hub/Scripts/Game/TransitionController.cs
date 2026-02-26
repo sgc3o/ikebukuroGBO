@@ -12,7 +12,7 @@ public class TransitionController : MonoBehaviour
     public GameStateManager gsm;
 
     [Header("Config")]
-    public float duration = 2f;
+    public float duration = 0.5f;
 
     [Header("Optional SE")]
     public AudioSource audioSource;
@@ -71,18 +71,18 @@ public class TransitionController : MonoBehaviour
             fadeCg.alpha = Mathf.Clamp01(t / duration);
             yield return null;
         }
-        fadeCg.alpha = 1f;
+        fadeCg.alpha = 0.2f;
 
         // 画面切替
         onSwitched?.Invoke();
 
         // 1 -> 0 (短めで戻す)
-        float back = 0.25f;
+        float back = 0.2f;
         t = 0f;
         while (t < back)
         {
             t += Time.deltaTime;
-            fadeCg.alpha = 1f - Mathf.Clamp01(t / back);
+            fadeCg.alpha = 0.5f - Mathf.Clamp01(t / back);
             yield return null;
         }
 

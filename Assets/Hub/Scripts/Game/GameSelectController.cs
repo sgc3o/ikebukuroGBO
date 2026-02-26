@@ -172,7 +172,7 @@ public class GameSelectController : MonoBehaviour, IEndDragHandler
         }
     }
 
-     // ★ FrameCard側のButton OnClickから呼ぶ（idx不要）
+    // ★ FrameCard側のButton OnClickから呼ぶ（idx不要）
     // ★ FrameCard側のButton OnClickから呼ぶ（idx不要）
     public void OnFrameConfirm()
     {
