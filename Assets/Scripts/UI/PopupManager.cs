@@ -1,13 +1,12 @@
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.U2D;
 using UnityEngine.UI;
+
 public class PopupManager : MonoBehaviour
 {
     [Header("Refs")]
-    [SerializeField] private CanvasGroup canvasGroup;// PopupLayerのCanvasGroup
-    [SerializeField] private Image popupImage;
+    [SerializeField] private CanvasGroup canvasGroup;   // PopupLayerのCanvasGroup
+    [SerializeField] private Image popupImage;          // 表示するImage
 
     [Header("Sprites")]
     [SerializeField] private Sprite stage1Sprite;
@@ -15,12 +14,24 @@ public class PopupManager : MonoBehaviour
     [SerializeField] private Sprite gameStartSprite;
     [SerializeField] private Sprite finishSprite;
 
-    [Header("Timing")]
-    [SerializeField] private float showSec = 2f;
-    [SerializeField] private float fadeOutSec = 0.35f;
+    [Header("Rule (Common)")]
+    [Tooltip("表示秒（この秒数で自動的に閉じる）")]
+    [SerializeField] private float showSec = 1.0f;
 
+    [Tooltip("自動で閉じるフェード秒（0なら即消し）")]
+    [SerializeField] private float fadeOutSec = 0.5f;
 
-    Coroutine routine;
+    [Tooltip("タップで閉じる時のフェード秒（0なら即消し）")]
+    [SerializeField] private float tapFadeOutSec = 0.15f;
+
+    [Tooltip("表示中に1タップで即閉じする（タップした瞬間に次の処理へ進める用）")]
+    [SerializeField] private bool tapToClose = true;
+
+    [Tooltip("表示直後、この秒数だけタップを無視（直前のタップ貫通事故防止）")]
+    [SerializeField] private float tapIgnoreSec = 0.1f;
+
+    private Coroutine routine;
+    private float shownAtUnscaledTime;
 
     public bool IsShowing
     {
@@ -33,30 +44,36 @@ public class PopupManager : MonoBehaviour
         }
     }
 
-
     private void Reset()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+        popupImage = GetComponentInChildren<Image>(true);
     }
 
     private void Awake()
     {
-        if (canvasGroup != null)
-        {
-            canvasGroup.alpha = 0f;
-            canvasGroup.blocksRaycasts = false;
-            canvasGroup.interactable = false;
-        }
-        if (popupImage != null) popupImage.enabled = false;
-        //isShowing = false;
+        HideImmediate();
+    }
 
+    private void Update()
+    {
+        if (!tapToClose) return;
+        if (!IsShowing) return;
+
+        // 表示直後のタップ貫通を抑制
+        if (Time.unscaledTime - shownAtUnscaledTime < tapIgnoreSec) return;
+
+        // タッチでもMouseとして入ってくる想定
+        if (Input.GetMouseButtonDown(0))
+        {
+            Close();
+        }
     }
 
     public void ShowStage(int stageIndex)
     {
         var sp = (stageIndex <= 1) ? stage1Sprite : stage2Sprite;
         Show(sp);
-
     }
 
     public void ShowGameStart() => Show(gameStartSprite);
@@ -72,49 +89,97 @@ public class PopupManager : MonoBehaviour
 
         if (routine != null) StopCoroutine(routine);
         routine = StartCoroutine(ShowRoutine(sprite));
-
     }
 
-    IEnumerator ShowRoutine(Sprite sprite)
+    private IEnumerator ShowRoutine(Sprite sprite)
     {
-        //isShowing = true;
-
+        shownAtUnscaledTime = Time.unscaledTime;
 
         popupImage.sprite = sprite;
         popupImage.SetNativeSize();
         popupImage.enabled = true;
 
         canvasGroup.alpha = 1f;
+
+        // 下を触れないようにブロック（タップで閉じるのは Update で拾う）
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = false;
 
-        yield return new WaitForSeconds(showSec);
+        // timeScale=0でも進むようにRealTime
+        if (showSec > 0f)
+            yield return new WaitForSecondsRealtime(showSec);
+
+        // 自動クローズ
+        yield return FadeOutRealtime(fadeOutSec);
+
+        HideImmediate();
+        routine = null;
+    }
+
+    private IEnumerator FadeOutRealtime(float sec)
+    {
+        sec = Mathf.Max(0f, sec);
+        if (sec <= 0f)
+        {
+            canvasGroup.alpha = 0f;
+            yield break;
+        }
 
         float t = 0f;
         float startA = canvasGroup.alpha;
-        while (t < fadeOutSec)
+
+        while (t < sec)
         {
-            t += Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(startA, 0f, t / fadeOutSec);
+            t += Time.unscaledDeltaTime;
+            float k = Mathf.Clamp01(t / sec);
+            canvasGroup.alpha = Mathf.Lerp(startA, 0f, k);
             yield return null;
         }
+
         canvasGroup.alpha = 0f;
-        popupImage.enabled = false;
-        routine = null;
-
-        //isShowing = false;
-
-
     }
 
+    /// <summary>
+    /// 表示中にタップされた時など、即時クローズしたい時に呼ぶ。
+    /// 既存の yield return ShowAndWait(...) 互換：Stopされたら待ちが解除される。
+    /// </summary>
+    public void Close()
+    {
+        if (!IsShowing) return;
+
+        // 進行中の自動表示ルーチンを止めて、今からフェードして閉じる
+        if (routine != null)
+        {
+            StopCoroutine(routine);
+            routine = null;
+        }
+
+        StartCoroutine(CloseRoutine());
+    }
+
+    private IEnumerator CloseRoutine()
+    {
+        yield return FadeOutRealtime(tapFadeOutSec);
+        HideImmediate();
+    }
+
+    private void HideImmediate()
+    {
+        if (canvasGroup != null)
+        {
+            canvasGroup.alpha = 0f;
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.interactable = false;
+        }
+
+        if (popupImage != null)
+            popupImage.enabled = false;
+    }
+
+    // ---- 既存互換（StageManagerが owner で回してても壊れないようにする） ----
     public Coroutine ShowAndWait(Sprite sprite, MonoBehaviour owner)
     {
-        if (routine != null) owner.StopCoroutine(routine);
-        routine = owner.StartCoroutine(ShowRoutine(sprite));
+        Show(sprite);
         return routine;
     }
-
-
-    
 }
-
