@@ -46,7 +46,7 @@ public class LogicalUiClicker : MonoBehaviour
                 var btn = RaycastButtonAtLogical(touch.LogicalPosition);
                 _pressedButton = btn;
 
-                if (debugLog) Debug.Log($"[Clicker] DOWN btn={(_pressedButton ? _pressedButton.name : "null")}");
+                //if (debugLog) Debug.Log($"[Clicker] DOWN btn={(_pressedButton ? _pressedButton.name : "null")}");
             }
         }
 

@@ -91,6 +91,9 @@ public class TransitionController : MonoBehaviour
         // 切替処理
         onSwitched?.Invoke();
 
+        // ★これを入れる
+        yield return null;
+
         // targetAlpha -> 0（フェードイン）
         yield return FadeAlpha(targetAlpha, 0f, fadeInSeconds);
 

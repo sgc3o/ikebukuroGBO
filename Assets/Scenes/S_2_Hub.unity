@@ -714,7 +714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -753,7 +753,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TransitionController
   fadeCg: {fileID: 110701224}
   gsm: {fileID: 1878279323}
-  duration: 2
+  fadeOutSeconds: 0.25
+  fadeInSeconds: 0.25
+  holdSeconds: 0.1
+  targetAlpha: 1
+  useUnscaledTime: 1
+  blockInputDuringFade: 1
   audioSource: {fileID: 0}
   se: {fileID: 0}
 --- !u!1 &130549214

@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\Repository\\ikebukuroGBO\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\TransitionController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Hub\\Scripts\\Game\\TransitionController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\LogicalUIClicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Hub\\Scripts\\Game\\LogicalUIClicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\RandomQrImageBag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Incentive\\RandomQrImageBag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,19 +35,43 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RandomQrImageBag.cs",
-              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\RandomQrImageBag.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Incentive\\RandomQrImageBag.cs",
-              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\RandomQrImageBag.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Incentive\\RandomQrImageBag.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACEAAAAxAAAAAAAAAA==",
+              "Title": "TransitionController.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\TransitionController.cs",
+              "RelativeDocumentMoniker": "Assets\\Hub\\Scripts\\Game\\TransitionController.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\TransitionController.cs",
+              "RelativeToolTip": "Assets\\Hub\\Scripts\\Game\\TransitionController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T04:34:45Z",
+              "WhenOpened": "2026-02-27T04:57:09.718Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "LogicalUIClicker.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\LogicalUIClicker.cs",
+              "RelativeDocumentMoniker": "Assets\\Hub\\Scripts\\Game\\LogicalUIClicker.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\LogicalUIClicker.cs",
+              "RelativeToolTip": "Assets\\Hub\\Scripts\\Game\\LogicalUIClicker.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAADwvzAAAABxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-27T04:46:53.623Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RandomQrImageBag.cs",
+              "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\RandomQrImageBag.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Incentive\\RandomQrImageBag.cs",
+              "ToolTip": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Incentive\\RandomQrImageBag.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Incentive\\RandomQrImageBag.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAADwv3kAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T04:34:45Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ScreenFlowController.cs",
               "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\ScreenFlowController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\ScreenFlowController.cs",
@@ -51,7 +83,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "StageManager.cs",
               "DocumentMoniker": "D:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Game\\StageManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\StageManager.cs",
