@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Repository\\ikebukuroGBO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\AutoMoveToGo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Hub\\Scripts\\AutoMoveToGo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\IdleRecoveryManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\SceneTransition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Flow\\SceneTransition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\AutoMoveToGo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Hub\\Scripts\\AutoMoveToGo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\SceneTransition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Flow\\SceneTransition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\Game\\LogicalUIClicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,20 +46,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "IdleRecoveryPopupController.cs",
               "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
               "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
               "RelativeToolTip": "Assets\\Scripts\\UI\\IdleRecoveryPopupController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAswKQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-02T06:52:02.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-02T06:52:02.238Z"
             },
             {
               "$type": "Document",
@@ -69,14 +68,13 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
               "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\UI\\IdleRecoveryManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAswLsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-02T03:47:45.767Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-02T03:47:45.767Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "SceneTransition.cs",
               "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Scripts\\Flow\\SceneTransition.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Flow\\SceneTransition.cs",
@@ -88,15 +86,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "AutoMoveToGo.cs",
               "DocumentMoniker": "C:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\AutoMoveToGo.cs",
               "RelativeDocumentMoniker": "Assets\\Hub\\Scripts\\AutoMoveToGo.cs",
               "ToolTip": "C:\\Repository\\ikebukuroGBO\\Assets\\Hub\\Scripts\\AutoMoveToGo.cs",
               "RelativeToolTip": "Assets\\Hub\\Scripts\\AutoMoveToGo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-27T06:11:42.834Z"
+              "WhenOpened": "2026-02-27T06:11:42.834Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
