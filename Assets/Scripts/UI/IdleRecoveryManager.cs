@@ -21,6 +21,19 @@ public class IdleRecoveryManager : MonoBehaviour
     [Header("Popup Prefab")]
     [SerializeField] private IdleRecoveryPopupController popupPrefab;
 
+    // ★追加：抑制（Hub TitlePanelだけ想定の最小実装）
+    [Header("Suppress Popup (Hub Title Only)")]
+    [SerializeField] private bool suppressOnTitlePanel = true;
+
+    // TitlePanelが SetActive 運用ならこれだけでOK
+    [SerializeField] private GameObject titlePanelObject;
+
+    // TitlePanelが CanvasGroup.alpha 運用ならこちら（あれば優先で判定）
+    [SerializeField] private CanvasGroup titlePanelCanvasGroup;
+
+    // CanvasGroup の表示判定用
+    [SerializeField] private float titleVisibleAlphaThreshold = 0.01f;
+
     // ---- runtime ----
     private float idleTimer = 0f;
 
@@ -70,6 +83,13 @@ public class IdleRecoveryManager : MonoBehaviour
         idleTimer += dt;
         if (idleTimer >= idleToPopupSeconds)
         {
+            // ★追加：TitlePanel中は出さない（ただしタイマーはリセットして再判定）
+            if (ShouldSuppressPopup())
+            {
+                ResetIdleTimer();
+                return;
+            }
+
             ShowPopup();
         }
     }
@@ -77,6 +97,28 @@ public class IdleRecoveryManager : MonoBehaviour
     private void ResetIdleTimer()
     {
         idleTimer = 0f;
+    }
+
+    // ★追加：抑制判定
+    private bool ShouldSuppressPopup()
+    {
+        if (!suppressOnTitlePanel) return false;
+
+        // CanvasGroupが指定されていればalphaで判定（透明Activeの罠を回避）
+        if (titlePanelCanvasGroup != null)
+        {
+            if (!titlePanelCanvasGroup.gameObject.activeInHierarchy) return false;
+            return titlePanelCanvasGroup.alpha > titleVisibleAlphaThreshold;
+        }
+
+        // GameObject指定ならActiveで判定（SetActive運用向け）
+        if (titlePanelObject != null)
+        {
+            return titlePanelObject.activeInHierarchy;
+        }
+
+        // 指定が無いなら抑制しない
+        return false;
     }
 
     private void ShowPopup()
