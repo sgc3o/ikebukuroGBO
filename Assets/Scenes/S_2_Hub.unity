@@ -911,8 +911,16 @@ PrefabInstance:
       value: S_2_Hub
       objectReference: {fileID: 0}
     - target: {fileID: 5646032921471841825, guid: 9a50b4e8f4fdf214aa72634e124cf8cb, type: 3}
+      propertyPath: titlePanelObject
+      value: 
+      objectReference: {fileID: 1103215412}
+    - target: {fileID: 5646032921471841825, guid: 9a50b4e8f4fdf214aa72634e124cf8cb, type: 3}
       propertyPath: idleToPopupSeconds
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5646032921471841825, guid: 9a50b4e8f4fdf214aa72634e124cf8cb, type: 3}
+      propertyPath: suppressOnTitlePanel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5835321990563510644, guid: 9a50b4e8f4fdf214aa72634e124cf8cb, type: 3}
       propertyPath: m_Name
