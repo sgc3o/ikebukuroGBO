@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: IpPack_03
   m_EditorClassIdentifier: 
   logoSprite: {fileID: 21300000, guid: bfdc72f6514275c44ab2fdefb9c13f39, type: 3}
+  copyrightSprite: {fileID: 21300000, guid: f8c4bda114b1e1d4c8222bac86f7a664, type: 3}
   characterSprites:
   - {fileID: 21300000, guid: 52bbcae8abb8b3b479fa016f0bc29040, type: 3}
   - {fileID: 21300000, guid: fa2b4eee134c863418aebc18c830506e, type: 3}
