@@ -58,6 +58,9 @@ public class MemoryStageManager : MonoBehaviour
     [SerializeField] private Image missionLogoImage;
     [SerializeField] private Image memorizeLogoImage;
     [SerializeField] private Image playLogoImage;
+    [SerializeField] private Image missionCopyrightImage;
+    [SerializeField] private Image memorizeCopyrightImage;
+    // [SerializeField] private Image playCopyrightImage;
 
     [Header("UI Refs")]
     [SerializeField] private CountdownUI missionCountdownUI;
@@ -156,6 +159,10 @@ public class MemoryStageManager : MonoBehaviour
         Debug.Log($"[MemoryStageManager] BeginStage idx={currentStageIndex} correctCount={cfg.correctCount} remainingCorrect={remainingCorrect}");
 
         ShowOnly(missionIntroPanel);
+
+        ApplyBrandingImage(missionLogoImage, missionLogoImage != null ? missionLogoImage.sprite : null);
+        ApplyBrandingImage(missionCopyrightImage, missionCopyrightImage != null ? missionCopyrightImage.sprite : null);
+
         ApplyStageBadge(currentStageIndex);
 
         if (targetCharaImage != null)
@@ -624,6 +631,15 @@ public class MemoryStageManager : MonoBehaviour
         return null;
     }
 
+    private Image GetCopyrightImageForPanel(GameObject panel)
+    {
+        if (panel == null) return null;
+        if (panel == missionIntroPanel) return missionCopyrightImage;
+        if (panel == memorizePanel) return memorizeCopyrightImage;
+        //  if (panel == gamePlayPanel) return playCopyrightImage;
+        return null;
+    }
+
     private CanvasGroup GetOrAddCanvasGroup(Component c)
     {
         if (c == null) return null;
@@ -638,13 +654,36 @@ public class MemoryStageManager : MonoBehaviour
         var from = GetOrAddCanvasGroup(fromPanel);
         var to = GetOrAddCanvasGroup(toPanel);
 
+        // --- Logo ---
         var fromLogoImg = GetLogoImageForPanel(fromPanel);
         var toLogoImg = GetLogoImageForPanel(toPanel);
         var fromLogo = GetOrAddCanvasGroup(fromLogoImg);
         var toLogo = GetOrAddCanvasGroup(toLogoImg);
 
+        // --- Copyright ---
+        var fromCrImg = GetCopyrightImageForPanel(fromPanel);
+        var toCrImg = GetCopyrightImageForPanel(toPanel);
+        var fromCr = GetOrAddCanvasGroup(fromCrImg);
+        var toCr = GetOrAddCanvasGroup(toCrImg);
+
+        // to側を先にON
         if (toPanel != null) toPanel.SetActive(true);
         if (toLogoImg != null) toLogoImg.gameObject.SetActive(true);
+        if (toCrImg != null) toCrImg.gameObject.SetActive(true);
+
+        // 初期化
+        if (to != null)
+        {
+            to.alpha = 0f;
+            to.interactable = false;
+            to.blocksRaycasts = false;
+        }
+        if (from != null)
+        {
+            from.alpha = 1f;
+            from.interactable = false;
+            from.blocksRaycasts = false;
+        }
 
         if (toLogo != null)
         {
@@ -659,29 +698,35 @@ public class MemoryStageManager : MonoBehaviour
             fromLogo.blocksRaycasts = false;
         }
 
-        if (to != null)
+        if (toCr != null)
         {
-            to.alpha = 0f;
-            to.interactable = false;
-            to.blocksRaycasts = false;
+            toCr.alpha = 0f;
+            toCr.interactable = false;
+            toCr.blocksRaycasts = false;
         }
-        if (from != null)
+        if (fromCr != null)
         {
-            from.alpha = 1f;
-            from.interactable = false;
-            from.blocksRaycasts = false;
+            fromCr.alpha = 1f;
+            fromCr.interactable = false;
+            fromCr.blocksRaycasts = false;
         }
 
+        // --- sec <= 0f : 即切替の後始末（あなたが迷ってた箇所その1）---
         if (sec <= 0f)
         {
             if (fromPanel != null) fromPanel.SetActive(false);
-            if (fromLogoImg != null) fromLogoImg.gameObject.SetActive(false);
 
             if (toLogo != null)
             {
                 toLogo.alpha = 1f;
                 toLogo.interactable = true;
                 toLogo.blocksRaycasts = true;
+            }
+            if (toCr != null)
+            {
+                toCr.alpha = 1f;
+                toCr.interactable = true;
+                toCr.blocksRaycasts = true;
             }
             if (to != null)
             {
@@ -692,6 +737,7 @@ public class MemoryStageManager : MonoBehaviour
             yield break;
         }
 
+        // フェード（あなたが迷ってた箇所その2：ループ内で同期）
         float t = 0f;
         while (t < sec)
         {
@@ -700,22 +746,35 @@ public class MemoryStageManager : MonoBehaviour
 
             if (from != null) from.alpha = Mathf.Lerp(1f, 0f, k);
             if (to != null) to.alpha = Mathf.Lerp(0f, 1f, k);
+
             if (fromLogo != null) fromLogo.alpha = Mathf.Lerp(1f, 0f, k);
             if (toLogo != null) toLogo.alpha = Mathf.Lerp(0f, 1f, k);
+
+            if (fromCr != null) fromCr.alpha = Mathf.Lerp(1f, 0f, k);
+            if (toCr != null) toCr.alpha = Mathf.Lerp(0f, 1f, k);
 
             yield return null;
         }
 
+        // 終了後の後始末（あなたが迷ってた箇所その3）
         if (from != null) from.alpha = 0f;
         if (fromPanel != null) fromPanel.SetActive(false);
+
         if (fromLogo != null) fromLogo.alpha = 0f;
-        if (fromLogoImg != null) fromLogoImg.gameObject.SetActive(false);
+
+        if (fromCr != null) fromCr.alpha = 0f;
 
         if (toLogo != null)
         {
             toLogo.alpha = 1f;
             toLogo.interactable = true;
             toLogo.blocksRaycasts = true;
+        }
+        if (toCr != null)
+        {
+            toCr.alpha = 1f;
+            toCr.interactable = true;
+            toCr.blocksRaycasts = true;
         }
         if (to != null)
         {
@@ -829,22 +888,40 @@ public class MemoryStageManager : MonoBehaviour
 
     private void ApplyIpLogo(MemoryIpPack pack)
     {
-        Sprite s = (pack != null) ? pack.LogoSprite : null;
+        Sprite logo = (pack != null) ? pack.LogoSprite : null;
+        Sprite cr = (pack != null) ? pack.CopyrightSprite : null;
 
-        if (missionLogoImage != null)
+        ApplyBrandingImage(missionLogoImage, logo);
+        ApplyBrandingImage(memorizeLogoImage, logo);
+        ApplyBrandingImage(playLogoImage, logo);
+
+        ApplyBrandingImage(missionCopyrightImage, cr);
+        ApplyBrandingImage(memorizeCopyrightImage, cr);
+        // playは使わない運用なら、ここは memorize を使う/または null のままでもOK
+       // ApplyBrandingImage(playCopyrightImage, cr);
+    }
+
+    private void ApplyBrandingImage(Image img, Sprite sprite)
+    {
+        if (img == null) return;
+
+        // GameObjectがOFFになってても必ず復帰
+        img.gameObject.SetActive(true);
+
+        img.sprite = sprite;
+        img.enabled = (sprite != null);
+
+        // ★これが今回の本丸：CrossFadeで落としたalphaを必ず戻す
+        var cg = img.GetComponent<CanvasGroup>();
+        if (cg != null)
         {
-            missionLogoImage.sprite = s;
-            missionLogoImage.enabled = (s != null);
+            cg.alpha = 1f;
+            cg.interactable = false;
+            cg.blocksRaycasts = false;
         }
-        if (memorizeLogoImage != null)
-        {
-            memorizeLogoImage.sprite = s;
-            memorizeLogoImage.enabled = (s != null);
-        }
-        if (playLogoImage != null)
-        {
-            playLogoImage.sprite = s;
-            playLogoImage.enabled = (s != null);
-        }
+
+        // 念のため色の透明も戻す（稀にColor.aが0にされてる事故対策）
+        var c = img.color;
+        if (c.a < 0.99f) img.color = new Color(c.r, c.g, c.b, 1f);
     }
 }
