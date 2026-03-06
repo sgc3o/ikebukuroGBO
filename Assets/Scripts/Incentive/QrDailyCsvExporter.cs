@@ -27,6 +27,10 @@ public static class QrDailyCsvExporter
         string filePath = Path.Combine(dir, $"qr_daily_{targetDate}.csv");
 
         var sb = new StringBuilder();
+
+        // ----------------------------------------
+        // 1) 機械向けの集計表
+        // ----------------------------------------
         sb.AppendLine("Date,GameKey,TodayCount,StartIndex,EndIndex,NextIndex,LastDayMaxCount");
 
         if (state.games != null)
@@ -42,6 +46,32 @@ public static class QrDailyCsvExporter
                 sb.Append(game.todayEndIndex).Append(",");
                 sb.Append(game.nextIndex).Append(",");
                 sb.Append(game.lastDayMaxCount);
+                sb.AppendLine();
+            }
+        }
+
+        // 空行
+        sb.AppendLine();
+
+        // ----------------------------------------
+        // 2) 人向けの日本語サマリー
+        // ----------------------------------------
+        sb.AppendLine("--------------------------------------------------");
+        sb.AppendLine($"集計日：{targetDate}");
+        sb.AppendLine();
+
+        if (state.games != null)
+        {
+            foreach (var game in state.games)
+            {
+                if (game == null) continue;
+
+                sb.AppendLine($"【{ToJapaneseGameName(game.gameKey)}】");
+                sb.AppendLine($"当日のQR表示回数：{game.todayCount}");
+                sb.AppendLine($"当日最初に表示したQR番号：{game.todayStartIndex}");
+                sb.AppendLine($"当日最後に表示したQR番号：{game.todayEndIndex}");
+                sb.AppendLine($"次回表示予定のQR番号：{game.nextIndex}");
+                sb.AppendLine($"過去1日あたり最大表示回数：{game.lastDayMaxCount}");
                 sb.AppendLine();
             }
         }
@@ -76,5 +106,25 @@ public static class QrDailyCsvExporter
         }
 
         return value;
+    }
+
+    private static string ToJapaneseGameName(string gameKey)
+    {
+        if (string.IsNullOrWhiteSpace(gameKey))
+        {
+            return "不明";
+        }
+
+        switch (gameKey.Trim().ToLowerInvariant())
+        {
+            case "memory":
+                return "ガシャポンメモリーゲーム";
+
+            case "puzzle":
+                return "たまごっちのガシャポンかくれんぼ";
+
+            default:
+                return gameKey;
+        }
     }
 }
