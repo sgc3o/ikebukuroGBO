@@ -27,6 +27,11 @@ public class QrStatusOverlay : MonoBehaviour
     [SerializeField] private bool showDeveloperControls = true;
     [SerializeField] private string developerButtonLabel = "【開発確認用】CSVを今すぐ出力";
 
+    [Header("Reset Controls")]
+    [SerializeField] private Button resetMemoryButton;
+    [SerializeField] private Button resetPuzzleButton;
+    [SerializeField] private QrResetConfirmPopup resetPopup;
+
     private float timer;
 
     private void Awake()
@@ -53,6 +58,16 @@ public class QrStatusOverlay : MonoBehaviour
         if (exportNowButtonLabel != null)
         {
             exportNowButtonLabel.text = developerButtonLabel;
+        }
+
+        if (resetMemoryButton != null)
+        {
+            resetMemoryButton.onClick.AddListener(OnClickResetMemory);
+        }
+
+        if (resetPuzzleButton != null)
+        {
+            resetPuzzleButton.onClick.AddListener(OnClickResetPuzzle);
         }
 
         RefreshView();
@@ -218,4 +233,25 @@ public class QrStatusOverlay : MonoBehaviour
                 return gameKey;
         }
     }
+
+    private void OnClickResetMemory()
+    {
+        if (resetPopup == null) return;
+
+        resetPopup.Show("ガシャポンメモリーゲーム", () =>
+        {
+            Debug.Log("Memory reset requested (Step4で実装)");
+        });
+    }
+
+    private void OnClickResetPuzzle()
+    {
+        if (resetPopup == null) return;
+
+        resetPopup.Show("たまごっちのガシャポンかくれんぼ", () =>
+        {
+            Debug.Log("Puzzle reset requested (Step4で実装)");
+        });
+    }
+
 }
