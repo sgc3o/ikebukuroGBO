@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class QrUsageManager : MonoBehaviour
 {
@@ -301,5 +302,64 @@ public class QrUsageManager : MonoBehaviour
     private string GetTodayString()
     {
         return DateTime.Now.ToString("yyyy-MM-dd");
+    }
+
+    public QrGameUsageState GetGameStateCopy(string gameKey)
+    {
+        EnsureTodayInitialized();
+        TryFinalizePreviousDayIfNeeded();
+
+        var game = GetOrCreateGameState(gameKey);
+        if (game == null) return null;
+
+        return new QrGameUsageState
+        {
+            gameKey = game.gameKey,
+            nextIndex = game.nextIndex,
+            todayCount = game.todayCount,
+            todayStartIndex = game.todayStartIndex,
+            todayEndIndex = game.todayEndIndex,
+            lastDayMaxCount = game.lastDayMaxCount
+        };
+    }
+
+    public string GetTodayDate()
+    {
+        EnsureTodayInitialized();
+        return state != null ? state.todayDate : "";
+    }
+
+    public string GetJsonFilePath()
+    {
+        return QrUsagePersistence.GetFilePath();
+    }
+
+    public string GetCsvOutputDirectory()
+    {
+        if (string.IsNullOrWhiteSpace(outputDirectory))
+        {
+            return Path.Combine(Application.persistentDataPath, "QRLogs");
+        }
+
+        if (Path.IsPathRooted(outputDirectory))
+        {
+            return outputDirectory;
+        }
+
+        return Path.Combine(Application.persistentDataPath, outputDirectory);
+    }
+
+    public string ExportTodayCsvNow()
+    {
+        EnsureTodayInitialized();
+        TryFinalizePreviousDayIfNeeded();
+
+        string today = GetTodayString();
+        string path = QrDailyCsvExporter.ExportDailySummary(state, today, outputDirectory);
+
+        state.lastAutoExportDate = today;
+        SaveState();
+
+        return path;
     }
 }
