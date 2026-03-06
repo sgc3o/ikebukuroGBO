@@ -12,6 +12,7 @@ public class IncentiveSceneController_Single : MonoBehaviour, IReturnConfirmOwne
     [SerializeField] private GameObject introRoot;
     [SerializeField] private VideoPlayer introVideoPlayer;
     [SerializeField] private float introFallbackSec = 1.0f;
+    [SerializeField] private bool useIntro = false;
 
     [Header("QR Popup")]
     [SerializeField] private CanvasGroup qrPopupCg;
@@ -27,12 +28,24 @@ public class IncentiveSceneController_Single : MonoBehaviour, IReturnConfirmOwne
     [Header("ポップアップ中のIdleRecovery機能させない")]
     [SerializeField] private IdleRecoveryIncentiveGuard idleGuard;
 
-
     private void Awake()
     {
         ShowCg(qrPopupCg, false);
-        if (raycastBlockerCg != null) ShowCg(raycastBlockerCg, false);
-        if (confirmPopup != null) confirmPopup.HideImmediate();
+
+        if (raycastBlockerCg != null)
+        {
+            ShowCg(raycastBlockerCg, false);
+        }
+
+        if (confirmPopup != null)
+        {
+            confirmPopup.HideImmediate();
+        }
+
+        if (introRoot != null)
+        {
+            introRoot.SetActive(false);
+        }
     }
 
     private void Start()
@@ -52,12 +65,33 @@ public class IncentiveSceneController_Single : MonoBehaviour, IReturnConfirmOwne
     {
         if (config == null) return;
 
-        if (qrImage != null) qrImage.sprite = config.qrSprite;
-        // VideoClipは再生時にセットする
+        Sprite sprite = QrUsageManager.Instance.GetNextQrSprite(config.gameKey);
+
+        if (qrImage != null)
+        {
+            if (sprite != null)
+            {
+                qrImage.sprite = sprite;
+            }
+            else if (config.qrSprite != null)
+            {
+                // 念のためのフォールバック
+                qrImage.sprite = config.qrSprite;
+            }
+        }
     }
 
     private IEnumerator RunFlow()
     {
+        if (!useIntro)
+        {
+            if (introRoot != null) introRoot.SetActive(false);
+            if (raycastBlockerCg != null) ShowCg(raycastBlockerCg, false);
+
+            ShowCg(qrPopupCg, true);
+            yield break;
+        }
+
         if (raycastBlockerCg != null) ShowCg(raycastBlockerCg, true);
 
         if (introRoot != null) introRoot.SetActive(true);
@@ -94,16 +128,18 @@ public class IncentiveSceneController_Single : MonoBehaviour, IReturnConfirmOwne
 
         yield return new WaitForSeconds(length);
     }
+
     private void ShowConfirm()
     {
         idleGuard?.Suspend();
-        // QRは表示のまま（見せたい）
+
+        // QRは表示のまま
         if (qrPopupCg != null)
         {
             if (!qrPopupCg.gameObject.activeSelf) qrPopupCg.gameObject.SetActive(true);
             qrPopupCg.alpha = 1f;
             qrPopupCg.interactable = false;
-            qrPopupCg.blocksRaycasts = false; // ←押せなくする
+            qrPopupCg.blocksRaycasts = false;
         }
 
         int sec = (config != null) ? config.timeoutSeconds : 120;
@@ -113,14 +149,12 @@ public class IncentiveSceneController_Single : MonoBehaviour, IReturnConfirmOwne
             if (!confirmPopup.gameObject.activeSelf) confirmPopup.gameObject.SetActive(true);
             confirmPopup.Show(this, sec);
         }
-        confirmPopup.Show(this, sec);
     }
 
-
-    // IReturnConfirmOwner
     public void ReturnToHub()
     {
         idleGuard?.Resume();
+
         string scene = (config != null && !string.IsNullOrEmpty(config.returnSceneName))
             ? config.returnSceneName
             : "S_GashaponHub";
@@ -131,14 +165,13 @@ public class IncentiveSceneController_Single : MonoBehaviour, IReturnConfirmOwne
     public void ClosePopupAndResume()
     {
         idleGuard?.Resume();
+
         if (qrPopupCg != null)
         {
             qrPopupCg.interactable = true;
             qrPopupCg.blocksRaycasts = true;
         }
     }
-
-
 
     private static void ShowCg(CanvasGroup cg, bool show)
     {

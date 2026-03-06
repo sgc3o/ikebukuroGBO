@@ -249,6 +249,10 @@ MonoBehaviour:
   hubSceneName: S_2_Hub
   useUnscaledTime: 1
   popupPrefab: {fileID: 5141775677277404603, guid: 5498f271f6c5d3048b9ee5d73fc46c91, type: 3}
+  suppressOnTitlePanel: 1
+  titlePanelObject: {fileID: 0}
+  titlePanelCanvasGroup: {fileID: 0}
+  titleVisibleAlphaThreshold: 0.01
 --- !u!1001 &265095822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -626,7 +630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &783329742
 RectTransform:
   m_ObjectHideFlags: 0
