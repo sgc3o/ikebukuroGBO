@@ -3217,6 +3217,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401315734}
   m_CullTransparentMesh: 1
+--- !u!1 &1473799139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1473799141}
+  - component: {fileID: 1473799140}
+  m_Layer: 0
+  m_Name: QrUsageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1473799140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473799139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efcd45fdd5661504b9fe8cf2c59aa5d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSettings:
+  - gameKey: Memory
+    resourcesFolder: MemoryIncentive/qr
+    maxQrCount: 10000
+  - gameKey: Puzzle
+    resourcesFolder: PuzzleIncentive/qr
+    maxQrCount: 10000
+  exportHour: 21
+  exportMinute: 10
+  outputDirectory: QRLogs
+  clockCheckIntervalSeconds: 5
+--- !u!4 &1473799141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473799139}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 288, y: 288, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1483672661
 GameObject:
   m_ObjectHideFlags: 0
@@ -5331,3 +5386,4 @@ SceneRoots:
   - {fileID: 1381065035}
   - {fileID: 397158994878633999}
   - {fileID: 1878279322}
+  - {fileID: 1473799141}

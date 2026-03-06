@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class IncentiveSceneController_Single : MonoBehaviour, IReturnConfirmOwner
+public class IncentiveSceneController : MonoBehaviour, IReturnConfirmOwner
 {
     [Header("Config (‚±‚ÌƒV[ƒ“ê—p‚ğ1‚Âh‚·)")]
     [SerializeField] private IncentiveConfig config;

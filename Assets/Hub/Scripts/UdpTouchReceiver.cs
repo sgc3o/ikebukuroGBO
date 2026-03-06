@@ -85,7 +85,7 @@ public class UdpTouchReceiver : MonoBehaviour
         if (phase != _prevPhase)
         {
             _prevPhase = phase;
-            Debug.Log($"[OSC RECV] {lastRaw} isDown={isDown}");
+           //Debug.Log($"[OSC RECV] {lastRaw} isDown={isDown}");
         }
 
         // （任意）このGameObjectを動かしたいなら
