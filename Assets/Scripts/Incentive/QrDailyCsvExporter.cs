@@ -28,9 +28,6 @@ public static class QrDailyCsvExporter
 
         var sb = new StringBuilder();
 
-        // ----------------------------------------
-        // 1) 機械向けの集計表
-        // ----------------------------------------
         sb.AppendLine("Date,GameKey,TodayCount,StartIndex,EndIndex,NextIndex,LastDayMaxCount");
 
         if (state.games != null)
@@ -50,12 +47,7 @@ public static class QrDailyCsvExporter
             }
         }
 
-        // 空行
         sb.AppendLine();
-
-        // ----------------------------------------
-        // 2) 人向けの日本語サマリー
-        // ----------------------------------------
         sb.AppendLine("--------------------------------------------------");
         sb.AppendLine($"集計日：{targetDate}");
         sb.AppendLine();
@@ -76,9 +68,47 @@ public static class QrDailyCsvExporter
             }
         }
 
+        AppendResetSection(sb, state, targetDate);
+
         File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
         Debug.Log($"[QrDailyCsvExporter] Exported: {filePath}");
         return filePath;
+    }
+
+    private static void AppendResetSection(StringBuilder sb, QrUsageState state, string targetDate)
+    {
+        if (state == null || state.resetRecords == null) return;
+
+        bool hasReset = false;
+        for (int i = 0; i < state.resetRecords.Count; i++)
+        {
+            var record = state.resetRecords[i];
+            if (record != null && record.date == targetDate)
+            {
+                hasReset = true;
+                break;
+            }
+        }
+
+        if (!hasReset) return;
+
+        sb.AppendLine("--------------------------------------------------");
+        sb.AppendLine("リセット記録");
+        sb.AppendLine();
+
+        for (int i = 0; i < state.resetRecords.Count; i++)
+        {
+            var record = state.resetRecords[i];
+            if (record == null) continue;
+            if (record.date != targetDate) continue;
+
+            sb.AppendLine($"{record.dateTime} に {ToJapaneseGameName(record.gameKey)} を手動リセット");
+            sb.AppendLine($"リセット前 NextIndex: {record.previousNextIndex}");
+            sb.AppendLine($"リセット前 TodayCount: {record.previousTodayCount}");
+            sb.AppendLine($"リセット前 StartIndex: {record.previousTodayStartIndex}");
+            sb.AppendLine($"リセット前 EndIndex: {record.previousTodayEndIndex}");
+            sb.AppendLine();
+        }
     }
 
     private static string ResolveOutputDirectory(string outputDirectory)
@@ -119,10 +149,8 @@ public static class QrDailyCsvExporter
         {
             case "memory":
                 return "ガシャポンメモリーゲーム";
-
             case "puzzle":
                 return "たまごっちのガシャポンかくれんぼ";
-
             default:
                 return gameKey;
         }

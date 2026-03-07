@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: StatusText
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 29f452225340d614f85c738753cfa789, type: 2}
-  m_sharedMaterial: {fileID: 5423142224606945263, guid: 29f452225340d614f85c738753cfa789, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e5bbe448b48042e47a180f2f77716d21, type: 2}
+  m_sharedMaterial: {fileID: -5603362779875531113, guid: e5bbe448b48042e47a180f2f77716d21, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -747,7 +747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: -326.2}
+  m_AnchoredPosition: {x: -948, y: -332}
   m_SizeDelta: {x: 754.033, y: 363.268}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &419659474616743521
@@ -1678,8 +1678,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00018310547, y: 0}
-  m_SizeDelta: {x: -0.00030517578, y: 0}
+  m_AnchoredPosition: {x: -25.000175, y: 0}
+  m_SizeDelta: {x: 49.99965, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397054549643732935
 CanvasRenderer:

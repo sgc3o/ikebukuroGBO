@@ -177,6 +177,12 @@ public class QrUsageManager : MonoBehaviour
         {
             state.games = new List<QrGameUsageState>();
         }
+
+        if (state.resetRecords == null)
+        {
+            state.resetRecords = new List<QrResetRecord>();
+        }
+
     }
 
     private void TryFinalizePreviousDayIfNeeded()
@@ -361,5 +367,89 @@ public class QrUsageManager : MonoBehaviour
         SaveState();
 
         return path;
+    }
+
+    public bool ResetGame(string gameKey)
+    {
+        if (string.IsNullOrWhiteSpace(gameKey))
+        {
+            Debug.LogWarning("[QrUsageManager] ResetGame failed. gameKey is empty.");
+            return false;
+        }
+
+        EnsureTodayInitialized();
+        TryFinalizePreviousDayIfNeeded();
+
+        var game = GetOrCreateGameState(gameKey);
+        if (game == null)
+        {
+            Debug.LogWarning($"[QrUsageManager] ResetGame failed. state not found: {gameKey}");
+            return false;
+        }
+
+        EnsureResetRecordsInitialized();
+
+        var record = new QrResetRecord
+        {
+            date = GetTodayString(),
+            dateTime = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+            gameKey = game.gameKey,
+            reason = "manual",
+            previousNextIndex = game.nextIndex,
+            previousTodayCount = game.todayCount,
+            previousTodayStartIndex = game.todayStartIndex,
+            previousTodayEndIndex = game.todayEndIndex
+        };
+
+        state.resetRecords.Add(record);
+
+        game.nextIndex = 1;
+        game.todayCount = 0;
+        game.todayStartIndex = 0;
+        game.todayEndIndex = 0;
+
+        SaveState();
+
+        Debug.Log($"[QrUsageManager] ResetGame success: {gameKey}");
+        return true;
+    }
+
+    private void EnsureResetRecordsInitialized()
+    {
+        if (state == null)
+        {
+            state = new QrUsageState();
+        }
+
+        if (state.resetRecords == null)
+        {
+            state.resetRecords = new System.Collections.Generic.List<QrResetRecord>();
+        }
+    }
+
+    public string GetTodayResetSummary()
+    {
+        EnsureTodayInitialized();
+
+        if (state == null || state.resetRecords == null || state.resetRecords.Count == 0)
+        {
+            return "‚È‚µ";
+        }
+
+        string today = GetTodayString();
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        bool found = false;
+
+        for (int i = 0; i < state.resetRecords.Count; i++)
+        {
+            var record = state.resetRecords[i];
+            if (record == null) continue;
+            if (record.date != today) continue;
+
+            found = true;
+            sb.AppendLine($"{record.dateTime} / {record.gameKey}");
+        }
+
+        return found ? sb.ToString().Trim() : "‚È‚µ";
     }
 }

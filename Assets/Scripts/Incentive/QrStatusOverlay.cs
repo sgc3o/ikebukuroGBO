@@ -120,6 +120,10 @@ public class QrStatusOverlay : MonoBehaviour
         sb.AppendLine($"JSON: {mgr.GetJsonFilePath()}");
         sb.AppendLine($"CSV : {mgr.GetCsvOutputDirectory()}");
 
+        sb.AppendLine("【本日のリセット履歴】");
+        sb.AppendLine(mgr.GetTodayResetSummary());
+        sb.AppendLine();
+
         statusText.text = sb.ToString();
     }
 
@@ -240,7 +244,11 @@ public class QrStatusOverlay : MonoBehaviour
 
         resetPopup.Show("ガシャポンメモリーゲーム", () =>
         {
-            Debug.Log("Memory reset requested (Step4で実装)");
+            var ok = QrUsageManager.Instance.ResetGame(memoryGameKey);
+            SetLastAction(ok
+                ? "メモリーゲームのQR使用状況をリセットしました。"
+                : "メモリーゲームのリセットに失敗しました。");
+            RefreshView();
         });
     }
 
@@ -250,7 +258,11 @@ public class QrStatusOverlay : MonoBehaviour
 
         resetPopup.Show("たまごっちのガシャポンかくれんぼ", () =>
         {
-            Debug.Log("Puzzle reset requested (Step4で実装)");
+            var ok = QrUsageManager.Instance.ResetGame(puzzleGameKey);
+            SetLastAction(ok
+                ? "たまごっちのガシャポンかくれんぼ のQR使用状況をリセットしました。"
+                : "たまごっちのガシャポンかくれんぼ のリセットに失敗しました。");
+            RefreshView();
         });
     }
 
