@@ -143,7 +143,7 @@ public class GameSelectController : MonoBehaviour, IEndDragHandler
         for (int i = 0; i < frames.Length; i++)
             if (frames[i]) frames[i].SetActive(i == idx);
 
-        Debug.Log($"[Select] idx={idx} -> show FrameCard");
+        //Debug.Log($"[Select] idx={idx} -> show FrameCard");
     }
 
 

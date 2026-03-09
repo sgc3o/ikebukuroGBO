@@ -9,7 +9,7 @@ public class QrUsageManager : MonoBehaviour
     public class GameQrSetting
     {
         public string gameKey;
-        public string resourcesFolder;
+        public string streamingFolderName;
         public int maxQrCount = 10000;
     }
 
@@ -39,10 +39,10 @@ public class QrUsageManager : MonoBehaviour
     [Header("Game QR Settings")]
     [SerializeField]
     private List<GameQrSetting> gameSettings = new List<GameQrSetting>()
-    {
-        new GameQrSetting { gameKey = "Memory", resourcesFolder = "MemoryIncentive/qr", maxQrCount = 10000 },
-        new GameQrSetting { gameKey = "Puzzle", resourcesFolder = "PuzzleIncentive/qr", maxQrCount = 10000 },
-    };
+{
+    new GameQrSetting { gameKey = "Memory", streamingFolderName = "Memory", maxQrCount = 10000 },
+    new GameQrSetting { gameKey = "Puzzle", streamingFolderName = "Puzzle", maxQrCount = 10000 },
+};
 
     [Header("Daily CSV Export")]
     [SerializeField] private int exportHour = 21;
@@ -134,12 +134,11 @@ public class QrUsageManager : MonoBehaviour
             return null;
         }
 
-        string resourcePath = $"{setting.resourcesFolder}/qr_{currentIndex:D5}";
-        Sprite sprite = Resources.Load<Sprite>(resourcePath);
+        Sprite sprite = LoadSpriteFromStreamingAssets(setting.streamingFolderName, currentIndex);
 
         if (sprite == null)
         {
-            Debug.LogWarning($"[QrUsageManager] Sprite not found: {resourcePath}");
+            Debug.LogWarning($"[QrUsageManager] Sprite not found in StreamingAssets. gameKey={gameKey}, index={currentIndex}");
             return null;
         }
 
@@ -569,5 +568,50 @@ public class QrUsageManager : MonoBehaviour
         }
 
         return resolvedBaseOutputDirectory;
+    }
+
+    private Sprite LoadSpriteFromStreamingAssets(string folderName, int index)
+    {
+        string fileName = $"qr_{index:D5}.png";
+        string fullPath = Path.Combine(Application.streamingAssetsPath, "QR", folderName, fileName);
+
+        if (!File.Exists(fullPath))
+        {
+            Debug.LogWarning($"[QrUsageManager] File not found: {fullPath}");
+            return null;
+        }
+
+        try
+        {
+            byte[] bytes = File.ReadAllBytes(fullPath);
+            if (bytes == null || bytes.Length == 0)
+            {
+                Debug.LogWarning($"[QrUsageManager] File is empty: {fullPath}");
+                return null;
+            }
+
+            Texture2D texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            bool loaded = texture.LoadImage(bytes);
+
+            if (!loaded)
+            {
+                Debug.LogWarning($"[QrUsageManager] Failed to load image bytes: {fullPath}");
+                UnityEngine.Object.Destroy(texture);
+                return null;
+            }
+
+            texture.name = fileName;
+
+            return Sprite.Create(
+                texture,
+                new Rect(0, 0, texture.width, texture.height),
+                new Vector2(0.5f, 0.5f),
+                100f);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning($"[QrUsageManager] Exception while loading sprite: {fullPath} / {e.Message}");
+            return null;
+        }
     }
 }
