@@ -9,6 +9,16 @@ public static class QrDailyCsvExporter
         string targetDate,
         string outputDirectory)
     {
+        string fileName = $"qr_daily_{targetDate}.csv";
+        return ExportDailySummaryWithFileName(state, targetDate, outputDirectory, fileName);
+    }
+
+    public static string ExportDailySummaryWithFileName(
+        QrUsageState state,
+        string targetDate,
+        string outputDirectory,
+        string fileName)
+    {
         if (state == null)
         {
             Debug.LogWarning("[QrDailyCsvExporter] state is null.");
@@ -21,10 +31,16 @@ public static class QrDailyCsvExporter
             return null;
         }
 
+        if (string.IsNullOrWhiteSpace(fileName))
+        {
+            Debug.LogWarning("[QrDailyCsvExporter] fileName is empty.");
+            return null;
+        }
+
         string dir = ResolveOutputDirectory(outputDirectory);
         Directory.CreateDirectory(dir);
 
-        string filePath = Path.Combine(dir, $"qr_daily_{targetDate}.csv");
+        string filePath = Path.Combine(dir, fileName);
 
         var sb = new StringBuilder();
 

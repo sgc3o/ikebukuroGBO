@@ -361,11 +361,16 @@ public class QrUsageManager : MonoBehaviour
         TryFinalizePreviousDayIfNeeded();
 
         string today = GetTodayString();
-        string path = QrDailyCsvExporter.ExportDailySummary(state, today, outputDirectory);
+        string timeStamp = System.DateTime.Now.ToString("HHmmss");
+        string fileName = $"qr_daily_{today}_BtnOut_{timeStamp}.csv";
 
-        state.lastAutoExportDate = today;
+        string path = QrDailyCsvExporter.ExportDailySummaryWithFileName(
+            state,
+            today,
+            outputDirectory,
+            fileName);
+
         SaveState();
-
         return path;
     }
 
