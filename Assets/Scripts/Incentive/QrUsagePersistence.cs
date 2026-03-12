@@ -5,14 +5,18 @@ public static class QrUsagePersistence
 {
     private const string FileName = "qr_usage_state.json";
 
-    public static string GetFilePath()
+    public static string GetFilePath(string baseDirectory = null)
     {
-        return Path.Combine(Application.persistentDataPath, FileName);
+        string root = string.IsNullOrWhiteSpace(baseDirectory)
+            ? Application.persistentDataPath
+            : baseDirectory;
+
+        return Path.Combine(root, FileName);
     }
 
-    public static QrUsageState Load()
+    public static QrUsageState Load(string baseDirectory = null)
     {
-        string path = GetFilePath();
+        string path = GetFilePath(baseDirectory);
 
         if (!File.Exists(path))
         {
@@ -37,11 +41,11 @@ public static class QrUsagePersistence
         }
     }
 
-    public static void Save(QrUsageState state)
+    public static void Save(QrUsageState state, string baseDirectory = null)
     {
         if (state == null) return;
 
-        string path = GetFilePath();
+        string path = GetFilePath(baseDirectory);
 
         try
         {

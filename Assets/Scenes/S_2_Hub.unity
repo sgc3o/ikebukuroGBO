@@ -1060,7 +1060,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2008729311}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.5
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3359,9 +3359,12 @@ MonoBehaviour:
   - gameKey: Puzzle
     resourcesFolder: PuzzleIncentive/qr
     maxQrCount: 10000
-  exportHour: 11
-  exportMinute: 38
+  exportHour: 21
+  exportMinute: 10
   outputDirectory: QRLogs
+  resolvedBaseOutputDirectory: 
+  useExternalOutputConfig: 1
+  externalConfigFileName: qr_output_config.json
   clockCheckIntervalSeconds: 5
 --- !u!4 &1473799141
 Transform:

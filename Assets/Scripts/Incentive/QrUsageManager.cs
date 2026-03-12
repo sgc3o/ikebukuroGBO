@@ -49,6 +49,13 @@ public class QrUsageManager : MonoBehaviour
     [SerializeField] private int exportMinute = 10;
     [SerializeField] private string outputDirectory = "QRLogs";
 
+    [Header("Resolved Output Paths")]
+    [SerializeField] private string resolvedBaseOutputDirectory = "";
+
+    [Header("External Config")]
+    [SerializeField] private bool useExternalOutputConfig = true;
+    [SerializeField] private string externalConfigFileName = "qr_output_config.json";
+
     [Header("Update Check")]
     [SerializeField] private float clockCheckIntervalSeconds = 5f;
 
@@ -65,6 +72,8 @@ public class QrUsageManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        LoadExternalOutputConfig();
 
         LoadState();
         EnsureTodayInitialized();
@@ -149,7 +158,7 @@ public class QrUsageManager : MonoBehaviour
 
     private void LoadState()
     {
-        state = QrUsagePersistence.Load();
+        state = QrUsagePersistence.Load(GetResolvedBaseOutputDirectory());
         if (state == null)
         {
             state = new QrUsageState();
@@ -158,7 +167,7 @@ public class QrUsageManager : MonoBehaviour
 
     private void SaveState()
     {
-        QrUsagePersistence.Save(state);
+        QrUsagePersistence.Save(state, GetResolvedBaseOutputDirectory());
     }
 
     private void EnsureTodayInitialized()
@@ -337,7 +346,7 @@ public class QrUsageManager : MonoBehaviour
 
     public string GetJsonFilePath()
     {
-        return QrUsagePersistence.GetFilePath();
+        return QrUsagePersistence.GetFilePath(GetResolvedBaseOutputDirectory());
     }
 
     public string GetCsvOutputDirectory()
@@ -456,5 +465,109 @@ public class QrUsageManager : MonoBehaviour
         }
 
         return found ? sb.ToString().Trim() : "なし";
+    }
+
+    private void LoadExternalOutputConfig()
+    {
+        try
+        {
+            string configPath = GetExternalConfigPath();
+
+            // Build版では Inspector の outputDirectory を信用せず、
+            // 外部jsonがあればそれを使い、なければ persistentDataPath を使う
+            if (!Application.isEditor)
+            {
+                if (File.Exists(configPath))
+                {
+                    string json = File.ReadAllText(configPath);
+
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        var config = JsonUtility.FromJson<QrOutputConfig>(json);
+                        if (config != null && !string.IsNullOrWhiteSpace(config.baseOutputDirectory))
+                        {
+                            resolvedBaseOutputDirectory = config.baseOutputDirectory.Trim();
+                            outputDirectory = Path.Combine(resolvedBaseOutputDirectory, "QRLogs");
+
+                            Debug.Log($"[QrUsageManager] Build config loaded. Base={resolvedBaseOutputDirectory}");
+                            Debug.Log($"[QrUsageManager] CSV output directory={outputDirectory}");
+                            return;
+                        }
+                    }
+
+                    Debug.LogWarning($"[QrUsageManager] Build config exists but is invalid: {configPath}");
+                }
+
+                resolvedBaseOutputDirectory = Application.persistentDataPath;
+                outputDirectory = Path.Combine(resolvedBaseOutputDirectory, "QRLogs");
+
+                Debug.Log($"[QrUsageManager] Build config not found. Fallback base={resolvedBaseOutputDirectory}");
+                return;
+            }
+
+            // Editor版
+            if (!useExternalOutputConfig)
+            {
+                resolvedBaseOutputDirectory = Application.persistentDataPath;
+                return;
+            }
+
+            if (!File.Exists(configPath))
+            {
+                resolvedBaseOutputDirectory = Application.persistentDataPath;
+                Debug.Log($"[QrUsageManager] External config not found: {configPath}");
+                return;
+            }
+
+            string editorJson = File.ReadAllText(configPath);
+            if (string.IsNullOrWhiteSpace(editorJson))
+            {
+                resolvedBaseOutputDirectory = Application.persistentDataPath;
+                Debug.LogWarning($"[QrUsageManager] External config is empty: {configPath}");
+                return;
+            }
+
+            var editorConfig = JsonUtility.FromJson<QrOutputConfig>(editorJson);
+            if (editorConfig == null)
+            {
+                resolvedBaseOutputDirectory = Application.persistentDataPath;
+                Debug.LogWarning($"[QrUsageManager] Failed to parse external config: {configPath}");
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(editorConfig.baseOutputDirectory))
+            {
+                resolvedBaseOutputDirectory = editorConfig.baseOutputDirectory.Trim();
+                outputDirectory = Path.Combine(resolvedBaseOutputDirectory, "QRLogs");
+
+                Debug.Log($"[QrUsageManager] Editor config loaded. Base={resolvedBaseOutputDirectory}");
+                Debug.Log($"[QrUsageManager] CSV output directory={outputDirectory}");
+            }
+            else
+            {
+                resolvedBaseOutputDirectory = Application.persistentDataPath;
+            }
+        }
+        catch (System.Exception e)
+        {
+            resolvedBaseOutputDirectory = Application.persistentDataPath;
+            Debug.LogWarning($"[QrUsageManager] LoadExternalOutputConfig failed: {e.Message}");
+        }
+    }
+
+    private string GetExternalConfigPath()
+    {
+        string exeDir = AppDomain.CurrentDomain.BaseDirectory;
+        return Path.Combine(exeDir, externalConfigFileName);
+    }
+
+    public string GetResolvedBaseOutputDirectory()
+    {
+        if (string.IsNullOrWhiteSpace(resolvedBaseOutputDirectory))
+        {
+            return Application.persistentDataPath;
+        }
+
+        return resolvedBaseOutputDirectory;
     }
 }
