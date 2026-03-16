@@ -67,7 +67,7 @@ public class TransitionController : MonoBehaviour
 
         if (!fadeCg)
         {
-            Debug.LogError("[Transition] fadeCg が空欄です");
+           // Debug.LogError("[Transition] fadeCg が空欄です");
             _running = false;
             yield break;
         }
@@ -145,13 +145,13 @@ public class TransitionController : MonoBehaviour
     /// </summary>
     public void StartTransitionToScene(string sceneName)
     {
-        Debug.Log($"[Transition] LoadScene param = '{sceneName}'");
+        //Debug.Log($"[Transition] LoadScene param = '{sceneName}'");
 
         StartFadeThen(() =>
         {
             SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         });
 
-        Debug.Log($"[Transition] StartTransitionToScene('{sceneName}') called");
+        //Debug.Log($"[Transition] StartTransitionToScene('{sceneName}') called");
     }
 }

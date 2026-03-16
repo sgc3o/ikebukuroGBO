@@ -110,7 +110,7 @@ public class GameStateManager : MonoBehaviour
         SetInputEnabled(false);
 
         var sceneId = GetSceneIdByIndex(selectedGameIndex);
-        Debug.Log($"[GSM] GoTransition idx={selectedGameIndex} -> {sceneId}");
+      //  Debug.Log($"[GSM] GoTransition idx={selectedGameIndex} -> {sceneId}");
 
         SceneNavigator.Go(sceneId);
     }

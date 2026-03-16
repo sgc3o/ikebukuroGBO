@@ -62,14 +62,14 @@ public class LogicalUiClicker : MonoBehaviour
             {
                 var btnUp = RaycastButtonAtLogical(touch.LogicalPosition);
 
-                if (debugLog) Debug.Log($"[Clicker] UP btnUp={(btnUp ? btnUp.name : "null")} pressed={(_pressedButton ? _pressedButton.name : "null")}");
+                if (debugLog) //Debug.Log($"[Clicker] UP btnUp={(btnUp ? btnUp.name : "null")} pressed={(_pressedButton ? _pressedButton.name : "null")}");
 
                 if (btnUp != null && btnUp == _pressedButton)
                 {
                     btnUp.onClick.Invoke();
                     _cooldown = clickCooldownSec;
 
-                    if (debugLog) Debug.Log($"[Clicker] CLICK {btnUp.name}");
+                    //if (debugLog) Debug.Log($"[Clicker] CLICK {btnUp.name}");
                 }
 
                 _pressedButton = null;

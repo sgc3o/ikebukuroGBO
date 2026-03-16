@@ -156,7 +156,7 @@ public class MemoryStageManager : MonoBehaviour
         BuildBoard(cfg);
 
         remainingCorrect = Mathf.Max(1, cfg.correctCount);
-        Debug.Log($"[MemoryStageManager] BeginStage idx={currentStageIndex} correctCount={cfg.correctCount} remainingCorrect={remainingCorrect}");
+      //  Debug.Log($"[MemoryStageManager] BeginStage idx={currentStageIndex} correctCount={cfg.correctCount} remainingCorrect={remainingCorrect}");
 
         ShowOnly(missionIntroPanel);
 

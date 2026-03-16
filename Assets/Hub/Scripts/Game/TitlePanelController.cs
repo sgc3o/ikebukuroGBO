@@ -38,7 +38,7 @@ public class TitleStartController : MonoBehaviour
         {
             armed = true;
             if (startBtnImage && spriteOn) startBtnImage.sprite = spriteOn;
-            Debug.Log("[TitleStart] armed=true");
+         //   Debug.Log("[TitleStart] armed=true");
             return;
         }
 
@@ -64,6 +64,6 @@ public class TitleStartController : MonoBehaviour
             // 必要ならここで armed を戻す（Titleに戻ったときはGoTitle側で戻すのが理想）
         });
 
-        Debug.Log("[TitleStart] Fade -> GoGameSelect");
+        //Debug.Log("[TitleStart] Fade -> GoGameSelect");
     }
 }
