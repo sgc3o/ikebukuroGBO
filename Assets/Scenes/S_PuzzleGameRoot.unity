@@ -1231,6 +1231,14 @@ PrefabInstance:
       propertyPath: targetIncentiveSceneName
       value: S_PuzzleIncentive
       objectReference: {fileID: 0}
+    - target: {fileID: 6139881095411371555, guid: 93e3800f048b0384d87d32b47db921e6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139881095411371555, guid: 93e3800f048b0384d87d32b47db921e6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6986845583376999310, guid: 93e3800f048b0384d87d32b47db921e6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
