@@ -1228,6 +1228,10 @@ PrefabInstance:
       value: DebugIncentiveJumpRoot
       objectReference: {fileID: 0}
     - target: {fileID: 4777862015917541337, guid: 93e3800f048b0384d87d32b47db921e6, type: 3}
+      propertyPath: forceShow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777862015917541337, guid: 93e3800f048b0384d87d32b47db921e6, type: 3}
       propertyPath: targetIncentiveSceneName
       value: S_PuzzleIncentive
       objectReference: {fileID: 0}
